@@ -36,8 +36,8 @@ A live example of WX-HWS template can be seen at https://claydonsweather.org.uk
 
 # Setup
 
-Follow the instructions in the quick setup guide (https://github.com/steepleian/WX-HWS-alpha/blob/master/QUICK_START_GUIDE.md) to install the template.
-Follw the instructions in 'charts almanacs guide' to complete the required changes to WeeWX.
+Follow the instructions in the 'quick setup guide' (https://github.com/steepleian/WX-HWS-alpha/blob/master/QUICK_START_GUIDE.md) to install the template.
+Follw the instructions in 'charts almanacs guide' (https://github.com/steepleian/WX-HWS-alpha/blob/master/CHARTS_ALMANACS_GUIDE.md) to complete the required changes to WeeWX.
 Browse to http://your.website/easyweathersetup.php
 There is no initial password when the page prompts the first time -- just press LOGIN to enter the page.
 IMPORTANT set a password in the screen for future use -- your browser can remember it. This will make future updates    reasonably secure so only you can do the updates to the configuration.

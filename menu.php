@@ -11,10 +11,10 @@ else echo' <div class="menucolor"><a href="./?units=metric">Units</a></div>';?><
  <div id="weather34sidebarMenu">
 <ul class="weather34sidebarMenuInner">
 <br /><br /><br />
+<li><a href="index.php" title="WEATHERSTATION HOME PAGE"> <weather34menumarkergreen></weather34menumarkergreen> Home </a></li>  
 <li class="header">ADMIN</li>
 <li><a href="easyweathersetup.php" target="_blank" title="WEATHERSTATION SETTINGS PAGE"><?php echo " <weather34menumarkeryellow></weather34menumarkeryellow> ",$lang['Settings']; ?> </a></li> 
 <p>
-<li><a href="index.php" title="WEATHERSTATION HOME PAGE"> <weather34menumarkergreen></weather34menumarkergreen> Home </a></li>  
 <li class="header">UI THEME</li>
 <li><a href=<?php if($theme=='dark'){echo'?theme=light';}else{echo'?theme=dark';}?>>
 <?php if($theme=='dark'){echo' <weather34menumarkerlight></weather34menumarkerlight> Light Mode';}else{echo'<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Dark Mode';}?></a></li>
@@ -34,7 +34,7 @@ else echo' <div class="menucolor"><a href="./?units=metric">Units</a></div>';?><
 else echo "";?>
 <li><!---webcam---> <a href="cam.php" data-lity title="WEATHERSTATION WEBCAM"> <weather34menumarkeryellow></weather34menumarkeryellow> Web Cam </a></li>  
 <li><!--contact info---> <a href="bio.php" data-lity title="Weather Station Owner Contact Card Info"> <weather34menumarkerorange></weather34menumarkerorange> Contact Card</a></li> 
-<li><!--hardware info---> <a href="stationinfo.php" data-lity title="Hardware Weather Station Hardware Info"> <weather34menumarkerred></weather34menumarkerred> Hardware Info</a></li>  
+<!--hardware info<li> <a href="stationinfo.php" data-lity title="Hardware Weather Station Hardware Info"> <weather34menumarkerred></weather34menumarkerred> Hardware Info</a></li>--->  
 
 <!---languages---> 
   <br>   <?php if($languages=="yes") echo '<li><a href="">
@@ -65,9 +65,10 @@ else echo "";?>
      '?>
      <!---credits | download info---> 
 <?php // please do not remove this and if so no support is given and your domain will be blacklisted from support it is not much to ask //?>
-<li><a href="https://github.com/weather34/Meteobridge-Weather34-Template/" title="Weather34 Meteobridge version via Github " target="_blank">
-<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Download Meteobridge Template</a></li>
-<li><a href="https://github.com/weather34/Meteobridge-Weather34-Template/" title="Weather34 Meteobridge version via Github " target="_blank">
-<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Maintained by William(lightmaster)</a></li>
-<li><a href="https://github.com/weather34/Meteobridge-Weather34-Template" title="https://github.com/weather34/Meteobridge-Weather34-Template/" target="_blank"><weather34menumarkerbluegrey></weather34menumarkerbluegrey> Designed by weather34.com</a></li>    
-</div></div></header>  
+
+<li><a href="https://github.com/steepleian/WX-HWS" title="Weather34 WeeWX version via Github " target="_blank">
+<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Download WeeWX Template</a></li>
+<li><a href="mailto:steepleian@gmail.com" title="Maintained by " target="_blank">
+<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Maintained by Steepleian</a></li>
+<li><a href="https://weather34.com/homeweatherstation" title="Designed by " target="_blank">
+<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Designed by weather34.com</a></li></div></div></header>  

@@ -8,23 +8,21 @@ This version is designed explicitly to harness the powerful WeeWX database to ge
 
 If you are happy to use Weather Underground as a source of data for chart generation you are strongly recommended to use the Ken True CU-HWS version (https://github.com/ktrue/CU-HWS) as your first choice which can be configured out-of-the-box to be used with WeeWX.
 
-# What's New in this Version WX-HWS-UB40-FFT
+# What's New in this Version WX-HWS-UB40-RRW
 
-Built on the current Meteobridge Version MB-UB40-FFT and is visually identical.
+Built on the current Meteobridge Version MB-UB40-FFT giving an identical experience.
 
 Latest design features.
 
 Harnesses the power of the WeeWX database to generate graphs and statiscal data.
 
-Additional pop-up windows for statistical data.
+Additional pop-up windows for almanacs.
 
 Introduces the concept of a WeeWX-api.
 
 Meteobridge to WeeWX variable look-up table.
 
 New addition wind direction chart.
-
-New addition humidity chart.
 
 New addition wind map.
 

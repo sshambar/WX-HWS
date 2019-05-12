@@ -1,0 +1,56 @@
+#timelapse files
+cam.jpg
+camplus.jpg
+cam
+timelapse/weather*
+timelapse/pics/*
+timelapse/
+timelapse
+
+#Scripts
+scripts/
+scripts
+
+#Settings
+settings1.php
+
+#personal Weather Data
+mbcharts/*.csv
+mbcharts/*/*.csv
+jsondata/*.txt
+chartswudata/*
+#demodata/*
+mbridge/MBrealtimeupload.txt
+
+#Ignore all backup files
+*.bak
+*.orig
+*.bak.*
+*.orig.*
+**/*.bak
+**/*.orig
+**/*.bak.*
+**/*.orig.*
+
+#Ignore Log files
+*.log
+**/*.log
+
+#Ignore Mac files
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+.vscode/

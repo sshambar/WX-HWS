@@ -107,13 +107,17 @@ Thomas Sosio for his invaluable contribution in producing the Meteobridge lookup
 
 David Marshall for contributing technical knowledge and solutions to create the wxchart .tmpl files and alternative solutions for weather alerts.
 
-Lightmaster who now maintains the parent MB-HWS weather34 template.
+Lightmaster who now maintains the parent Meteobridge-Weather34-Template.
 
 Taylormia for contributing his excellent setup example for instances where weeWX and server/template are remote to each other.
 
 All those unamed people who have helped me with testing updates
 
-# Alternative versions 
+# Alternative versions
+
+# Meteobridge
+you can find the Meteobridge version maintained by Lightmaster (William) at 
+https://github.com/weather34/Meteobridge-Weather34-Template34/
 
 # Cumulus
 you can find the Cumulus version maintained by Ken True (Saratoga) at 

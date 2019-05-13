@@ -5,14 +5,18 @@
 </style>
 
 <?php $file_headers = @get_headers($webcamurl); ?>
-<div class="updatedtime1"><span>
-<?php if(!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') {
+
+<div class="updatedtime"><span>
+<?php if(file_exists($livedata)&&time()- filemtime($livedata)>300) {
   echo $offline. '<offline> Offline </offline>';
 } else {
-  echo $online.' '.date($timeFormat);
+  echo $online." ".$weather["time"];
 }
-?>
-</span></div>
+  ?>
+
+
+
+  </span></div>
 <!-- HOMEWEATHER STATION TEMPLATE SIMPLE WEBCAM -add your url as shown below do NOT delete the class='webcam' !!! -->
 <img src="<?php echo $webcamurl?>?v=<?php echo date('YmdGis');?>" alt="weathercam" class="webcam">
 </span>

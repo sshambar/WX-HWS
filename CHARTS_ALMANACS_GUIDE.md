@@ -42,7 +42,7 @@ At the bottom of this section append the following: -
                  template = w34stats.php.tmpl
                  HTML_ROOT = /var/www/pws
 
-* In the download you will find a folder called 'copy_folder_and_file_inside_to_skins_Standard or Seasons_folder'. Inside is a folder called 'wxchartdata' and a file called w34stats.php.tmpl. Move  or copy both of these to your skins/Standard (or Seasons) folder.
+* In the download you will find a folder called 'copy_files_inside_to_skins_Standard or Seasons_folder'. Inside are the following files called result.csv.tmpl, MMYYYY.csv.tmpl, YYYY.csv.tmpl and w34stats.php.tmpl. Move  or copy these to your skins/Standard (or Seasons) folder.
 * You will also find a folder called 'copy_files_inside_to_user_folder'. Copy the files inside stats.py and lastrain.py into your weewx/bin/user folder.
 
 # IMPORTANT

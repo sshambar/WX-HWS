@@ -34,6 +34,20 @@ Auto adjusting pop-up windows for better viewing experience on smart phones and 
 
 A live example of WX-HWS template can be seen at https://claydonsweather.org.uk
 
+# Weather34 Historic Timeline of design 2014-2019 
+https://weather34.com/homeweatherstation/weather34timeline/weather34timeline.html
+
+# Template Screenshot
+<p align="center">
+  <img src="https://res.cloudinary.com/brian-underdown/image/upload/v1553679424/weather34_meteobridge2019_bzq4sa.png" width="550" title="weather34 meteobridge template ">
+ 
+</p>
+
+<p align="center">
+  <img src="https://res.cloudinary.com/brian-underdown/image/upload/v1557158225/almanacs_m5vmum.jpg" width="550" title="weather34 meteobridge alamanacs ">
+ 
+</p>
+
 # Setup
 
 Follow the instructions in the 'quick setup guide' (https://github.com/steepleian/WX-HWS-alpha/blob/master/QUICK_START_GUIDE.md) to install the template.

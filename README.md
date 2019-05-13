@@ -107,6 +107,8 @@ Thomas Sosio for his invaluable contribution in producing the Meteobridge lookup
 
 David Marshall for contributing technical knowledge and solutions to create the wxchart .tmpl files and alternative solutions for weather alerts.
 
+Lightmaster who now maintains the parent MB-HWS weather34 template.
+
 Taylormia for contributing his excellent setup example for instances where weeWX and server/template are remote to each other.
 
 All those unamed people who have helped me with testing updates

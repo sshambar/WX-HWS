@@ -30,6 +30,12 @@ New addition pop-up window links now visible in phone mode.
 
 Auto adjusting pop-up windows for better viewing experience on smart phones and smaller tablet devices.
 
+Chart crosshairs for pin point accuracy.
+
+Dark or light chart colour theme.
+
+Choice of 24hr 12hr station main clock.
+
 # Demo
 
 A live example of WX-HWS template can be seen at https://claydonsweather.org.uk

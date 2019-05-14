@@ -14,10 +14,9 @@
 #else
 #set $Rain="%6.2f"
 #end if
-Date,TemperatureHighC,TemperatureLowC,DewpointHighC,DewpointLowC,PrecipitationSumCM,GustSpeedMaxKMH,WindSpeedMaxKMH,PressureMaxhPa,PressureMinhPa
-                
 #for $day in $month.days
 #if $day.barometer.count.raw
+## Date,TemperatureHighC,TemperatureLowC,DewpointHighC,DewpointLowC,PrecipitationSumCM,GustSpeedMaxKMH,WindSpeedMaxKMH,PressureMaxhPa,PressureMinhPa                
 $day.dateTime.format($M),$day.outTemp.max.raw,$day.outTemp.min.raw,$day.dewpoint.max.raw,$day.dewpoint.min.raw,$day.rain.sum.raw,$day.windGust.max.raw,$day.windSpeed.max.raw,$day.radiation.max.raw,$day.barometer.max.raw,$day.barometer.min.raw
 #else
 $NONE

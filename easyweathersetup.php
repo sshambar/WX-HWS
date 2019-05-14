@@ -45,18 +45,14 @@ $rainrate = "'. $_POST["rainrate"]. '";
 $pressureunit  = "'. $_POST["pressureunit"]. '";
 $livedataFormat = "'. $_POST["livedataFormat"]. '";
 $livedata   = "'. $_POST["livedata"]. '";
-
 $currentconditions   = "'. $_POST["currentconditions"]. '";
-
 $chartsource   = "'. $_POST["chartsource"]. '";
 $extralinks   = "'. $_POST["extralinks"]. '";
 $languages   = "'. $_POST["languages"]. '";
-
 $dateFormat   = "'. $_POST["dateFormat"]. '";
 $timeFormat    = "'. $_POST["timeFormat"]. '";
 $timeFormatShort    = "'. $_POST["timeFormatShort"]. '";
-
-
+$clockformat    = "'. $_POST["clockformat"]. '";
 $showDate = '. $_POST["showDate"]. ';
 $temperaturemodule   = "'. $_POST["temperaturemodule"]. '";
 $position1   = "'. $_POST["position1"]. '";
@@ -74,23 +70,17 @@ $position12   = "'. $_POST["position12"]. '";
 $positionlastmoduletitle   = "'. $_POST["positionlastmoduletitle"]. '";
 $positionlastmodule   = "'. $_POST["positionlastmodule"]. '";
 $webcamurl   = "'. $_POST["webcamurl"]. '";
-
 $email    = "'. $_POST["email"]. '";
 $twitter   = "'. $_POST["twitter"]. '";
-
-
 $theme1   = "'. $_POST["theme1"]. '";
 $since    = "'. $_POST["since"]. '";
-
 $weatherhardware   = "'.$_POST["weatherhardware"]. '";
 $mbplatform   = "'.$_POST["mbplatform"]. '";
 $davis   = "'.$_POST["davis"]. '";
-
 $db_host   = "'. $_POST["db_host"]. '";
 $db_user    = "'. $_POST["db_user"]. '";
 $db_pass  = "'. $_POST["db_pass"]. '";
 $db_name   = "'. $_POST["db_name"]. '";
-
 $notifications = "'. $_POST["notifications"]. '";
 $sunoption = "'. $_POST["sunoption"]. '";
 $hemisphere   = "'. $_POST["hemisphere"]. '";
@@ -98,11 +88,11 @@ $metar   = "'. $_POST["metar"]. '";
 $icao1   = "'. $_POST["icao1"]. '";
 $airport1   = "'. $_POST["airport1"]. '";
 $airport1dist   = "'. $_POST["airport1dist"]. '";
-
 $defaultlanguage   = "'.$_POST["defaultlanguage"]. '";
 $language    = "'.$_POST['language']. '";
 $password    = "'.$_POST['password']. '";
 $flag   = "'.$_POST["flag"]. '";
+$dshourly   = "'.$_POST["dshourly"].'";
 ';
  
 $fp = FOPEN("settings1.php", "w") or die("Unable to open settings1.php file check file permissions !");
@@ -133,12 +123,12 @@ function showForm($error="LOGIN"){
   
   <div class= "login_screen" style="width:60%;max-width:600px;margin:0 auto;color:rgba(24, 25, 27, 1.000);border:solid 1px grey;padding:10px;border-radius:4px;">  <?php echo 'Your Current PHP version is :<orange> ' . phpversion(), '</orange> <br>(PHP 5.6 or higher PHP 7+ is  advised if you are not already using these versions)'; ?>
   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="pwd" > 
-   Enter Your Password For WeeWX Setup Screen Below
+   Enter Your Password For Meteobridge Setup Screen Below
 <center> <div class="modal-buttons">
      <input name="passwd" type="password" class="input-button"/>  <input type="submit" name="submit_pwd" value="Login " class="modal-button" /> 
          </form> 
      </center>
-      <?php echo "2015-" ;?><?php echo date('Y');?> &copy;</a> WEATHER34 WX-UB<orange>40</orange>-SE</span></span></span>
+      <?php echo "2015-" ;?><?php echo date('Y');?> &copy;</a> WEATHER34 MB-UB<orange>40</orange>-SE</span></span></span>
       <br><br>
         
 
@@ -169,10 +159,10 @@ if (isset($_POST['submit_pwd'])){    $pass = isset($_POST['passwd']) ? $_POST['p
 </div>
 <div span style="width:390px;margin:0 auto;margin-top:10px;text-align:center;color:#4a636f;background:0;font-family:arial;padding:20px;border-radius:4px;border:1px solid rgba(74, 99, 111, 0.4);"> 
 <img src='img/easyweathersetupweather34.svg' width='120px'>
-<img src='img/icon-weewx.svg' width='120px' style="float:none;">
+<img src='img/nano.svg' width='40px' style="float:none;transform: rotate(100grad)"><img src='img/MeteobridgePRO.svg' width='60px' style="float:none;"><img src='img/TP-LINK.svg' width='60px' style="float:none;">
 <br>
 
-Welcome you have logged into the WEATHER34 WeeWX setup screen <?php echo date("M jS Y H:i"); ?>
+Welcome you have logged into the WEATHER34 Meteobridge setup screen <?php echo date("M jS Y H:i"); ?>
 </span>
 </div>
 </div></div>
@@ -258,7 +248,7 @@ check languages
     <path d="M13 2 L13 6 11 7 8 4 4 8 7 11 6 13 2 13 2 19 6 19 7 21 4 24 8 28 11 25 13 26 13 30 19 30 19 26 21 25 24 28 28 24 25 21 26 19 30 19 30 13 26 13 25 11 28 8 24 4 21 7 19 6 19 2 Z" />
     <circle cx="16" cy="16" r="4" />
 </svg>
-  Database (Currently not applicable for WeeWX users)</div><p>
+  Database (Used for <strong>Meteobridge-API</strong> users only at present)</div><p>
 
 <div class= "stationvalue">  Database Host</div>
 <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
@@ -351,7 +341,8 @@ Choose the default Language to display and use..</div>
            <option>aus</option>
            <option>en</option>
            <option>can</option>  
-           <option>cat</option>             
+           <option>cat</option> 
+           <option>ch-switzerland</option>        
            <option>dk</option>
            <option>dl</option>
            <option>fi</option>  
@@ -415,7 +406,7 @@ Choose the default Language to display and use..</div>
    <p>
    <div class="weatheroptionssidebar">
    <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg>  WeeWX Hardware 
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg>  Meteobridge Hardware 
 
      <br />
      
@@ -441,7 +432,7 @@ check path to data file
     <path d="M10 9 L3 17 10 25 M22 9 L29 17 22 25 M18 7 L14 27" />
 </svg>
 
-WeeWX Software Path to Data file</div><p>
+METEOBRIDGE Software Path to Data file</div><p>
       <div class= "stationvalue">Data Type</div>
       <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M12 30 L24 16 12 2" />
@@ -451,7 +442,7 @@ WeeWX Software Path to Data file</div><p>
  <label name="livedataFormat"></label>
         <select id="livedataFormat" name="livedataFormat" class="choose1">
            <option ><?php echo $livedataFormat ;?></option>  
-            <option>WeeWX-CRT</option>
+            <option>meteobridge-api</option>
            
           
            
@@ -460,7 +451,7 @@ WeeWX Software Path to Data file</div><p>
         
         </p>
         
-    <div class= "stationvalue">Add Your Path to data file (realtime.txt)</div> 
+    <div class= "stationvalue">Add Your Path to data file (mbridge/MBrealtimeupload.txt)</div> 
     <svg id="i-chevron-bottom" viewBox="0 0 32 32" width="10" height="10" fill="#777" stroke="#777" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M30 12 L16 24 2 12" /></svg><br>
 
@@ -468,15 +459,18 @@ WeeWX Software Path to Data file</div><p>
   
   <br><br>
        
+	<strong><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg></strong><span style="color:#777;"> METEOBRIDGE-API path example: http://yourdomain/mbridge/MBrealtimeupload.txt</span><br>
 	
+    <br>
     
     <strong><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg></strong><span style="color:#777;"> WeeWX-CRT path example: http://yourdomain/realtime.txt</span><br>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg></strong><span style="color:#777;"> METEOBRIDGE path example: http://yourdomain/mbridge/MBrealtime.txt</span><br>
 	
     <br>
     <span style="color:rgba(86, 95, 103, 1.000)">
     <strong> <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> getting the path correct is essential for live realtime data display (realtime.txt)</strong></span>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> getting the path correct is essential for live realtime data display (mbridge/MBrealtimeupload.txt)</strong></span>
 <p>
 
 
@@ -486,7 +480,7 @@ WeeWX Software Path to Data file</div><p>
     <path d="M10 9 L3 17 10 25 M22 9 L29 17 22 25 M18 7 L14 27" />
 </svg>
 
-WeeWX Chart Data Source</div><p>
+Meteobridge Chart Data Source</div><p>
       <div class= "stationvalue">This is important</div>
       <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M12 30 L24 16 12 2" />
@@ -496,7 +490,7 @@ WeeWX Chart Data Source</div><p>
  <label name="chartsource"></label>
         <select id="chartsource" name="chartsource" class="choose1">
            <option ><?php echo $chartsource;?></option>  
-            <option>wxcharts</option>
+            <option>mbcharts</option>
             <option>chartswu</option>       
           
            
@@ -504,11 +498,11 @@ WeeWX Chart Data Source</div><p>
             <br>
     <span style="color:rgba(86, 95, 103, 1.000)">
     <strong> <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:rgba(24, 25, 27, 0.8)">wxcharts</span> if you are the WeeWX Database !</strong></span>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:rgba(24, 25, 27, 0.8)">mbcharts</span> if you are using MYSQL !</strong></span>
      <br>
     <span style="color:rgba(86, 95, 103, 1.000)">
     <strong> <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:#FF793A">chartswu</span> if you are NOT using the WeeWX database and will use your data history stored at weather underground</strong></span>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:#FF793A">chartswu</span> if you are NOT using MYSQL and will use your data history stored at weather underground</strong></span>
      
         
         </p>
@@ -591,12 +585,10 @@ Your Weather Station Hardware</div><p>
            <option>Ambient Weather Observer-IP</option>
            <option>Ambient Weather WS-12-IP</option>
            <option>Ambient Weather WS-1000</option>
-           <option>Fine Offset WH2650A-WIFI1930A</option> 
            <option>Fine Offset WH-1080</option>
            <option>Fine Offset WH-2080</option>
            <option>Fine Offset WH-3080</option>
            <option>Fine Offset WH-1080</option>
-           <option>Fine Offset Other</option>
            <option>Accurite</option>
            <option>La Crosse</option>
            <option>Weatherflow Air-Sky</option>
@@ -635,9 +627,9 @@ Your Weather Station Hardware</div><p>
     <path d="M10 9 L3 17 10 25 M22 9 L29 17 22 25 M18 7 L14 27" />
 </svg>
 
-Platform</div><p>
+Which Meteobridge Platform</div><p>
       <div class= "stationvalue"> 
-     Which Platform Do Yo Use</div>
+     Which Meteobridge Platform Do Yo Use</div>
       <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="#F05E40" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M12 30 L24 16 12 2" />
 </svg><svg id="i-chevron-bottom" viewBox="0 0 32 32" width="10" height="10" fill="#777" stroke="#777" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
@@ -647,8 +639,13 @@ Platform</div><p>
        <label name="mbplatform"></label>
         <select id="mbplatform" name="mbplatform" class="chooseapi">           
            <option><?php echo $mbplatform ;?></option>
-           <option>WeeWX</option>
-           
+           <option>Meteobridge Nano</option>
+           <option>Meteobridge NanoSD</option>
+           <option>Meteobridge Pro</option>  
+           <option>MB TP-Link</option>
+           <option>MB D-Link</option>
+           <option>MB Asus</option>
+           <option>Meteobridge</option>
         </select>
         <br><br>
     
@@ -1572,7 +1569,18 @@ your nearly there :-) keep going<br><br>
         </select>
         
        
-        
+        <div class= "stationvalue">Set the Main Clock Format</div> <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="rgba(86, 95, 103, 1.000)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <path d="M12 30 L24 16 12 2" />
+</svg><svg id="i-chevron-bottom" viewBox="0 0 32 32" width="10" height="10" fill="#777" stroke="#777" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <path d="M30 12 L16 24 2 12" />
+</svg>
+   
+   <label name="clockformat"></label>
+        <select id="clockformat" name="clockformat" class="choose1">
+            <option><?php echo $clockformat ;?></option>
+            <option>24</option>
+            <option>12</option> 
+        </select>  
        
         
         
@@ -1623,7 +1631,12 @@ your nearly there :-) keep going<br><br>
      <br>
          
      
-          
+     <span style="color:#777;font-weight:600;">Main Clock format<br></span>
+        <span style="color:rgba(86, 95, 103, 1.000);font-weight:normal;"><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> 24 <span style="color:#777;">Main Clock output example 17:32:12 </span></span><br> 
+        <span style="color:rgba(86, 95, 103, 1.000);"><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> 12 <span style="color:#777;">Main Clock output example 5:32:12 pm</span></span><br> <br>
+     
       <span style="color:#777;font-weight:600;">Time format<br></span>
        <span style="color:rgba(86, 95, 103, 1.000);font-weight:normal;"><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%"><path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> H:i:s <span style="color:#777;"> 17:34:22 format</span> </span><br> 
        
@@ -1801,6 +1814,23 @@ your nearly there :-) keep going<br><br>
  <center> <span style="color:rgba(86, 95, 103, 1.000);">*IMPORTANT</span> NEW DARKSKY API (uses old script originally used in  2016) requires personal API KEY(MAY 30TH 2018) available via 
      <a href="https://darksky.net/dev/docs" title="https://darksky.net/dev/docs" target="_blank"> https://darksky.net/dev/docs</a></center>  
 <P>
+
+<div class= "stationvalue">
+<img src="img/darksky.svg" width="100" /> DarkSky Hourly Forecast (If using WU Weekly)</div>
+ <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="#F05E40" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <path d="M12 30 L24 16 12 2" />
+</svg>
+    <label name="dshourly"></label>
+        <select id="dshourly" name="dshourly" value="<?php echo $dshourly ;?>" class="choose1" >
+          <option><?php echo $dshourly ;?></option>
+            <option>yes</option> 
+            <option>no</option>
+            </select>
+
+<br/>
+ Whether or not to show the DarkSky Hourly Forecast when using WeatherUnderground's Weekly Forecast
+<P>
+
 
        
           <div class="seperator"></div>
@@ -2060,8 +2090,8 @@ now check the weather
     <span style="font-size:12px;color:#777;"><svg id="i-info" viewBox="0 0 32 32" width="12" height="12" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M16 14 L16 23 M16 8 L16 10" />
     <circle cx="16" cy="16" r="14" />
-</svg> WeeWX DASHBOARD EASY SETUP &copy; 2015-<?php echo date('Y');?> Dashboard WX-UB40-SE</span><br>
-<center><a href="http://weewx.com" title="http://weewx.com" target="_blank"><img src="img/icon-weewx.svg" width="120" /></a></center><br>
+</svg> Meteobridge DASHBOARD EASY SETUP &copy; 2015-<?php echo date('Y');?> Dashboard MB-UB40-SE</span><br>
+<center><a href="http://www.meteobridge.com/wiki/index.php/Home" title="http://www.meteobridge.com/wiki/index.php/Home" target="_blank"><img src="img/meteobridge.svg" width="120" /></a></center><br>
  
 </form></div> 
 </div>

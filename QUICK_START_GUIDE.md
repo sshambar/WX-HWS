@@ -22,7 +22,7 @@ This new version will require a clean install. Extract the .zip file into the ro
 
 Important. Depending on the configuration of your server, you may have to change your file permissions. Change all files and folders recursively in the root of your server to 0775 using CHMOD and user to your Linux login name and groups to www-data using CHOWN, either via the CLI or your server Control Panel (if you employ one). I use Webmin http://www.webmin.com/deb.html, an open source control panel which will make your tasks much easier.
 
-You can now test that the template is working by opening it up in your browser. Initially you will see random demo data. Click on the menu button at the top-left corner and select settings. This will open up a web form in which you apply your own settings. Pay particular attention to the location of the realtime.txt file being generated on a loop cycle by weeWX. The default location is “/var/tmp/weewx/realtime.txt”
+You can now test that the template is working by opening it up in your browser. Initially you will see random demo data. Click on the menu button at the top-left corner and select settings. This will open up a web form in which you apply your own settings. Pay particular attention to the location of the realtime.txt file being generated on a loop cycle by weeWX. The default location is “/[html_root]/weewx/realtime.txt” (for example /var/www/html/weewx/realtime.txt).
 
 If you intend to use your own weeWX data archive to generate the pop-up charts (wxcharts setting), please refer to the 'CHARTS_ALMANAC_GUIDE.md' document for further setup instructions.
 

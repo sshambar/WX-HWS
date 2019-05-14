@@ -103,6 +103,7 @@ $defaultlanguage   = "'.$_POST["defaultlanguage"]. '";
 $language    = "'.$_POST['language']. '";
 $password    = "'.$_POST['password']. '";
 $flag   = "'.$_POST["flag"]. '";
+$dshourly   = "'.$_POST["dshourly"].'";
 ';
  
 $fp = FOPEN("settings1.php", "w") or die("Unable to open settings1.php file check file permissions !");
@@ -1802,6 +1803,23 @@ your nearly there :-) keep going<br><br>
      <a href="https://darksky.net/dev/docs" title="https://darksky.net/dev/docs" target="_blank"> https://darksky.net/dev/docs</a></center>  
 <P>
 
+<div class= "stationvalue">
+<img src="img/darksky.svg" width="100" /> DarkSky Hourly Forecast (If using WU Weekly)</div>
+ <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="#F05E40" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+    <path d="M12 30 L24 16 12 2" />
+</svg>
+    <label name="dshourly"></label>
+        <select id="dshourly" name="dshourly" value="<?php echo $dshourly ;?>" class="choose1" >
+          <option><?php echo $dshourly ;?></option>
+            <option>yes</option> 
+            <option>no</option>
+            </select>
+
+<br/>
+ Whether or not to show the DarkSky Hourly Forecast when using WeatherUnderground's Weekly Forecast
+<P>
+
+
        
           <div class="seperator"></div>
     
@@ -2065,4 +2083,3 @@ now check the weather
  
 </form></div> 
 </div>
-

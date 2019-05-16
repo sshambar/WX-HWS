@@ -1,4 +1,4 @@
-<?php include('settings.php');include('livedata.php'); include('common.php');
+<?php include('settings.php');include('livedata.php');include('jsondata/meteoalarmsettings.php');include('common.php');
 
 
 
@@ -400,7 +400,7 @@ Copyright © EUMETNET-METEOalarm (http://www.meteoalarm.eu/).
 Used with permission.
 <br>Time delays between this website and the www.meteoalarm.eu website are possible, 
 for the most up to date information about alert levels as published by the participating National Meteorological Services 
-please use <a href="<?php echo $EUCode ?>" target="_blank">www.meteoalarm.eu</a></p>
+please use <a href="<?php echo $regionalurl ?>" target="_blank">www.meteoalarm.eu</a></p>
 
 
 </div>

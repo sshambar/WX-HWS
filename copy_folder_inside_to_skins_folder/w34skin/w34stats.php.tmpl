@@ -101,7 +101,7 @@ $rainunits =   "--";
 $last5minwind = "$span($time_delta=300).windSpeed.avg.format(add_label=False, $localize=False)";
 $last60minbaromavg = "$span($hour_delta=1).barometer.avg.format(add_label=False, $localize=False)";
 $monthrainsum = "$month.rain.maxsum.format(add_label=False, $localize=False)";
-$yearrainsum = "$year.rain.maxsum.format(add_label=False, $localize=False)";
+$yearrainsum = "$rainyear.rain.sum.format(add_label=False, $localize=False)";
 $yesterdayrainsum = "$yesterday.rain.sum.format(add_label=False, $localize=False)";
 $nowintemp = "$current.inTemp.format(add_label=False, $localize=False)";
 $nowinhum = "$current.inHumidity.format(add_label=False, $localize=False)";
@@ -184,8 +184,8 @@ $monthmaxgusttime = "$month.windGust.maxtime.format(format_string="%Y%m%d%H%M%S"
 $yesterdaymaxrainrate = "$yesterday.rainRate.max.format(add_label=False, $localize=False)";
 $monthmaxrainrate = "$month.rainRate.max.format(add_label=False, $localize=False)";
 $monthmaxrainratetime = "$month.rainRate.maxtime.format(format_string="%Y%m%d%H%M%S")";
-$yearmaxrainrate = "$year.rainRate.max.format(add_label=False, $localize=False)";
-$yearmaxrainratetime = "$year.rainRate.maxtime.format(format_string="%Y%m%d%H%M%S")";
+$yearmaxrainrate = "$rainyear.rainRate.max.format(add_label=False, $localize=False)";
+$yearmaxrainratetime = "$rainyear.rainRate.maxtime.format(format_string="%Y%m%d%H%M%S")";
 $daymaxsolar = "$day.radiation.max.format(add_label=False, $localize=False)";
 $daymaxsolartime = "$day.radiation.maxtime.format(format_string="%Y%m%d%H%M%S")";
 $yesterdaymaxsolar = "$yesterday.radiation.max.format(add_label=False, $localize=False)";
@@ -252,8 +252,11 @@ $yesterdaymaxhum = "$yesterday.outHumidity.max.format(add_label=False, $localize
 $yesterdaymaxhumtime = "$yesterday.outHumidity.maxtime.format(format_string="%Y%m%d%H%M%S")";
 $yesterdayminhum = "$yesterday.outHumidity.min.format(add_label=False, $localize=False)";	
 $yesterdayminhumtime = "$yesterday.outHumidity.mintime.format(format_string="%Y%m%d%H%M%S")";  
+$startcivil = "$almanac(horizon=-6).sun(use_center=1).rise.raw";
+$endcivil = "$almanac(horizon=-6).sun(use_center=1).set.raw";
+$rain_year_start = "$rainyear.start.format(format_string="%b %Y")";
+$rain_end_year = "$rainyear.end.format(format_string="%b %Y")";
 
-  
 ##################FOLLOWING LOOKS LIKE ARE NOT USED... DELETED SOME WEIRD ONES..
 
 	$daymaxrainrate = "$day.rainRate.max.format(add_label=False, $localize=False)";

@@ -238,7 +238,7 @@ check languages
     <path d="M13 2 L13 6 11 7 8 4 4 8 7 11 6 13 2 13 2 19 6 19 7 21 4 24 8 28 11 25 13 26 13 30 19 30 19 26 21 25 24 28 28 24 25 21 26 19 30 19 30 13 26 13 25 11 28 8 24 4 21 7 19 6 19 2 Z" />
     <circle cx="16" cy="16" r="4" />
 </svg>
-  Setup Unique Easysetup Password</div><p>
+  Setup Unique Easywxsetup Password</div><p>
 
   
   <div class= "stationvalue">  Set Easysetup Password it is for your privacy & protection</div>
@@ -506,11 +506,11 @@ WeeWX Chart Data Source</div><p>
             <br>
     <span style="color:rgba(86, 95, 103, 1.000)">
     <strong> <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:rgba(24, 25, 27, 0.8)">wxcharts</span> if you are the WeeWX Database !</strong></span>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:rgba(24, 25, 27, 0.8)">wxcharts</span> if you want WeeWX Database to generate your charts !</strong></span>
      <br>
     <span style="color:rgba(86, 95, 103, 1.000)">
     <strong> <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:#FF793A">chartswu</span> if you are NOT using the WeeWX database and will use your data history stored at weather underground</strong></span>
+     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> choose <span style="color:#FF793A">chartswu</span> if you are NOT using the WeeWX database and will use your data history stored at weather underground instead</strong></span>
      
         
         </p>

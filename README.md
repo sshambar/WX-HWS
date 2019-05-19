@@ -4,7 +4,7 @@ This repository contains the current WeeWX version of Brian Underdown's Home Wea
 
 This version requires WeeWX software with the CRT extension to denerate data feeds for the conditions from your personal weather station. WeeWX is available at http://weewx.com
 
-This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-FFT which is now maintained by Lightmaster (Meteobridge-Weather34-Template)
+This version is designed explicitly to harness the powerful WeeWX database to generate the weather data charts and statistical data. It is built on the current MB-UB40-RRW which is now maintained by Lightmaster (Meteobridge-Weather34-Template). A key metric for this project is to maintain design, functional and performance parity with the MB-UB40 parent. Although not an absolute guarantee, the aim is to update WX-HWS within 24 hours of the parent being updated.
 
 If you are happy to use Weather Underground as a source of data for chart generation you are strongly recommended to use the Ken True CU-HWS version (https://github.com/ktrue/CU-HWS) as your first choice which can be configured out-of-the-box to be used with WeeWX.
 
@@ -56,13 +56,13 @@ https://weather34.com/homeweatherstation/weather34timeline/weather34timeline.htm
 
 # Setup
 
-Follow the instructions in the 'quick setup guide' (https://github.com/steepleian/WX-HWS-alpha/blob/master/QUICK_START_GUIDE.md) to install the template.
-Follw the instructions in 'charts almanacs guide' (https://github.com/steepleian/WX-HWS-alpha/blob/master/CHARTS_ALMANACS_GUIDE.md) to complete the required changes to WeeWX.
-Browse to http://your.website/easyweathersetup.php
+Follow the instructions in the 'quick setup guide' (QUICK_START_GUIDE.md) to install the template.
+Follw the instructions in 'charts almanacs guide' (CHARTS_ALMANACS_GUIDE.md) to complete the required changes to WeeWX.
+Browse to http://your.website/easywxsetup.php
 There is no initial password when the page prompts the first time -- just press LOGIN to enter the page.
 IMPORTANT set a password in the screen for future use -- your browser can remember it. This will make future updates    reasonably secure so only you can do the updates to the configuration.
 Make setting entries in the easyweathersetup.php page and SAVE. The next time you run it, use the password you set in the step above.
-Repeat running easyweathersetup.php until the main screen appears as you like it.
+Repeat running easywxsetup.php until the main screen appears as you like it.
 
 # Diagnostics
 
@@ -94,7 +94,7 @@ Non-weeWX versions Available
 
     ATMOCOM Version for Ambient WS-2902 Osprey,Ventus W830, MiSol, ChiliTec, PanTech, Froggit WH3000, Ambient WS-8478 Falcon, Bresser, FOSHK HP-3500 series info here https://atmocom.com/Demo-weather-data
 
-    Weather Display version by Wim van der Kuil Now Available via https://wd34.weather-template.com/. This version also now supports Cumulus, WeeWX and WeatherCat.
+   
 
 
 
@@ -157,7 +157,7 @@ http://creativecommons.org/licenses/by-nc-nd/4.0/
  
  Boris at smartbedded (meteobridge) for ongoing support and upkeep of meteobridge 
  
- Wim van der Kuil for the original meteobridge script (now offers Weather Display and other versions of template)
+ Wim van der Kuil for the original meteobridge script 
  
  David St John at weatherflow for providing hardware for testing and his non bias logical views 
  

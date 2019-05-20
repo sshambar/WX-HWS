@@ -214,7 +214,7 @@ align-items:center;justify-content:center;margin-bottom:10px;top:0}
  <main class="grid1">
   <articlegraph> 
   <div class=actualt>Today <span style="color:#ff9350">UV-INDEX</div>  
-  <iframe  src="wxcharts/todayuvsmall.php" frameborder="0" scrolling="no" width="100%"></iframe>
+  <iframe  src="mbcharts/todayuvsmall.php" frameborder="0" scrolling="no" width="100%"></iframe>
    
   </articlegraph> 
   

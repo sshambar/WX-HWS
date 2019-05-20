@@ -333,9 +333,9 @@ $weather["humidity_ydmintime"]=$humydmintime;
 	$originalDate27 = $meteobridgeapi[124];
     $rainlasttoday1 = date("jS", strtotime($originalDate27));
 	$weather["rainydmax"]		    = $meteobridgeapi[21]; //rain max yesterday
-	$weather["rainmmax"]		    = $meteobridgeapi[101]; //wind max month
+	$weather["rainmmax"]		    = $meteobridgeapi[19];//$meteobridgeapi[101]; //wind max month
 	$weather["rainmmaxtime"]		= $rainmmaxtime; //seconds	
-	$weather["rainymax"]		    = $meteobridgeapi[103]; //wind max year
+	$weather["rainymax"]		    = $meteobridgeapi[20];//$meteobridgeapi[103]; //wind max year
 	$weather["rainymaxtime"]		= $rainymaxtime; //seconds
 	
 	

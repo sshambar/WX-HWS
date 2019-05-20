@@ -14,6 +14,8 @@ Built on the current Meteobridge Version MB-UB40-RRW giving an identical experie
 
 Latest design features.
 
+New w34 skin
+
 Harnesses the power of the WeeWX database to generate graphs and statiscal data.
 
 New style pop-up weather almanacs.

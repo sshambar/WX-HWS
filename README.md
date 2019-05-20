@@ -10,19 +10,19 @@ If you are happy to use Weather Underground as a source of data for chart genera
 
 # What's New in this Version WX-HWS-UB40-RRW
 
-Built on the current Meteobridge Version MB-UB40-FFT giving an identical experience.
+Built on the current Meteobridge Version MB-UB40-RRW giving an identical experience.
 
 Latest design features.
 
 Harnesses the power of the WeeWX database to generate graphs and statiscal data.
 
-Additional pop-up windows for almanacs.
+New style pop-up weather almanacs.
 
 Introduces the concept of a WeeWX-api.
 
 Meteobridge to WeeWX variable look-up table.
 
-New addition wind direction chart.
+New addition charts.
 
 New addition wind map.
 
@@ -30,7 +30,7 @@ New addition pop-up window links now visible in phone mode.
 
 Auto adjusting pop-up windows for better viewing experience on smart phones and smaller tablet devices.
 
-Chart crosshairs for pin point accuracy.
+Enhanced chart freatures.
 
 Dark or light chart colour theme.
 

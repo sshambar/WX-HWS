@@ -114,6 +114,8 @@ Lightmaster who now maintains the parent Meteobridge-Weather34-Template.
 
 Taylormia for contributing his excellent setup example for instances where weeWX and server/template are remote to each other.
 
+Gary Portellas for a helpful suggestion to further simplify the installation process.
+
 All those unamed people who have helped me with testing updates
 
 # Alternative versions

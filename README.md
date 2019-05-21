@@ -60,7 +60,7 @@ https://weather34.com/homeweatherstation/weather34timeline/weather34timeline.htm
 
 # Setup
 
-Follow the instructions in the 'quick setup guide' (INSTALLATION_GUIDE.md) to install the template.
+Follow the instructions in the 'installation guide' (INSTALLATION_GUIDE.md) to install the template.
 Browse to http://your.website/easywxsetup.php
 There is no initial password when the page prompts the first time -- just press LOGIN to enter the page.
 IMPORTANT set a password in the screen for future use -- your browser can remember it. This will make future updates    reasonably secure so only you can do the updates to the configuration.

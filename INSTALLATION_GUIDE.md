@@ -1,6 +1,6 @@
 # Installation Guide
 
-This quick start guide assumes that you are already reasonably familiar with WeeWX and that it is already installed on your computer along with a webserver, php and curl. For a light-touch webserver, Lighttpd is a good choice. A good guide for installing PHP 7.0 and Lighttpd on a RaspberryPi can be found at https://pimylifeup.com/raspberry-pi-lighttpd/
+This installation guide assumes that you are already reasonably familiar with WeeWX and that it is already installed on your computer along with a webserver, php and curl. For a light-touch webserver, Lighttpd is a good choice. A good guide for installing PHP 7.0 and Lighttpd on a RaspberryPi can be found at https://pimylifeup.com/raspberry-pi-lighttpd/
 
 If you are carrying out a fresh install of WeeWX, you are strongly recommended to use the setup.py method (http://www.weewx.com/docs/setup.htm)
 
@@ -18,38 +18,7 @@ IMPORTANT. After installing PHP please make sure you install all the PHP modules
 
 	If your path to your web root is different, please amend the path in front of 'weewx/realtime.txt' accordingly.
 
-	Whilst edditing the weewx.conf file please locate the '[[[[Groups]]]]' section and make sure it is identical to the following: -
-
-		[[[[Groups]]]]
-                
-                	group_altitude = meter    # Options are 'foot' or 'meter'
-                	group_degree_day = degree_C_day    # Options are 'degree_F_day' or 'degree_C_day'
-                	group_pressure = hPa    # Options are 'inHg', 'mmHg', 'mbar', or 'hPa'
-                	group_rain = mm    # Options are 'inch', 'cm', or 'mm'
-               	 	group_rainrate = mm_per_hour    # Options are 'inch_per_hour', 'cm_per_hour', or 'mm_per_hour'
-                	group_speed = km_per_hour    # Options are 'mile_per_hour', 'km_per_hour', 'knot', or 'meter_per_second'
-                	group_speed2 = km_per_hour2    # Options are 'mile_per_hour2', 'km_per_hour2', 'knot2', or 'meter_per_second2'
-                	group_temperature = degree_C    # Options are 'degree_F' or 'degree_C'
-                	mbar = "mb"
-                	hPa = "hPa"
-                	inHg = "in"
-               	 	mm_per_hour = "mm"
-                	cm_per_hour = "cm"
-                	inch_per_hour = "in"
-                	km_per_hour = "km/h"
-                	knot = "kts"
-                	meter_per_second ="m/s"
-                	mile_per_hour ="mph"
-		
-	Then scroll down to the labels section '[[[[Labels]]]]' (after '[[[[StringFormats]]]]') and make sure it is looks like this: -
-
-		[[[[Labels]]]]
-			day = " day", " days"
-			hour = " hour", " hours"
-			minute = " minute", " minutes"
-			second = " second", " seconds"
-			NONE = ""
-
+	
 	Finally go to the '[StdReport]' section and add this: -
 
 		[[w34skinReport]]
@@ -67,7 +36,7 @@ This new version will require a clean install. Extract the .zip file into the ro
 
 * Important. Depending on the configuration of your server, you may have to change your file permissions. Change all files and folders recursively in the root of your server to 0775 using CHMOD and user to your Linux login name and groups to www-data using CHOWN, either via the CLI or your server Control Panel (if you employ one). I use Webmin http://www.webmin.com/deb.html, an open source control panel which will make your tasks much easier.
 
-* In the download you will find a folder called 'copy_folder_inside_into_skins_folder'. Inside is a folder called 'w34skin'. Copy or move the w34skin folder and its contents into your skins folder. You will need to edit the skin.conf file in this folder to insert your own path to the folder in which the template is installed. For example /[YOUR_OWN_PATH]/mbcharts might typically be '/var/www/html/pws/mbcharts'.
+* In the download you will find a folder called 'copy_folder_inside_into_skins_folder'. Inside is a folder called 'w34skin'. Copy or move the w34skin folder and its contents into your skins folder. In the '[CheetahGenerator]' section you will need to edit the skin.conf file in this folder to insert your own path to the folder in which the template is installed. For example /[YOUR_OWN_PATH]/mbcharts might typically be '/var/www/html/pws/mbcharts'.
 
 * You will also find a folder called 'copy_files_inside_to_user_folder'. Copy the files inside, stats.py and lastrain.py, into your weewx/bin/user folder.
 

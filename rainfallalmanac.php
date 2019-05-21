@@ -125,8 +125,9 @@ if($weather["rain_units"] =='in'){ echo number_format($weather["rain_month"]*25.
 </article> 
   
    
-   <article> 
-   <div class=actualt>Rainfall <?php echo date("Y");?> </div>      
+   <article>
+  <div class=actualt><?php echo $rain_year_start ?>&nbsp;to&nbsp;<?php echo $rain_year_end ?> </div>
+         
   <?php // rain year
 echo "<div class='rainfalltoday1'>",$weather["rain_year"] . "</value>";echo "<smalluvunit>".$weather["rain_units"]."</smalluvunit>"?>
 <div class='w34convertrain'>

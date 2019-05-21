@@ -85,85 +85,43 @@ var refreshId;$(document).ready(function(){currentfore()});function currentfore(
 </script>
 <?php if ($position1=="weather34clock.php"){?>
 <script>
-// power the clock display in position1 using JavaScript
-var clockID;var yourTimeZoneFrom=<?php echo $UTC?>;var d=new Date();
-<?php 
-// Added code to display clock using supported languages - ktrue - 30-Mar-2019
-$rc = setlocale(LC_TIME,explode(',',$lang_locale));
-print "// language='$language' lang_locale='$lang_locale' setlocale='$rc' \n";
-
-$months = array_map(
-    function($m){
-        return strftime("%b",mktime(0, 0, 0, $m, 2, 1970)) ;
-    },
-    range(1, 12)
-);
-//var months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-print "var months=[";
-foreach ($months as $n => $abbr) {
-	if($n>0) {print ",";}
-	print "\"$abbr\"";
+var clockID;
+var yourTimeZoneFrom=<?php echo $UTC?>;
+var d=new Date();
+var weekdays=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var months=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+var tzDifference=yourTimeZoneFrom*60+d.getTimezoneOffset();
+var offset=tzDifference*60*1000;
+function UpdateClock(){
+  var e=new Date(new Date().getTime()+offset);
+  var c=e.getHours()<?php if ($clockformat == '12') { echo '% 12 || 12';} else { echo '% 24 || 24';}?>;
+  <?php
+  if($clockformat=='12') {
+    echo "if(e.getHours()<12){amorpm=' am'}else{amorpm=' pm'}";
+  } else {
+    echo "amorpm='';";
+  }
+  ?>
+  var a=e.getMinutes();
+  var g=e.getSeconds();
+  var f=e.getFullYear();
+  var h=months[e.getMonth()];
+  var b=e.getDate();
+  var i=weekdays[e.getDay()];
+  if(a<10){
+    a="0"+a
+  }
+  if(g<10){
+    g="0"+g
+  }
+  if(c<10){
+    c="0"+c
+  }
+  document.getElementById("theTime").innerHTML="<div class='weatherclock34'> "+i+" "+b+" "+h+" "+f+"<div class='orangeclock'>"+c+":"+a+":"+g+amorpm
 }
-print "]; //using $language month names\n";
-
-$days = array_map(
-    function($m) {
-			  return strftime("%a",mktime(0, 0, 0, 1, $m+3, 1970)) ; // days of the week (Sun first)
-    },
-    range(1, 7)
-);
-
-//var weekdays=["Sun","Mon","Tue","Wed","Thur","Fri","Sat"];
-print "var weekdays=[";
-foreach ($days as $n => $abbr) {
-	if($n>0) {print ",";}
-	print "\"$abbr\"";
-}
-print "]; //using $language day names\n";
-print "var useAMPM = ";
-print preg_match('|g|',$timeFormat)?' true':' false';
-print " // time format\n";
-print "var ampmLegend = '".date('a')."';\n";
-?>
-var tzDifference = yourTimeZoneFrom * 60 + d.getTimezoneOffset();
-var offset = tzDifference * 60 * 1000;
-function UpdateClock() {
-	var e = new Date(new Date().getTime() + offset);
-	var c = e.getHours();
-	var a = e.getMinutes();
-	var g = e.getSeconds();
-	var f = e.getFullYear();
-	var h = months[e.getMonth()];
-	var b = e.getDate();
-	var i = weekdays[e.getDay()];
-	if (a < 10) {
-		a = "0" + a
-	}
-	if (g < 10) {
-		g = "0" + g
-	}
-	if (!useAMPM & c < 10) {
-		c = "0" + c
-	}
-	var c2 = c;
-	if (useAMPM) {
-	  if (c > 12)  {c2 = c - 12; ampm = 'pm'} else { ampm = 'am' } // afternoon v.s. morning
-		if (c == 12) { ampm='pm' } // noon
-	  if (c < 1 )  {c2 = c+12;} // midnight
-	}
-	
-	if(useAMPM) {c = c2;} else {ampm = '';}
-	document.getElementById("theTime").innerHTML = "<div class='weatherclock34'> " + i + " " + b + " " + h + " " + f + "<div class='orangeclock'>" + c + ":" + a + ":" + g + ampm
-}
-function StartClock() {
-	clockID = setInterval(UpdateClock, 500)
-}
-function KillClock() {
-	clearTimeout(clockID)
-}
-window.onload = function () {
-	StartClock()
-};
+function StartClock(){clockID=setInterval(UpdateClock,500)}
+function KillClock(){clearTimeout(clockID)}
+window.onload=function(){StartClock()};
 </script>
 <?php }?>
 <!-- end updater.php -->

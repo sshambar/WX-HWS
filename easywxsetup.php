@@ -463,12 +463,7 @@ WeeWX Software Path to Data file</div><p>
 	<strong><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
      <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg></strong><span style="color:#777;"> WEEWX-CRT path example: http://yourdomain/weewx/realtime.txt</span><br>
 	
-    <br>
-    
-    <strong><svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="rgba(24, 25, 27, 0.8)" stroke="rgba(24, 25, 27, 0.8)" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
-     <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg></strong><span style="color:#777;"> WEEWX-CRT path example: http://yourdomain/weewx/realtime.txt</span><br>
-	
-    <br>
+        <br>
     <span style="color:rgba(86, 95, 103, 1.000)">
     <strong> <svg id="i-info" viewBox="0 0 32 32" width="10" height="10" fill="#FF793A" stroke="#FF793A" stroke-linecap="round" stroke-linejoin="round" stroke-width="16.25%">
      <path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg> getting the path correct is essential for live realtime data display (mbridge/MBrealtimeupload.txt)</strong></span>
@@ -652,7 +647,7 @@ Which WeeWX Platform</div><p>
 <svg id="i-code" viewBox="0 0 32 32" width="12" height="12" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M10 9 L3 17 10 25 M22 9 L29 17 22 25 M18 7 L14 27" />
 </svg>
-*New Davis Forecast Console text English Only,Metar option for current ICON weather conditions, or use Darksky Option</strong><br>
+*New Davis Forecast Console text English Only, Metar option for current ICON weather conditions, or use Darksky Option</strong><br>
 </div><p>
     
        <div class= "stationvalue"><strong>Options</strong></div> 

@@ -20,6 +20,8 @@ Harnesses the power of the WeeWX database to generate graphs and statiscal data.
 
 New style pop-up weather almanacs.
 
+Rainfall almanac reflects rain year settings in weewx.conf file.
+
 Introduces the concept of a WeeWX-api.
 
 Meteobridge to WeeWX variable look-up table.
@@ -34,7 +36,7 @@ Auto adjusting pop-up windows for better viewing experience on smart phones and 
 
 Enhanced chart freatures.
 
-Dark or light chart colour theme.
+Dark or light chart colour theme (set by Default Theme Colour in Settings).
 
 Choice of 24hr 12hr station main clock.
 

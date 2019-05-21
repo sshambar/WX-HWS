@@ -12,7 +12,7 @@
         skin = w34skin
         enable = true
 
-* In the download you will find a folder called 'copy_folder_inside_into_skins_folder'. Inside is a folder called 'w34skin'. Copy or move the w34skin folder and its contents into your skins folder. You will need to edit the skin.conf file in this folder to insert your own path to the folder in which the template is installed. Eg /[YOUR_OWN_PATH]/mbcharts might typically be /var/www/html/pws/.
+* In the download you will find a folder called 'copy_folder_inside_into_skins_folder'. Inside is a folder called 'w34skin'. Copy or move the w34skin folder and its contents into your skins folder. You will need to edit the skin.conf file in this folder to insert your own path to the folder in which the template is installed. For example /[YOUR_OWN_PATH]/mbcharts might typically be '/var/www/html/pws/mbcharts'.
 
 * You will also find a folder called 'copy_files_inside_to_user_folder'. Copy the files inside, stats.py and lastrain.py, into your weewx/bin/user folder.
 

@@ -49,7 +49,7 @@
 		var dataPoints2 = [];
 		$.ajax({
 			type: "GET",
-			url: "chartdata/<?php echo $weatherfile;?>.csv",
+			url: "<?php echo $weatherfile;?>.csv",
 			dataType: "text",
 			cache:false,
 			success: function(data) {processData1(data),processData2(data);}
@@ -100,7 +100,7 @@
 		toolTip:{
 			   fontStyle: "normal",
 			   cornerRadius: 4,
-			   backgroundColor: '<?php echo $backgroundcolor;?>',
+			   backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
 			   contentFormatter: function(e) {
       var str = '<span style="color: <?php echo $fontcolor;?>;">' + CanvasJS.formatDate(e.entries[0].dataPoint.label, "DD MMM") + '</span><br/>';
       for (var i = 0; i < e.entries.length; i++) {
@@ -159,7 +159,7 @@
 			labelFontColor: "#F8F8F8",
 			labelFontSize:11,
 			labelBackgroundColor: '<?php echo $ycrosshaircolor;?>',
-			valueFormatString: "#0.# <?php echo $windunit ;?>",
+			valueFormatString: "#0.0 <?php echo $windunit ;?>",
 		}
 
       },
@@ -175,6 +175,7 @@
 			// Max Wind Gust
 			type: "splineArea",
 			color: '<?php echo $line1color;?>',
+			lineColor: '<?php echo $line1linecolor;?>',
 			markerSize:0,
 			showInLegend:true,
 			legendMarkerType: "circle",
@@ -182,22 +183,22 @@
 			markerType: "circle",
 			name:"Max Wind Gust",
 			dataPoints: dataPoints1,
-			yValueFormatString:"#0.# <?php echo $windunit ;?>",
+			yValueFormatString:"#0.0 <?php echo $windunit ;?>",
 		},
 		{
 			// Average Wind Speed
 			type: "splineArea",
 			color: '<?php echo $line2color;?>',
 			markerSize:0,
-      markerColor: '<?php echo $line2markercolor;?>',
+      		markerColor: '<?php echo $line2markercolor;?>',
 			showInLegend:true,
 			legendMarkerType: "circle",
 			lineThickness: 2,
-      lineColor: '<?php echo $line2markercolor;?>',
+      		lineColor: '<?php echo $line2markercolor;?>',
 			markerType: "circle",
 			name:"Avg Wind Speed",
 			dataPoints: dataPoints2,
-			yValueFormatString:"#0.# <?php echo $windunit ;?>",
+			yValueFormatString:"#0.0 <?php echo $windunit ;?>",
 		}
 
 		]

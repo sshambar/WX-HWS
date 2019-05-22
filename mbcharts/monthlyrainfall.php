@@ -16,7 +16,7 @@
 	####################################################################################################
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
-	$weatherfile = date('mY');
+	$weatherfile = date('M');
 
 	$conv = 1;
 	if ($rainunit == 'in') {
@@ -52,7 +52,7 @@ $(document).ready(function () {
 	var dataPoints2 = [];
 	$.ajax({
 		type: "GET",
-		url: "chartdata/<?php echo $weatherfile;?>.csv",
+		url: "<?php echo date('Y');?>/<?php echo $weatherfile;?>.csv",
 		dataType: "text",
 		cache:false,
 		success: function(data) {
@@ -89,6 +89,7 @@ $(document).ready(function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
 			backgroundColor: '<?php echo $backgroundcolor;?>',
 			animationEnabled: true,
+			animationDuration: <?php echo $animationduration;?>,
 			title: {
 				text: "",
 				fontSize: 12,
@@ -98,7 +99,7 @@ $(document).ready(function () {
 			toolTip:{
 				fontStyle: "normal",
 				cornerRadius: 4,
-				backgroundColor: '<?php echo $backgroundcolor;?>',
+				backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
 				contentFormatter: function(e) {
 					var str = '<span style="color: <?php echo $fontcolor;?>;">' + CanvasJS.formatDate(e.entries[0].dataPoint.label, "DD MMM") + '</span><br/>';
 					for (var i = 0; i < e.entries.length; i++) {

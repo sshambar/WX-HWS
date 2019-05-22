@@ -18,8 +18,6 @@
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('Y');
 
-	$animationduration = '500';
-
   $conv = 1;
 	if ($rainunit == 'in') {
     $conv = '0.0393701';
@@ -53,7 +51,7 @@
 		var dataPoints2 = [];
 		$.ajax({
 			type: "GET",
-			url: "chartdata/<?php echo $weatherfile;?>.csv",
+			url: "<?php echo $weatherfile;?>.csv",
 			dataType: "text",
 			cache:false,
 			success: function(data) {processData1(data),processData2(data);}
@@ -104,7 +102,7 @@
 		toolTip:{
 			   fontStyle: "normal",
 			   cornerRadius: 4,
-			   backgroundColor: '<?php echo $backgroundcolor;?>',
+			   backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
 			   contentFormatter: function(e) {
       var str = '<span style="color: <?php echo $fontcolor;?>;">' + CanvasJS.formatDate(e.entries[0].dataPoint.label, "DD MMM") + '</span><br/>';
       for (var i = 0; i < e.entries.length; i++) {
@@ -164,7 +162,9 @@
 			labelFontColor: "#fff",
 			labelFontSize:12,
 			labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
-			valueFormatString: "#0.## '<?php echo $rainunit ?>'",
+			labelFormatter: function ( e ) {
+        return e.value .toFixed(<?php echo $raindecimal;?>) + " <?php echo $rainunit ;?> " ;
+         },
 		}
       },
 

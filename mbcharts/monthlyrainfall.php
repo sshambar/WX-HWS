@@ -16,7 +16,7 @@
 	####################################################################################################
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
-	$weatherfile = date('M');
+	$weatherfile = date('mY');
 
 	$conv = 1;
 	if ($rainunit == 'in') {
@@ -52,7 +52,7 @@ $(document).ready(function () {
 	var dataPoints2 = [];
 	$.ajax({
 		type: "GET",
-		url: "<?php echo date('Y');?>/<?php echo $weatherfile;?>.csv",
+		url: "chartdata/<?php echo date('Y');?>/<?php echo $weatherfile;?>.csv",
 		dataType: "text",
 		cache:false,
 		success: function(data) {
@@ -101,7 +101,7 @@ $(document).ready(function () {
 				cornerRadius: 4,
 				backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
 				contentFormatter: function(e) {
-					var str = '<span style="color: <?php echo $fontcolor;?>;">' + CanvasJS.formatDate(e.entries[0].dataPoint.label, "DD MMM") + '</span><br/>';
+					var str = '<span style="color: <?php echo $fontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
 					for (var i = 0; i < e.entries.length; i++) {
 						var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $fontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(2) + "<?php echo ' '.$rainunit ;?>" + '</span> <br/>';
 						str = str.concat(temp);

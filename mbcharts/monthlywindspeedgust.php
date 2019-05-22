@@ -16,9 +16,9 @@
 	####################################################################################################
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
-	$weatherfile = date('mY');
+	$weatherfile = date('M');
 
-	$conv = 1;
+	 $conv = 1;
 
 	if ($windunit == 'mph') {
     $conv= '0.621371';
@@ -27,13 +27,14 @@
   } else if ($windunit == 'km/h'){
     $conv= '1';
   }
-				echo '
+		echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR WIND Month CHART</title>
 	<script src=../js/jquery.js></script>
+
 	';
 	?>
 <br>
@@ -43,7 +44,7 @@ $(document).ready(function () {
 	var dataPoints2 = [];
 	$.ajax({
 		type: "GET",
-		url: "chartdata/<?php echo $weatherfile;?>.csv",
+		url: "chartdata/<?php echo date('Y');?>/<?php echo $weatherfile;?>.csv",
 		dataType: "text",
 		cache:false,
 		success: function(data) {processData1(data),processData2(data);}
@@ -61,6 +62,7 @@ $(document).ready(function () {
 		requestTempCsv();
 	}
 	function requestTempCsv(){
+
 	}
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
@@ -91,7 +93,7 @@ $(document).ready(function () {
 				cornerRadius: 4,
 				backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
 				contentFormatter: function(e) {
-					var str = '<span style="color: <?php echo $fontcolor;?>;">' + CanvasJS.formatDate(e.entries[0].dataPoint.label, "DD MMM") + '</span><br/>';
+					var str = '<span style="color: <?php echo $fontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
 					for (var i = 0; i < e.entries.length; i++) {
 						var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $fontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(1) + "<?php echo ' '.$windunit ;?>" + '</span> <br/>';
 						str = str.concat(temp);

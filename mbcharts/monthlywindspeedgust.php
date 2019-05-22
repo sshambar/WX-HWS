@@ -27,14 +27,13 @@
   } else if ($windunit == 'km/h'){
     $conv= '1';
   }
-		echo '
+				echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR WIND Month CHART</title>
 	<script src=../js/jquery.js></script>
-
 	';
 	?>
 <br>
@@ -62,7 +61,6 @@ $(document).ready(function () {
 		requestTempCsv();
 	}
 	function requestTempCsv(){
-
 	}
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
@@ -81,6 +79,7 @@ $(document).ready(function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
 			backgroundColor: '<?php echo $backgroundcolor;?>',
 			animationEnabled: true,
+			animationDuration: <?php echo $animationduration;?>,
 			title: {
 				text: "",
 				fontSize: 12,
@@ -90,7 +89,7 @@ $(document).ready(function () {
 			toolTip:{
 				fontStyle: "normal",
 				cornerRadius: 4,
-				backgroundColor: '<?php echo $backgroundcolor;?>',
+				backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
 				contentFormatter: function(e) {
 					var str = '<span style="color: <?php echo $fontcolor;?>;">' + CanvasJS.formatDate(e.entries[0].dataPoint.label, "DD MMM") + '</span><br/>';
 					for (var i = 0; i < e.entries.length; i++) {
@@ -160,6 +159,7 @@ $(document).ready(function () {
 				// Max Wind Gust
 				type: "splineArea",
 				color: '<?php echo $line1color;?>',
+				lineColor: '<?php echo $line1linecolor;?>',
 				markerSize:0,
 				showInLegend:true,
 				legendMarkerType: "circle",

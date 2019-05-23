@@ -41,7 +41,7 @@ $(document).ready(function () {
 	var dataPoints2 = [];
 	$.ajax({
 		type: "GET",
-		url: "chartdata/<?php echo date('Y');?>/<?php echo $weatherfile;?>.csv",
+		url: "chartdata/<?php echo $weatherfile;?>.csv",
 		dataType: "text",
 		cache:false,
 		success: function(data) {

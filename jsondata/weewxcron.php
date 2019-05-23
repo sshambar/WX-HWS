@@ -1,4 +1,7 @@
 <?php
+include('../settings.php');include('../settings1.php');
+?>
+<?php
 if ($position6=="forecast3wu.php" || $position6=="forecast3wularge.php"){
 // weather34 weather underground  curl based
 $url4c = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode='.$lat.','.$lon.'&language=en-US&format=json&units='.$wuapiunit.'&apiKey='.$wuapikey ;
@@ -96,6 +99,7 @@ curl_close($ch4a);
 fclose($fp4a);}
 }
 ?>
+
 
 <?php 
 if($weatherflowoption=='yes'){

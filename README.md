@@ -89,6 +89,16 @@ THE TEMPLATE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Attribution-NonCommercial 4.0 International based on a work at https://weather34.com/homeweatherstation
 Non-weeWX versions Available
 
+# Meteobridge-Weather34-Template MB-UB40-RRW
+Github repository for the Meteobridge version of the original weather34 template 
+Weather Template for Meteobridge users only 
+
+# This work is not permitted to be used in any other versions without prior permission unless listed below 
+# Permission is granted for use in Cumulus version maintained by Ken True 
+# Permission is granted for use in Weewx version maintained by Ian Millard
+
+*This work means CSS/SVG/PHP .
+
     Cumulus Version available via download and more info supported by Ken True ( https://github.com/ktrue/CU-HWS ). This version now also supports WeeWX and WeatherCat
 
     Weatherflow API Version Discontinued Please use meteobridge version if you have a meteobridge product, it offers more versatile options over the API and faster updates and better history/chart outputs or alternatively try the version for Weather Display below by Wim van der Kuil

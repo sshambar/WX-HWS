@@ -89,7 +89,7 @@ THE TEMPLATE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Attribution-NonCommercial 4.0 International based on a work at https://weather34.com/homeweatherstation
 Non-weeWX versions Available
 
-# Meteobridge-Weather34-Template MB-UB40-RRW
+# An Excerpt from Meteobridge-Weather34-Template MB-UB40-RRW README.md
 Github repository for the Meteobridge version of the original weather34 template 
 Weather Template for Meteobridge users only 
 
@@ -99,19 +99,11 @@ Weather Template for Meteobridge users only
 
 *This work means CSS/SVG/PHP .
 
-    Cumulus Version available via download and more info supported by Ken True ( https://github.com/ktrue/CU-HWS ). This version now also supports WeeWX and WeatherCat
+Meteobridge Version available via download, maintained by Lightmaster (https://github.com/weather34/Meteobridge-Weather34-Template)
 
-    Weatherflow API Version Discontinued Please use meteobridge version if you have a meteobridge product, it offers more versatile options over the API and faster updates and better history/chart outputs or alternatively try the version for Weather Display below by Wim van der Kuil
+Meteobridge Version available via download maintained by Lightmaster (https://github.com/weather34/Meteobridge-Weather34-Template)
 
-    Raspberry Pi Python Weatherflow console version available via here supported download via by Peter Davis ( Weatherflow Forum ) https://github.com/peted-davis/WeatherFlow_PiConsole
-
-    Davis WeatherLink version by Mats Ahlklo supports WL 2.0 details here http://pysselilivet.blogspot.com/2017/01/install-weather34-with-weatherlink.html
-
-    ATMOCOM Version for Ambient WS-2902 Osprey,Ventus W830, MiSol, ChiliTec, PanTech, Froggit WH3000, Ambient WS-8478 Falcon, Bresser, FOSHK HP-3500 series info here https://atmocom.com/Demo-weather-data
-
-   
-
-
+Cumulus Version available via download and more info supported by Ken True ( https://github.com/ktrue/CU-HWS ). This version now also supports WeeWX and WeatherCat
 
 
 Apart from Brian Underdown without him, this template would never exist, I would aslo like to acknowledge the following people: -

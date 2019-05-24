@@ -10,7 +10,9 @@ timelapse
 #Scripts
 scripts/
 scripts
-
+nanocharts/
+pbnotify.php
+pbnotify_test.php
 #Settings
 settings1.php
 

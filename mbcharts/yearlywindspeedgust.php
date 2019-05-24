@@ -50,43 +50,33 @@
 			cache:false,
 			success: function(data) {processData1(data),processData2(data);}
 		});
-
 	function processData1(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
-
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
 				if ( rowData.length >1)
 					dataPoints1.push({label: rowData[0],y:parseFloat(rowData[6]*<?php echo $conv;?>)});
-
-
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
-
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
-
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
 				if ( rowData.length >1)
 					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[7]*<?php echo $conv;?>)});
 					//parseFloat(rowData[13])});
-
 			}
 			drawChart(dataPoints1 , dataPoints2 );
 		}
 	}
-
-
 	function drawChart( dataPoints1 , dataPoints2 ) {
 		var chart = new CanvasJS.Chart("chartContainer", {
 		 backgroundColor: '<?php echo $backgroundcolor;?>',
 		  animationEnabled: true,
 		  animationDuration: <?php echo $animationduration;?>,
-
 		title: {
             text: "",
 			fontSize: 12,
@@ -127,9 +117,7 @@
 			labelFontSize:11,
 			labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
 		}
-
 			},
-
 		axisY:{
 		title: "Wind - Gusts (<?php echo $windunit ;?>) Recorded",
 		titleFontColor: "#555",
@@ -157,15 +145,11 @@
 			labelBackgroundColor: '<?php echo $ycrosshaircolor;?>',
 			valueFormatString: "#0.0 <?php echo $windunit ;?>",
 		}
-
       },
-
 	  legend:{
       fontFamily: "arial",
       fontColor: '<?php echo $fontcolor;?>',
-
  },
-
 		data: [
 		{
 			// Max Wind Gust
@@ -196,14 +180,11 @@
 			dataPoints: dataPoints2,
 			yValueFormatString:"#0.0 <?php echo $windunit ;?>",
 		}
-
 		]
 		});
-
 		chart.render();
 	}
 });
-
     </script>
      <link rel="stylesheet" href="weather34chartstyle-<?php echo $charttheme;?>.css">
 <body>

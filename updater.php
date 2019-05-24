@@ -12,7 +12,7 @@ date_default_timezone_set($TZ);
   .html(a);<?php if ($wuupdate >0) {
   echo 'setTimeout(stationcron,' . 221000*$wuupdate.')';}?>},
   contentType: "application/x-www-form-urlencoded;charset=ISO-8859-15",
-  type:"GET",url:"jsondata/weewxcron.php"})}; 
+  type:"GET",url:"weewxcron.php"})}; 
 
 //update the modules
 

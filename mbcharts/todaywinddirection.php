@@ -163,7 +163,7 @@
 			//wind direction
 			type: "scatter",
 			color: '<?php echo $line2color;?>',
-			markerSize:2,
+			markerSize:3,
 			showInLegend:true,
 			legendMarkerType: "circle",
 			lineThickness: 1,

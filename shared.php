@@ -153,7 +153,7 @@ function heatIndex($temp, $rh) {
 	{
 		$heatIndex = heatIndexHigh($t, $rh);
 	}
-$weather["temp_units"]='C';
+
 if ($weather["temp_units"] == 'C'){
 $heatIndex = fToCDirect($heatIndex);
 	}
@@ -182,7 +182,10 @@ function anyToC($field){
 }
 
 function anyToF($field){
-	
+	 global $weather;
+        if ($weather["temp_units"] == 'F'){
+                return $field;
+        } else {
 		return cToFDirect ($field);
 	}
 

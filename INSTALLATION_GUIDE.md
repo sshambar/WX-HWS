@@ -17,7 +17,8 @@ IMPORTANT. After installing PHP please make sure you install all the PHP modules
     			unit_system = METRIC
 
 	If your path to your web root is different, please amend the path in front of 'weewx/realtime.txt' accordingly.
-	IMPORTANT. It is crucial that the '[CumulusRealTime]' unit_system is set to METRIC as in the snippet above. If US or METRICWX setting is used, the resulting display will be un-predictable and even nonsensical! 
+	
+	#IMPORTANT. It is crucial that the '[CumulusRealTime]' unit_system is set to METRIC as in the snippet above. If US or METRICWX setting is used, the resulting display will be un-predictable and even nonsensical! 
 
 	
 	Finally go to the '[StdReport]' section and add this: -

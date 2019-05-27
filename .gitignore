@@ -19,7 +19,7 @@ settings1.php
 #personal Weather Data
 mbcharts/*.csv
 mbcharts/*/*.csv
-jsondata/*.txt
+w34stats.php
 chartswudata/*
 #demodata/*
 mbridge/MBrealtimeupload.txt

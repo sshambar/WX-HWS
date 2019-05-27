@@ -182,11 +182,8 @@ function anyToC($field){
 }
 
 function anyToF($field){
-	 global $weather;
-        if ($weather["temp_units"] == 'F'){
-                return $field;
-        } else {
-		return cToFDirect ($field);
+
+	return cToFDirect ($field);
 	}
 
 

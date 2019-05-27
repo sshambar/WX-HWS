@@ -103,7 +103,7 @@ else echo "Wind Gusts Becoming Strong Caution Required <notifyorange>" .$weather
 date_default_timezone_set($TZ);
 $json_string=file_get_contents('jsondata/eqnotification.txt');
 $parsed_json=json_decode($json_string,true);$magnitude = array();$eqtitle = array();$depth = array();$time = array();$lati = array();$longi = array();$eventime = array();
-for ($i = 0; $i < 100; $i++) {
+for ($i = 0; $i < sizeof($parsed_json); $i++) {
 $magnitude[$i]=$parsed_json{$i}{'magnitude'};$eqtitle[$i]=$parsed_json{$i}['title'];$depth[$i]=$parsed_json{$i}['depth'];$time[$i]=$parsed_json{$i}['date_time'];
 $lati[$i]=$parsed_json{$i}['latitude'];$longi[$i]=$parsed_json{$i}['longitude'];$eventime[$i]=date($timeFormatShort, strtotime($time[$i]) );$eqdist[$i] = round(distance($lat, $lon, $lati[$i], $longi[$i])) ;
 }

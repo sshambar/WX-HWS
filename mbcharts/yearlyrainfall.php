@@ -1,51 +1,41 @@
 <?php
 
 	####################################################################################################
-	#	WUDATACHARTS by BRIAN UNDERDOWN 2016                                                           #
-	#	CREATED FOR HOMEWEATHERSTATION TEMPLATE at http://weather34.com/homeweatherstation/index.html  #
+	#	DATACHARTS by BRIAN UNDERDOWN 2017                                                      	   #
+	#	CREATED FOR HOMEWEATHERSTATION TEMPLATE at https://weather34.com/homeweatherstation/index.html #
 	# 	                                                                                               #
 	# 	built on CanvasJs  	                                                                           #
 	#   canvasJs.js is protected by CREATIVE COMMONS LICENCE BY-NC 3.0  	                           #
 	# 	free for non commercial use and credit must be left in tact . 	                               #
 	# 	                                                                                               #
-	# 	Weather Data is based on your PWS upload quality collected at Weather Underground 	           #
+	# 	Weather Data is based on your PWS quality Stored								               #
 	# 	                                                                                               #
-	# 	Second General Release: 4th October 2016  	                                                   #
+	# 	3rd General Release: updated : 4th Nov 2017  	                                      		   #
 	# 	                                                                                               #
-	#   http://www.weather34.com 	                                                                   #
+	#   https://www.weather34.com 	                                                                   #
 	####################################################################################################
-
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('Y');
 
-  $conv = 1;
-	if ($rainunit == 'in') {
-    $conv = '0.0393701';
-  } else if ($rainunit == 'mm') {
-    $conv = '1';
-  }
-
-	if ($rainunit == 'mm'){
-		$raindecimal = '0';
+	if ($tempunit == 'F') {
+	$conv = '(9 / 5) + 32';
 	} else {
-		$raindecimal = '2';
+	$conv = '1';
 	}
 
-	/*$interval = '\'auto\'';
-	if ($windunit == 'mph') {$interval= '0.5';}
-	else if ($windunit == 'm/s') {$interval= '1';}
-	else if ($windunit == 'km/h'){$interval= '1';}*/
     echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-		<title>OUTDOOR Rainfall YEAR CHART</title>
+		<title>DEWPOINT TEMP YEAR CHART</title>
 		<script src=../js/jquery.js></script>
-			';
+
+	';
 	?>
     <br>
     <script type="text/javascript">
+		// today temperature
         $(document).ready(function () {
 		var dataPoints1 = [];
 		var dataPoints2 = [];
@@ -60,13 +50,11 @@
 	function processData1(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
-
+			//hi
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-					dataPoints1.push({label:rowData[0],y:parseFloat(rowData[5]*<?php echo $conv;?>)});
-
-
+				if ( rowData.length >7)
+					dataPoints1.push({label: rowData[0],y:parseFloat(rowData[3]*<?php echo $conv ;?>)});
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
@@ -74,28 +62,27 @@
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
-
+			//lo
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[5]*<?php echo $conv;?>)});
-					//parseFloat(rowData[13])});
+				if ( rowData.length >7)
+					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[4]*<?php echo $conv ;?>)});
 
 			}
-			drawChart(dataPoints1 );
+			drawChart(dataPoints1 , dataPoints2 );
 		}
 	}
 
-
-	function drawChart( dataPoints1 , dataPoints2 ) {
+		function drawChart( dataPoints1 , dataPoints2 ) {
 		var chart = new CanvasJS.Chart("chartContainer", {
 		 backgroundColor: '<?php echo $backgroundcolor;?>',
 		  animationEnabled: true,
 		  animationDuration: <?php echo $animationduration;?>,
 
+
 		title: {
-            text: "",
-			fontSize: 12,
+            text: " ",
+			fontSize: 11,
 			fontColor: '<?php echo $fontcolor;?>',
 			fontFamily: "arial",
         },
@@ -106,26 +93,28 @@
 			   contentFormatter: function(e) {
       var str = '<span style="color: <?php echo $fontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
       for (var i = 0; i < e.entries.length; i++) {
-        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $fontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(2) + "<?php echo ' '.$rainunit ;?>" + '</span> <br/>';
+        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $fontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(1) + "<?php echo ' °'.$tempunit ;?>" + '</span> <br/>';
         str = str.concat(temp);
       }
       return (str);
     },
 			   shared: true,
+
+
  },
 		axisX: {
 			gridColor: '<?php echo $gridcolor;?>',
 		    labelFontSize: 10,
 			labelFontColor: '<?php echo $fontcolor;?>',
-			lineThickness: 1,
+			lineThickness: 0.5,
 			gridThickness: 1,
-			gridDashType: "dot",
+      gridDashType: "dot",
 			titleFontFamily: "arial",
 			labelFontFamily: "arial",
 			minimum:0,
-			interval: 'auto',
+			interval:'auto',
 			intervalType:"day",
-			xValueType: "dateTime",
+			//xValueType: "dateTime",
 			crosshair: {
         enabled: true,
         snapToDataPoint: true,
@@ -134,37 +123,36 @@
         labelFontSize:11,
         labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
       }
-    },
+
+			},
 
 		axisY:{
-		title: "Rainfall (<?php echo $rainunit ;?>) Recorded",
+		title: "Dewpoint (°<?php echo $tempunit ;?>) Recorded",
 		titleFontColor: '<?php echo $fontcolor;?>',
 		titleFontSize: 10,
         titleWrap: false,
 		margin: 10,
-		lineThickness: 1,
+		lineThickness: 0.5,
 		gridThickness: 1,
-		gridDashType: "dot",
+      gridDashType: "dot",
+        includeZero: true,
 		interval: 'auto',
-        includeZero: false,
 		gridColor: '<?php echo $gridcolor;?>',
 		labelFontSize: 11,
 		labelFontColor: '<?php echo $fontcolor;?>',
 		titleFontFamily: "arial",
 		labelFontFamily: "arial",
 		labelFormatter: function ( e ) {
-        return e.value .toFixed(<?php echo $raindecimal;?>) + " <?php echo $rainunit ;?> " ;
+        return e.value .toFixed(0) + " °<?php echo $tempunit ;?>" ;
          },
 		crosshair: {
 			enabled: true,
 			snapToDataPoint: true,
-			color: '<?php echo $xcrosshaircolor;?>',
+			color: '<?php echo $ycrosshaircolor;?>',
 			labelFontColor: "#fff",
-			labelFontSize:12,
-			labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
-			labelFormatter: function ( e ) {
-        return e.value .toFixed(<?php echo $raindecimal;?>) + " <?php echo $rainunit ;?> " ;
-         },
+			labelFontSize:11,
+			labelBackgroundColor: '<?php echo $ycrosshaircolor;?>',
+			valueFormatString: "##0.# °<?php echo $tempunit ;?>",
 		}
       },
 
@@ -177,21 +165,34 @@
 
 		data: [
 		{
-			//rainfall
-			type: "column",
-			color: '<?php echo $line2color;?>',
+			//type: "spline",
+			type: "splineArea",
+			color: '<?php echo $line1color;?>',
+			lineColor: '<?php echo $line1linecolor;?>',
 			markerSize:0,
-      markerColor: '<?php echo $line2color;?>',
 			showInLegend:true,
 			legendMarkerType: "circle",
-			lineThickness: 0,
-      //lineColor: '<?php echo $line2color;?>',
-			markerType: "none",
-			name:"Total Rainfall",
+			lineThickness: 2,
+			markerType: "circle",
+			name:" Hi Dewpoint",
 			dataPoints: dataPoints1,
-			yValueFormatString:"#0.# <?php echo $rainunit ;?>",
+			yValueFormatString: "#0.# °<?php echo $tempunit ;?>",
+
 		},
 		{
+
+			type: "splineArea",
+			color: '<?php echo $line2color;?>',
+			markerSize:0,
+      markerColor: '<?php echo $line2markercolor;?>',
+			showInLegend:true,
+			legendMarkerType: "circle",
+			lineThickness: 2,
+      lineColor: '<?php echo $line2markercolor;?>',
+			markerType: "circle",
+			name:" Lo Dewpoint",
+			dataPoints: dataPoints2,
+			yValueFormatString: "#0.# °<?php echo $tempunit ;?>",
 
 		}
 
@@ -205,7 +206,7 @@
     </script>
      <link rel="stylesheet" href="weather34chartstyle-<?php echo $charttheme;?>.css">
 <body>
-<div class="weather34darkbrowser" url="Rainfall Recorded - <?php echo date('Y') ;?> &nbsp;&nbsp;|&nbsp;&nbsp; Total: <?php echo $weather["rain_year"].' '.$rainunit ;?>"></div>
+<div class="weather34darkbrowser" url="Dewpoint - <?php echo date('Y') ;?> &nbsp;&nbsp;|&nbsp;&nbsp; High: <?php echo $weather['dewymax'].' °'.$tempunit;?>&nbsp;&nbsp; Low: <?php echo $weather['dewymin'].' °'.$tempunit;?>"></div>
 <div style="width:auto;background:0;padding:0px;margin-left:5px;font-size: 12px;border-radius:3px;">
 <div id="chartContainer" class="chartContainer"></div></div>
 <div class="weather34browser-footer">

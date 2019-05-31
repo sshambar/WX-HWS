@@ -99,9 +99,7 @@ Weather Template for Meteobridge users only
 
 *This work means CSS/SVG/PHP .
 
-Meteobridge Version available via download, maintained by Lightmaster (https://github.com/weather34/Meteobridge-Weather34-Template)
-
-Meteobridge Version available via download maintained by Lightmaster (https://github.com/weather34/Meteobridge-Weather34-Template)
+Meteobridge Version available via download maintained by Lightmaster (https://github.com/lightmaster/Meteobridge-Weather34-Template)
 
 Cumulus Version available via download and more info supported by Ken True ( https://github.com/ktrue/CU-HWS ). This version now also supports WeeWX and WeatherCat
 

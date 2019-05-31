@@ -16,6 +16,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 /////MODS WEEWX HERE///////////////////////////////////////////////////////////	
 	include('meteobridge_lookup.php');
+        if (isset($meteobridgeapi)){
 	$weather["rain_alltime"] = $meteobridgeapi[151];
 	
 //if ($livedataFormat == 'meteobridge-api' && $livedata) {
@@ -78,8 +79,10 @@
 	$weather["temp_avg15"]         = $meteobridgeapi[67];
 	$weather["temp_avg"]           = $meteobridgeapi[123]; // last 60 minutes
 	$weather["wind_speed_avg"]     = $meteobridgeapi[5];
-	$weather["wind_direction"]     = number_format($meteobridgeapi[7],0);
-	$weather["wind_direction_avg"] = number_format($meteobridgeapi[46],0);
+	$weather["wind_direction"]     = number_format((float)$meteobridgeapi[7],0);
+	$weather["wind_direction_avg"] = 0;
+        if (is_numeric($meteobridgeapi[46])){
+	$weather["wind_direction_avg"] = number_format($meteobridgeapi[46],0);}
 	$weather["wind_speed"]         = number_format($meteobridgeapi[5]);
 	$weather["wind_gust_speed"]    = $meteobridgeapi[6];
 	$weather["wind_speed_bft"]     = $meteobridgeapi[12];
@@ -89,7 +92,9 @@
 	$weather["wind_speed_avg15"]   = $meteobridgeapi[72];
 	$weather["wind_speed_avg30"]   = $meteobridgeapi[73];
 	$weather["sunshine"]           = $meteobridgeapi[55];
-	$weather["maxsolar"]           = number_format($meteobridgeapi[80],0);
+	$weather["maxsolar"]           = 0;
+        if (is_numeric($meteobridgeapi[80])){
+	$weather["maxsolar"]           = number_format($meteobridgeapi[80],0);}
 	$weather["maxuv"]              = $meteobridgeapi[58];	
 	$weather["sunny"]          	   = $meteobridgeapi[57];
 	$weather["lux"] 			   = number_format($meteobridgeapi[45]/0.00809399477,0, '.', '');
@@ -113,10 +118,29 @@
 	$windrunformula=$windrunhr=date('G')+$windrunmin;
 	$weather["windrun34"]=$weather['wind_speed_avg30']*number_format($windrunformula,1);
 	//weather34 meteobridge moon sun data 
-    $weather["moonphase"]=$meteobridgeapi[153];$weather["luminance"]=$meteobridgeapi[154];$weather["daylight"]=$meteobridgeapi[155];if ($meteobridgeapi[156]=='--'){$weather["moonrise"]='In Transit';}
-	else $weather["moonrise"]='Rise<moonrisecolor> '.date($timeFormatShort, strtotime($meteobridgeapi[156]));$weather["moonset"]='Set<moonsetcolor> '.date($timeFormatShort, strtotime($meteobridgeapi[157]));
+        $weather["moonphase"]=$meteobridgeapi[153];
+        $weather["luminance"]=$meteobridgeapi[154];
+        $weather["daylight"]=$meteobridgeapi[155];
+        if ($meteobridgeapi[156]=='--'){$weather["moonrise"]='In Transit';}
+	else $weather["moonrise"]='Rise<moonrisecolor> '.date($timeFormatShort, strtotime($meteobridgeapi[156]));
+        $weather["moonset"]='Set<moonsetcolor> '.date($timeFormatShort, strtotime($meteobridgeapi[157]));
 	//weather34 meteobridge real feel 02-08-2018 based on cumulus forum formula (THW)
-	$weather['realfeel'] = round(($weather['temp'] + 0.33*($weather['humidity']/100)*6.105*exp(17.27*$weather['temp']/(237.7+$weather['temp']))- 0.70*$weather["wind_speed"] - 4.00),1);
+	//$weather['realfeel'] = round(($weather['temp'] + 0.33*($weather['humidity']/100)*6.105*exp(17.27*$weather['temp']/(237.7+$weather['temp']))- 0.70*$weather["wind_speed"] - 4.00),1);
+
+    if ($weather['temp'] <= 50 and $weather["wind_speed"] >= 3){
+        $vFeelsLike = 35.74 + (0.6215*$weather['temp']) - 35.75*($weather["wind_speed"]**0.16) + ((0.4275*$weather['temp'])*($weather["wind_speed"]**0.16));}
+    else{
+        $vFeelsLike = $weather['temp'];}
+    if ($vFeelsLike == $weather['temp'] and $weather['temp'] >= 80){
+        $vFeelsLike = 0.5 * ($weather['temp'] + 61.0 + (($weather['temp']-68.0)*1.2) + ($weather['humidity']*0.094));}
+        if ($vFeelsLike >= 80){
+            $vFeelsLike = -42.379 + 2.04901523*$weather['temp'] + 10.14333127*$weather['humidity'] - .22475541*$weather['temp']*$weather['humidity'] - .00683783*$weather['temp']*$weather['temp'] - .05481717*$weather['humidity']*$weather['humidity'] + .00122874*$weather['temp']*$weather['temp']*$weather['humidity'] + .00085282*$weather['temp']*$weather['humidity']*$weather['humidity'] - .00000199*$weather['temp']*$weather['temp']*$weather['humidity']*$weather['humidity'];}
+            if ($weather['humidity'] < 13 and $weather['temp'] >= 80 and $weather['temp'] <= 112){
+                $vFeelsLike = $vFeelsLike - ((13-$weather['humidity'])/4)*sqrt((17-abs($weather['temp']-95.))/17);}
+                if ($weather['humidity'] > 85 and $weather['temp'] >= 80 and $weather['temp'] <= 87){
+                    $vFeelsLike = $vFeelsLike + (($weather['humidity']-85)/10) * ((87-$weather['temp'])/5);}
+    $weather['realfeel'] =  round($vFeelsLike,1);
+
 	//uptimealt
 	$convertuptimemb34 = $weather["uptime"];$uptimedays = floor($convertuptimemb34 / 86400);$uptimehours = floor(($convertuptimemb34 -($uptimedays*86400)) / 3600);
 	//amusing indoor real feel
@@ -283,6 +307,7 @@ $weather["humidity_ydmaxtime"]=$humydmaxtime;
 //hum yesterday min
 $weather["humidity_ydmin"]=number_format($meteobridgeapi[169],0);
 $originalDate759=$meteobridgeapi[170];
+
 $humydmintime=date('H:i',strtotime($originalDate759));
 $weather["humidity_ydmintime"]=$humydmintime;
 
@@ -402,7 +427,8 @@ $weather["humidity_ydmintime"]=$humydmintime;
     $solarymaxtime = date('jS M H:i', strtotime($solaroriginalDate4));	
 	$solaroriginalDate6 = $meteobridgeapi[106];
     $solardmaxtime = date('H:i', strtotime($solaroriginalDate6));	
-	
+
+        if (is_numeric($meteobridgeapi[107])) {	
 	$weather["solarydmax"]		    = number_format($meteobridgeapi[107],0, '.', ''); //temp max yesterday
 	$weather["solarydmaxtime"]		= $solarydmaxtime; //seconds	
 	$weather["solarmmax"]		    = number_format($meteobridgeapi[109],0, '.', ''); //temp max month
@@ -411,7 +437,7 @@ $weather["humidity_ydmintime"]=$humydmintime;
 	$weather["solarymaxtime"]		= $solarymaxtime; //seconds	
 	$weather["solardmax"]		    = number_format($meteobridgeapi[105],0, '.', ''); //temp max today
 	$weather["solardmaxtime"]		= $solardmaxtime; //seconds	
-	
+}	
 	
 	
 	//alamanac uv	
@@ -424,6 +450,7 @@ $weather["humidity_ydmintime"]=$humydmintime;
 	$uvoriginalDate6 = $meteobridgeapi[113];
     $uvdmaxtime = date('H:i', strtotime($uvoriginalDate6));	
 	
+        if (is_numeric($meteobridgeapi[114])) {	
 	$weather["uvydmax"]		    = number_format($meteobridgeapi[114],1); //temp max yesterday
 	$weather["uvydmaxtime"]		= $uvydmaxtime; //seconds	
 	$weather["uvmmax"]		    = number_format($meteobridgeapi[116],1); //temp max month
@@ -432,7 +459,7 @@ $weather["humidity_ydmintime"]=$humydmintime;
 	$weather["uvymaxtime"]		= $uvymaxtime; //seconds	
 	$weather["uvdmax"]		    = number_format($meteobridgeapi[58],1); //temp max today
 	$weather["uvdmaxtime"]		= $uvdmaxtime; //seconds	
-	
+}	
 		
 	//trends will update 15 minutes after a reboot or power failure
 	$weather["temp_trend"]         =  number_format($meteobridgeapi[2],1) -  number_format($meteobridgeapi[67],1) ;
@@ -440,10 +467,10 @@ $weather["humidity_ydmintime"]=$humydmintime;
 	$weather["dewpoint_trend"]     =  number_format($meteobridgeapi[4],1) -  number_format($meteobridgeapi[69],1);
 	$weather["temp_indoor_trend"]  =  number_format($meteobridgeapi[22],1) - number_format($meteobridgeapi[70],1);//indoor
 	$weather["temp_humidity_trend"] = number_format($meteobridgeapi[23],1) - number_format($meteobridgeapi[71],1);//indoor
-	$weather["barotrend"] =   $meteobridgeapi[10] -  $barotrend[0];	
+	//$weather["barotrend"] =   $meteobridgeapi[10] -  $barotrend[0];	
 	$weather['barometer6h'] = $meteobridgeapi[10] - $meteobridgeapi[73];
 	$weather['winddir6h'] =	 $meteobridgeapi[72];
-	$weather["dirtrend"] =$dirtrend[0];
+	//$weather["dirtrend"] =$dirtrend[0];
 	
 	
 	
@@ -452,6 +479,7 @@ $weather["humidity_ydmintime"]=$humydmintime;
 		// standardize format
 		$weather["barometer_units"] = "inHg";}
 // Convert temperatures if necessary
+
 if ($tempunit != $weather["temp_units"]) {
 	if ($tempunit == "C") {
 		fToC($weather, "temp_indoor");
@@ -911,7 +939,8 @@ if ($response != null) {
   //darksky api Hourly Forecast
   $darkskyhourlySummary = $response['hourly']['summary'];
   $darkskyhourlyIcon = $response['hourly']['icon'];
-  $darkskyhourlyUV = $response['hourly']['uvIndex'];
+  if (isset($response['hourly']['uvIndex'])){
+  $darkskyhourlyUV = $response['hourly']['uvIndex'];}
   $darkskyhourlyCond= array();
     foreach ($response['hourly']['data'] as $td) {
       $darkskyhourlyCond[] = $td;
@@ -924,7 +953,7 @@ if ($response != null) {
       $darkskydayCond[] = $d;
     }}
 //end darksky api and convert winspeed below
-
+}
 
 
 $o='Designed by weather34.com';
@@ -1002,5 +1031,5 @@ $E = (6.11 * pow(10 , (7.5 * $Tdc / (237.7 + $Tdc))));
 $wetbulbcalc = (((0.00066 * $P) * $Tc) + ((4098 * $E) / pow(($Tdc + 237.7) , 2) * $Tdc)) / ((0.00066 * $P) + (4098 * $E) / pow(($Tdc + 237.7) , 2));
 $wetbulbx =number_format($wetbulbcalc,1);
 // K-INDEX & SOLAR DATA FOR WEATHER34 HOMEWEATHERSTATION TEMPLATE RADIO HAMS REJOICE :-) //
-$str = file_get_contents('jsondata/kindex.txt');$json = array_reverse(json_decode($str,false));$kp =  $json[1][1];?>
+$kp =0;$str = file_get_contents('jsondata/kindex.txt');$str = json_decode($str,false);if ($str){$json = array_reverse($str);$kp = $json[1][1];}?>
 <?php $file = $_SERVER["SCRIPT_NAME"];$break = Explode('/', $file);$mod34file = $break[count($break) - 1];?>

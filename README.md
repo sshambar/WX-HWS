@@ -120,6 +120,8 @@ Taylormia for contributing his excellent setup example for instances where weeWX
 
 Gary Portellas for a helpful suggestion to further simplify the installation process.
 
+Jake aka Jerry, work on JS conversion script for error free more efficient unit conversion for CanvasJS charts.
+
 All those unamed people who have helped me with testing updates
 
 # Alternative versions

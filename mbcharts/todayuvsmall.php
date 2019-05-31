@@ -93,7 +93,7 @@
 			   contentFormatter: function(e) {
       var str = '<span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
       for (var i = 0; i < e.entries.length; i++) {
-        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(1) + ' UVi</span> <br/>';
+        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(0) + ' UVi</span> <br/>';
         str = str.concat(temp);
       }
       return (str);
@@ -118,6 +118,8 @@
 				labelFontColor: "#F8F8F8",
 				labelFontSize:11,
 				labelBackgroundColor: '<?php echo $darkxcrosshaircolor;?>',
+				labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
       		}
 		},
 			
@@ -149,7 +151,7 @@
 			labelMaxWidth: 60,
 			labelBackgroundColor: '<?php echo $darkycrosshaircolor;?>',
 			labelFormatter: function ( e ) {
-        return e.value .toFixed(1);
+        return e.value .toFixed(0);
          },
 		}
       },
@@ -173,7 +175,7 @@
 			markerType: "circle",
 			name:"UV-INDEX",
 			dataPoints: dataPoints1,
-			yValueFormatString:"#0.0 UVI",
+			yValueFormatString:"#0 UVI",
 		}
 
 		]
@@ -187,7 +189,7 @@
  </script>
 
 <body>
-<div id="chartContainer2" class="chartContainer2" style="width:100%;height:175px;padding:0;margin-top:-25px;border-radius:3px;border: 1px solid rgba(245, 247, 252,.02);
+<div id="chartContainer2" class="chartContainer2" style="width:100%;height:140px;padding:0;margin-top:-25px;border-radius:3px;border: 1px solid rgba(245, 247, 252,.02);
   box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.6);"></div></div>
 
 </body>

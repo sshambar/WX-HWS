@@ -18,13 +18,6 @@
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('mY');
 
-	$conv = 1;
-	if ($rainunit == 'in') {
-		$conv = '0.0393701';
-	} else if ($rainunit == 'mm') {
-		$conv = '1';
-	}
-
 	if ($rainunit == 'mm'){
 		$raindecimal = '0';
 	} else {
@@ -32,9 +25,6 @@
 	}
 
 	$interval = 'auto';
-	/*if ($windunit == 'mph') {$interval= '0.5';}
-	else if ($windunit == 'm/s') {$interval= '1';}
-	else if ($windunit == 'km/h'){$interval= '1';}*/
 		echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -42,6 +32,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR Rainfall CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 
 	';
 	?>
@@ -63,9 +54,10 @@ $(document).ready(function () {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-				dataPoints1.push({label:rowData[0],y:parseFloat(rowData[5]*<?php echo $conv;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[14])
+                                  dataPoints1.push({label: rowData[0],y:convert_rain(rowData[14], '<?php echo $rainunit;?>', parseFloat(rowData[5]))});
+				  //dataPoints1.push({label:rowData[0],y:parseFloat(rowData[5]*<?php echo $conv;?>)});
 			}
 		}
 		requestTempCsv();
@@ -77,9 +69,10 @@ $(document).ready(function () {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-				dataPoints2.push({label: rowData[0],y:parseFloat(rowData[5]*<?php echo $conv;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[14])
+                                  dataPoints2.push({label: rowData[0],y:convert_rain(rowData[14], '<?php echo $rainunit;?>', parseFloat(rowData[5]))});
+				//dataPoints2.push({label: rowData[0],y:parseFloat(rowData[5]*<?php echo $conv;?>)});
 				//parseFloat(rowData[13])});
 			}
 			drawChart(dataPoints1 );
@@ -89,6 +82,8 @@ $(document).ready(function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
 			backgroundColor: '<?php echo $backgroundcolor;?>',
 			animationEnabled: true,
+			zoomEnabled: true,
+			zoomType: "xy",
 			animationDuration: <?php echo $animationduration;?>,
 			title: {
 				text: "",
@@ -131,6 +126,8 @@ $(document).ready(function () {
 					labelFontColor: "#F8F8F8",
 					labelFontSize:10,
 					labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+					labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 				}
 			},
 			axisY:{

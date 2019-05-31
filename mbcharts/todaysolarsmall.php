@@ -26,8 +26,7 @@
 		
 	';
 	
-	$date= date('D jS Y');
-	$weatherfile = date('dmY');?>
+	$date= date('D jS Y');$weatherfile = date('dmY');?>
     <br>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -43,11 +42,11 @@
 	
 	function processData1(allText) {
 		var allLinesArray = allText.split('\n');
-		if(allLinesArray.length>0){
+		if(allLinesArray.length>=0){
 			
 			for (var i = 1; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >1)
+				if ( rowData.length >=0)
 					dataPoints1.push({label: rowData[1],y:parseFloat(rowData[8])});
 					
 					
@@ -57,11 +56,11 @@
 
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
-		if(allLinesArray.length>0){
+		if(allLinesArray.length>=0){
 			
 			for (var i = 1; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >1)
+				if ( rowData.length >=0)
 					dataPoints2.push({label: rowData[1],y:parseFloat(rowData[8])});
 					//parseFloat(rowData[13])});
 				
@@ -93,7 +92,7 @@
 			   contentFormatter: function(e) {
       var str = '<span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
       for (var i = 0; i < e.entries.length; i++) {
-        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(0) + ' UVi</span> <br/>';
+        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(0) + ' Wm/2</span> <br/>';
         str = str.concat(temp);
       }
       return (str);
@@ -112,21 +111,21 @@
    			intervalType: "hour",
 			minimum:0,
 			crosshair: {
-				enabled: true,
-				snapToDataPoint: true,
+        		enabled: true,
+        		snapToDataPoint: true,
 				color: '<?php echo $darkxcrosshaircolor;?>',
 				labelFontColor: "#F8F8F8",
 				labelFontSize:11,
 				labelBackgroundColor: '<?php echo $darkxcrosshaircolor;?>',
+				labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
       		}
 		},
-          
-      
 			
 		axisY:{
 		title: "",
 		titleFontColor: '<?php echo $darkfontcolor;?>',
-		titleFontSize: 10,
+		titleFontSize: 0,
         titleWrap: false,
 		margin: 0,
 		lineThickness: 1,		
@@ -141,7 +140,7 @@
 		labelFontFamily: "arial",
 		labelFormatter: function ( e ) {
         return e.value .toFixed(0);
-        },
+         },
 		crosshair: {
 			enabled: true,
 			snapToDataPoint: true,
@@ -187,7 +186,7 @@
  </script>
 
 <body>
-<div id="chartContainer2" class="chartContainer2" style="width:100%;height:175px;padding:0;margin-top:-25px;border-radius:3px;border: 1px solid rgba(245, 247, 252,.02);
+<div id="chartContainer2" class="chartContainer2" style="width:100%;height:125px;padding:0;margin-top:-25px;border-radius:3px;border: 1px solid rgba(245, 247, 252,.02);
   box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.6);"></div></div>
 
 </body>

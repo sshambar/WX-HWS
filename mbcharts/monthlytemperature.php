@@ -18,12 +18,6 @@
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('mY');
 
-	if ($tempunit == 'F') {
-		$conv = '(9 / 5) + 32';
-	} else {
-		$conv = '1';
-	}
-
 		echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,6 +25,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR TEMP MONTH CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 		';
 	?>
 <br>
@@ -53,9 +48,9 @@ $(document).ready(function () {
 		if(allLinesArray.length>0){
 			//hi
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >7) {
-					dataPoints1.push({label: rowData[0],y:parseFloat(rowData[1]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[11]) {
+                                        dataPoints1.push({label: rowData[0],y:convert_temp(rowData[11], '<?php echo $tempunit;?>', parseFloat(rowData[1]))});
 				}
 			}
 		}
@@ -69,9 +64,9 @@ $(document).ready(function () {
 		if(allLinesArray.length>0){
 			//lo
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >7){
-					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[2]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[11]){
+                                        dataPoints2.push({label: rowData[0],y:convert_temp(rowData[11], '<?php echo $tempunit;?>', parseFloat(rowData[2]))});
 				}
 			}
 			drawChart(dataPoints1 , dataPoints2 );
@@ -81,6 +76,8 @@ $(document).ready(function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
 			backgroundColor: '<?php echo $backgroundcolor;?>',
 			animationEnabled: true,
+			zoomEnabled: true,
+                        zoomType: "xy",
 			animationDuration: <?php echo $animationduration;?>,
 			title: {
 				text: " ",
@@ -114,7 +111,7 @@ $(document).ready(function () {
 				minimum: 0,
 				interval:'auto',
 				intervalType:"month",
-				xValueType: "dateTime",
+				xValueType: "string",
 				includezero: false,
 				crosshair: {
 					enabled: true,
@@ -123,6 +120,9 @@ $(document).ready(function () {
 					labelFontColor: "#F8F8F8",
 					labelFontSize:10,
 					labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+                                        labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
+
 				}
 			},
 			axisY:{

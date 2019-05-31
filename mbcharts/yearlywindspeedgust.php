@@ -18,15 +18,8 @@
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('Y');
 
- $conv = 1;
+	$animationduration = '500';
 
-	if ($windunit == 'mph') {
-    $conv= '0.621371';
-  } else if ($windunit == 'm/s') {
-    $conv= '0.277778';
-  } else if ($windunit == 'km/h'){
-    $conv= '1';
-  }
 ?>
 
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -35,7 +28,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR WIND YEAR CHART</title>
 		<script src=../js/jquery.js></script>
-
+		<script src=../js/convert_units.js></script>
 
 
     <br>
@@ -50,33 +43,46 @@
 			cache:false,
 			success: function(data) {processData1(data),processData2(data);}
 		});
+
 	function processData1(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
+
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-					dataPoints1.push({label: rowData[0],y:parseFloat(rowData[6]*<?php echo $conv;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[12])
+                                        dataPoints1.push({label: rowData[0],y:convert_wind(rowData[12], '<?php echo $windunit;?>', parseFloat(rowData[6]))});
+					//dataPoints1.push({label: rowData[0],y:parseFloat(rowData[6]*<?php echo $conv;?>)});
+
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
+
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
+
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[7]*<?php echo $conv;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[12])
+                                        dataPoints2.push({label: rowData[0],y:convert_wind(rowData[12], '<?php echo $windunit;?>', parseFloat(rowData[7]))});
+					//dataPoints2.push({label: rowData[0],y:parseFloat(rowData[7]*<?php echo $conv;?>)});
 					//parseFloat(rowData[13])});
+
 			}
 			drawChart(dataPoints1 , dataPoints2 );
 		}
 	}
+
+
 	function drawChart( dataPoints1 , dataPoints2 ) {
 		var chart = new CanvasJS.Chart("chartContainer", {
 		 backgroundColor: '<?php echo $backgroundcolor;?>',
 		  animationEnabled: true,
+		  zoomEnabled: true,
+		  zoomType: "xy",
 		  animationDuration: <?php echo $animationduration;?>,
+
 		title: {
             text: "",
 			fontSize: 12,
@@ -116,8 +122,12 @@
 			labelFontColor: "#F8F8F8",
 			labelFontSize:11,
 			labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+			labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 		}
+
 			},
+
 		axisY:{
 		title: "Wind - Gusts (<?php echo $windunit ;?>) Recorded",
 		titleFontColor: "#555",
@@ -145,11 +155,15 @@
 			labelBackgroundColor: '<?php echo $ycrosshaircolor;?>',
 			valueFormatString: "#0.0 <?php echo $windunit ;?>",
 		}
+
       },
+
 	  legend:{
       fontFamily: "arial",
       fontColor: '<?php echo $fontcolor;?>',
+
  },
+
 		data: [
 		{
 			// Max Wind Gust
@@ -180,11 +194,14 @@
 			dataPoints: dataPoints2,
 			yValueFormatString:"#0.0 <?php echo $windunit ;?>",
 		}
+
 		]
 		});
+
 		chart.render();
 	}
 });
+
     </script>
      <link rel="stylesheet" href="weather34chartstyle-<?php echo $charttheme;?>.css">
 <body>

@@ -17,12 +17,6 @@
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 
-	if ($tempunit == 'F') {
-	$conv = '(9 / 5) + 32';
-	} else {
-	$conv = '1';
-	}
-
     echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -31,7 +25,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR TEMPERATURE DATABASE CHART</title>
 		<script src=../js/jquery.js></script>
-
+                <script src=../js/convert_units.js></script>
 
 	';
 
@@ -56,8 +50,8 @@
 
 			for (var i = 2; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData[2] >-50)
-					dataPoints1.push({label: rowData[1],y:parseFloat(rowData[2]*<?php echo $conv ;?>)});
+				if ( rowData[15])
+                                        dataPoints1.push({label: rowData[1],y:convert_temp(rowData[15], '<?php echo $tempunit;?>', parseFloat(rowData[2]))});
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
@@ -68,8 +62,8 @@
 
 			for (var i = 2; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData[9] >-50)
-					dataPoints2.push({label: rowData[1],y:parseFloat(rowData[9]*<?php echo $conv ;?>)});
+				if ( rowData[15])
+                                        dataPoints2.push({label: rowData[1],y:convert_temp(rowData[15], '<?php echo $tempunit;?>', parseFloat(rowData[9]))});
 
 			}
 			drawChart(dataPoints1 , dataPoints2 );
@@ -80,6 +74,8 @@
 		var chart = new CanvasJS.Chart("chartContainer", {
 		 backgroundColor: '<?php echo $backgroundcolor;?>', //backgroundcolor
 		 animationEnabled: true,
+		 zoomEnabled: true,
+                 zoomType: "xy",
 		 animationDuration: <?php echo $animationduration;?>,
 
 		title: {
@@ -123,6 +119,9 @@
         labelFontColor: "#F8F8F8",
         labelFontSize:11,
         labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+	labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+			return e.chart.data[0].dataPoints[e.value].label;return e.value;},
+
       }
 
 			},

@@ -16,17 +16,6 @@
 	####################################################################################################
 	
 	include('chartslivedata.php');header('Content-type: text/html; charset=utf-8');	
-	$conv = 1;
-	if ($uk == true) {$conv= '1';}
-	if ($units == 'uk' && $windunit == 'mph') {$conv= '1';}
-	else if ($windunit == 'mph') {$conv= '(1.8) +32';}
-	else if ($windunit == 'm/s') {$conv= '1';}
-	else if ($windunit == 'km/h'){$conv= '1';}
-	$interval = 1;
-	if ($uk == true && $windunit == 'mph') {$conv= '1';}
-	if ($windunit == 'mph') {$interval= '0.5';}
-	else if ($windunit == 'm/s') {$interval= '1';}
-	else if ($windunit == 'km/h'){$interval= '1';}
     echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -35,7 +24,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR TEMPERATURE DATABASE CHART</title>	
 		<script src=../js/jquery.js></script>
-		
+		<script src=../js/convert_units.js></script>
 		
 	';
 	
@@ -60,8 +49,8 @@
 			
 			for (var i = 2; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData[2] >-50)
-					dataPoints1.push({label: rowData[1],y:parseFloat(rowData[2]*<?php echo $conv ;?>)});
+				if ( rowData[15])
+                                        dataPoints1.push({label: rowData[1],y:convert_temp(rowData[15], '<?php echo $tempunit;?>', parseFloat(rowData[2]))});
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
@@ -72,9 +61,8 @@
 			
 			for (var i = 2; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData[9] >-50)
-					dataPoints2.push({label: rowData[1],y:parseFloat(rowData[9]*<?php echo $conv ;?>)});
-				
+				if ( rowData[15])
+                                        dataPoints2.push({label: rowData[1],y:convert_temp(rowData[15], '<?php echo $tempunit;?>', parseFloat(rowData[9]))});
 			}
 			drawChart(dataPoints1 , dataPoints2 );
 		}
@@ -83,7 +71,9 @@
 		function drawChart( dataPoints1 , dataPoints2 ) {
 		var chart = new CanvasJS.Chart("chartContainer2", {
 		backgroundColor: "rgba(40, 45, 52,.4)",
-		 animationEnabled: false,
+		 animationEnabled: true,
+		 zoomEnabled: true,
+                 zoomType: "xy",
 		 margin: 0,
 		
 		title: {
@@ -120,6 +110,8 @@
 			labelFontColor: "#F8F8F8",
 			labelFontSize:6,
 			labelBackgroundColor: "#009bab",
+			labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value.label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 		}
 			
 			},

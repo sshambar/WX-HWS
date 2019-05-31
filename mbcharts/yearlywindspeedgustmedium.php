@@ -1,32 +1,24 @@
 <?php
 
-	####################################################################################################
-	#	WUDATACHARTS by BRIAN UNDERDOWN 2016                                                           #
-	#	CREATED FOR HOMEWEATHERSTATION TEMPLATE at http://weather34.com/homeweatherstation/index.html  #
-	# 	                                                                                               #
-	# 	built on CanvasJs  	                                                                           #
-	#   canvasJs.js is protected by CREATIVE COMMONS LICENCE BY-NC 3.0  	                           #
-	# 	free for non commercial use and credit must be left in tact . 	                               #
-	# 	                                                                                               #
-	# 	Weather Data is based on your PWS upload quality collected at Weather Underground 	           #
-	# 	                                                                                               #
-	# 	Second General Release: 4th October 2016  	                                                   #
-	# 	                                                                                               #
-	#   http://www.weather34.com 	                                                                   #
-	####################################################################################################
+        ####################################################################################################
+        #       WUDATACHARTS by BRIAN UNDERDOWN 2016                                                           #
+        #       CREATED FOR HOMEWEATHERSTATION TEMPLATE at http://weather34.com/homeweatherstation/index.html  #
+        #                                                                                                      #
+        #       built on CanvasJs                                                                                  #
+        #   canvasJs.js is protected by CREATIVE COMMONS LICENCE BY-NC 3.0                                 #
+        #       free for non commercial use and credit must be left in tact .                                  #
+        #                                                                                                      #
+        #       Weather Data is based on your PWS upload quality collected at Weather Underground                  #
+        #                                                                                                      #
+        #       Second General Release: 4th October 2016                                                           #
+        #                                                                                                      #
+        #   http://www.weather34.com                                                                       #
+        ####################################################################################################
 
-	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
-	$weatherfile = date('Y');
+        include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
+        $weatherfile = date('Y');
 
- $conv = 1;
-
-	if ($windunit == 'mph') {
-    $conv= '0.621371';
-  } else if ($windunit == 'm/s') {
-    $conv= '0.277778';
-  } else if ($windunit == 'km/h'){
-    $conv= '1';
-  }
+        $animationduration = '500';
 
 ?>
 
@@ -36,7 +28,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR WIND YEAR CHART</title>
 		<script src=../js/jquery.js></script>
-
+		<script src=../js/convert_units.js></script>
 
 
     <br>
@@ -51,45 +43,38 @@
 			cache:false,
 			success: function(data) {processData1(data),processData2(data);}
 		});
-
 	function processData1(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
-
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-					dataPoints1.push({label: rowData[0],y:parseFloat(rowData[6]*<?php echo $conv;?>)});
-
-
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[12])
+                                        dataPoints1.push({label: rowData[0],y:convert_wind(rowData[12], '<?php echo $windunit;?>', parseFloat(rowData[6]))});
+					//dataPoints1.push({label: rowData[0],y:parseFloat(rowData[6]*<?php echo $conv;?>)});
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
-
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
 		if(allLinesArray.length>0){
-
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >1)
-					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[7]*<?php echo $conv;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[12])
+                                        dataPoints2.push({label: rowData[0],y:convert_wind(rowData[12], '<?php echo $windunit;?>', parseFloat(rowData[7]))});
+					//dataPoints2.push({label: rowData[0],y:parseFloat(rowData[7]*<?php echo $conv;?>)});
 					//parseFloat(rowData[13])});
-
 			}
 			drawChart(dataPoints1 , dataPoints2 );
 		}
 	}
-
-
 	function drawChart( dataPoints1 , dataPoints2 ) {
 		var chart = new CanvasJS.Chart("chartContainer2", {
 		backgroundColor: '<?php echo $darkbackgroundcolor;?>',
 		animationEnabled: true,
+		zoomEnabled: true,
+		zoomType: "xy",
 		animationDuration: <?php echo $animationduration;?>,
 		 margin: 0,
-
-
 		title: {
             text: " ",
 			fontSize: 11,
@@ -131,10 +116,10 @@
 			labelFontSize:8,
 			labelMaxWidth: 60,
 			labelBackgroundColor: '<?php echo $darkxcrosshaircolor;?>',
+			labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 		}
-
 			},
-
 		axisY:{
 		title: "",
 		titleFontColor: "#555",
@@ -163,15 +148,11 @@
 			labelBackgroundColor: '<?php echo $darkycrosshaircolor;?>',
 			valueFormatString: "#0.0<?php echo $windunit ;?>",
 		}
-
       },
-
 	  legend:{
       fontFamily: "arial",
       fontColor: '<?php echo $darkfontcolor;?>',
-
  },
-
 		data: [
 		{
 			// Max Wind Gust
@@ -202,14 +183,11 @@
 			dataPoints: dataPoints2,
 			yValueFormatString:"#0.0 <?php echo $windunit ;?>",
 		}
-
 		]
 		});
-
 		chart.render();
 	}
 });
-
    </script>
 
 <body>

@@ -18,13 +18,6 @@
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('Y');
 
-  $conv = 1;
-	if ($pressureunit == 'mb' || $pressureunit == 'hPa') {
-    $conv = '1';
-  } else if ($pressureunit == 'inHg') {
-    $conv = '0.02953';
-  }
-
 	$int = '\'auto\'';
 	if ($pressureunit == 'mb' || $pressureunit == 'hPa') {
 		$int= '10';
@@ -54,6 +47,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR Barometer YEAR CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 
 	';
 	?>
@@ -75,9 +69,10 @@
 		if(allLinesArray.length>0){
 
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData[9] >0)
-					dataPoints1.push({label:rowData[0],y:parseFloat(rowData[9]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[13])
+                                        dataPoints1.push({label: rowData[0],y:convert_pressure(rowData[13], '<?php echo $pressureunit;?>', parseFloat(rowData[9]))});
+					//dataPoints1.push({label:rowData[0],y:parseFloat(rowData[9]*<?php echo $conv ;?>)});
 
 
 			}
@@ -89,9 +84,10 @@
 		if(allLinesArray.length>0){
 
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData[10] >0)
-					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[10]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[13])
+                                        dataPoints2.push({label: rowData[0],y:convert_pressure(rowData[13], '<?php echo $pressureunit;?>', parseFloat(rowData[10]))});
+					//dataPoints2.push({label: rowData[0],y:parseFloat(rowData[10]*<?php echo $conv ;?>)});
 					//parseFloat(rowData[13])});
 
 			}
@@ -104,6 +100,8 @@
 		var chart = new CanvasJS.Chart("chartContainer", {
 		 backgroundColor: '<?php echo $backgroundcolor;?>',
 		  animationEnabled: true,
+		  zoomEnabled: true,
+		  zoomType: "xy",
       animationDuration: <?php echo $animationduration;?>,
 
 		title: {
@@ -146,6 +144,8 @@
 				labelFontColor: "#F8F8F8",
 				labelFontSize:11,
 				labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+				labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 			}
 
 			},

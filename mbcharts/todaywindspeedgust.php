@@ -18,15 +18,7 @@
 	####################################################################################################
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
-	$conv = 1;
-
-	if ($windunit == 'mph') {
-    $conv= '0.621371';
-  } else if ($windunit == 'm/s') {
-    $conv= '0.277778';
-  } else if ($windunit == 'km/h'){
-    $conv= '1';
-  }
+    
     echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,6 +26,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR WIND day CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 
 	';
 
@@ -57,10 +50,8 @@
 
 			for (var i = 1; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >1)
-					dataPoints1.push({label: rowData[1],y:parseFloat(rowData[7]*<?php echo $conv;?>)});
-
-
+				if ( rowData[16])
+                                        dataPoints1.push({label: rowData[1],y:convert_wind(rowData[16], '<?php echo $windunit;?>', parseFloat(rowData[7]))});
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
@@ -71,8 +62,8 @@
 
 			for (var i = 1; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >1)
-					dataPoints2.push({label: rowData[1],y:parseFloat(rowData[6]*<?php echo $conv;?>)});
+				if ( rowData[16])
+                                        dataPoints2.push({label: rowData[1],y:convert_wind(rowData[16], '<?php echo $windunit;?>', parseFloat(rowData[6]))});
 					//parseFloat(rowData[13])});
 
 			}
@@ -85,6 +76,8 @@
 		var chart = new CanvasJS.Chart("chartContainer", {
 		 backgroundColor: '<?php echo $backgroundcolor;?>',
 		 animationEnabled: true,
+		 zoomEnabled: true,
+		 zoomType: "xy",
 		 animationDuration: <?php echo $animationduration;?>,
 
 		title: {
@@ -125,7 +118,9 @@
 					labelFontColor: "#F8F8F8",
 					labelFontSize:11,
 					labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
-				}
+                    labelFormatter: function(e){if(e.chart.data[0].dataPoints[e.value].label)
+                                    return e.chart.data[0].dataPoints[e.value].label;return e.value;},
+				   }
 			},
 
 		axisY:{

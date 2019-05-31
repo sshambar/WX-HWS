@@ -18,12 +18,6 @@
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('Y');
 
-	if ($tempunit == 'F') {
-	$conv = '(9 / 5) + 32';
-	} else {
-	$conv = '1';
-	}
-
     echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,6 +25,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR TEMP YEAR CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 
 	';
 	?>
@@ -53,9 +48,9 @@
 		if(allLinesArray.length>1){
 			//hi
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >7)
-					dataPoints1.push({label: rowData[0],y:parseFloat(rowData[1]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[11])
+                                        dataPoints1.push({label: rowData[0],y:convert_temp(rowData[11], '<?php echo $tempunit;?>', parseFloat(rowData[1]))});
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
@@ -65,9 +60,9 @@
 		if(allLinesArray.length>1){
 			//lo
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >7)
-					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[2]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[11])
+                                        dataPoints2.push({label: rowData[0],y:convert_temp(rowData[11], '<?php echo $tempunit;?>', parseFloat(rowData[2]))});
 
 			}
 			drawChart(dataPoints1 , dataPoints2 );
@@ -78,6 +73,8 @@
 		var chart = new CanvasJS.Chart("chartContainer2", {
 		backgroundColor: '<?php echo $darkbackgroundcolor;?>',
 		animationEnabled: true,
+		zoomEnabled: true,
+                 zoomType: "xy",
 		animationDuration: <?php echo $animationduration;?>,
 		 margin: 0,
 
@@ -123,6 +120,8 @@
         labelFontColor: "#F8F8F8",
         labelFontSize:11,
         labelBackgroundColor: '<?php echo $darkxcrosshaircolor;?>',
+	labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
       }
 
 			},

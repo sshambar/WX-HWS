@@ -34,7 +34,7 @@
 		var dataPoints2 = [];
 		$.ajax({
 			type: "GET",
-			url: "chartdata/<?php echo $weatherfile;?>.csv",
+			url: "<?php echo $weatherfile;?>.csv",
 			dataType: "text",
 			cache:false,
 			success: function(data) {processData1(data),processData2(data);}
@@ -45,7 +45,7 @@
 		if(allLinesArray.length>0){
 
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
 				if ( rowData.length >1)
 					dataPoints1.push({label:rowData[0],y:parseFloat(rowData[8])});
 
@@ -59,7 +59,7 @@
 		if(allLinesArray.length>1){
 
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
 				if ( rowData.length >0)
 					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[3]*1.60934)});
 					//parseFloat(rowData[13])});

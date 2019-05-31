@@ -16,24 +16,11 @@
 	####################################################################################################
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
-	$conv = 1;
-	if ($rainunit == 'in') {
-		$conv = '0.0393701';
-	} else if ($rainunit == 'mm') {
-		$conv = '1';
-	}
-
 	if ($rainunit == 'mm'){
 		$raindecimal = '0';
 	} else {
 		$raindecimal = '2';
 	}
-
-	/*$interval = 1;
-	if ($uk == true && $windunit == 'mph') {$interval= '1';}
-	else if ($windunit == 'mph') {$interval= '0.5';}
-	else if ($windunit == 'm/s') {$interval= '1';}
-	else if ($windunit == 'km/h'){$interval= '1';}*/
 		echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -42,6 +29,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>Rainfall Today DATABASE CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 
 
 	';
@@ -65,7 +53,9 @@ $(document).ready(function () {
 		if(allLinesArray.length>0){
 			for (var i = 2; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >1){dataPoints1.push({label: rowData[1],y:parseFloat(rowData[4]*<?php echo $conv;?>)});}
+				if ( rowData[18])
+                                    dataPoints1.push({label: rowData[1],y:convert_rain(rowData[18], '<?php echo $rainunit;?>', parseFloat(rowData[4]))});
+                                   //{dataPoints1.push({label: rowData[1],y:parseFloat(rowData[4]*<?php echo $conv;?>)});}
 			}
 		}
 		requestTempCsv();
@@ -78,7 +68,9 @@ $(document).ready(function () {
 		if(allLinesArray.length>0){
 			for (var i = 2; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >1){dataPoints2.push({label: rowData[1],y:parseFloat(rowData[10]*<?php echo $conv;?>)});}
+				if ( rowData[18])
+                                     dataPoints2.push({label: rowData[1],y:convert_rain(rowData[18], '<?php echo $rainunit;?>', parseFloat(rowData[10]))});
+                                     //{dataPoints2.push({label: rowData[1],y:parseFloat(rowData[10]*<?php echo $conv;?>)});}
 			}
 			drawChart(dataPoints1 , dataPoints2 );
 		}
@@ -87,6 +79,8 @@ $(document).ready(function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
 			backgroundColor: '<?php echo $backgroundcolor;?>',
 			animationEnabled: true,
+			zoomEnabled: true,
+			zoomType: "xy",
 			animationDuration: <?php echo $animationduration;?>,
 			title: {
 				text: " ",
@@ -126,6 +120,8 @@ $(document).ready(function () {
 					labelFontColor: "#F8F8F8",
 					labelFontSize:11,
 					labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+					labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 				}
 			},
 			axisY:{

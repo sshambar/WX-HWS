@@ -17,19 +17,12 @@
 
 	include('chartslivedata.php');include('./chart_theme.php');include('conversion.php');header('Content-type: text/html; charset=utf-8');
 
-	$conv = 1;
-	if ($pressureunit == 'mb' || $pressureunit == 'hPa') {
-		$conv = '1';
-	} else if ($pressureunit == 'inHg') {
-		$conv = '0.02953';
-	}
-
 	$int = '\'auto\'';
-	/*if ($pressureunit == 'mb' || $pressureunit == 'hPa') {
-		$int= '20';
-	} else if ($pressureunit == 'inHg') {
-		$int= '0.5';
-	}*/
+        if ($pressureunit == 'mb' || $pressureunit == 'hPa') {
+                $int= '10';
+        } else if ($pressureunit == 'inHg') {
+                $int= '0.5';
+        }
 
 	if ($pressureunit == 'mb' || $pressureunit == 'hPa') {
 		$pressdecimal = '0';
@@ -45,11 +38,6 @@
 		$minimum = '28';
 	}
 
-	$limit = '0';
-	if ($windunit == 'mph') {$limit= '20';}
-	else if ($windunit == 'm/s') {$limit= '930';}
-	else if ($windunit == 'km/h'){$limit= '930';}
-
 		echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -57,6 +45,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR Barometer CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 
 	';
 
@@ -79,9 +68,9 @@ $(document).ready(function () {
 		if(allLinesArray.length>0){
 			for (var i = 2; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData[3] ><?php echo $limit;?>) {
-					dataPoints1.push({label:rowData[1],y:parseFloat(rowData[3]*<?php echo $conv;?>)});
-				}
+				if (rowData[17]) 
+                                        dataPoints1.push({label: rowData[1],y:convert_pressure(rowData[17], '<?php echo $pressureunit;?>', parseFloat(rowData[3]))});
+					//dataPoints1.push({label:rowData[1],y:parseFloat(rowData[3]*<?php echo $conv;?>)});
 			}
 		}
 		requestTempCsv();
@@ -94,9 +83,9 @@ $(document).ready(function () {
 		if(allLinesArray.length>0){
 			for (var i = 1; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData[3] ><?php echo $limit;?>){
-					dataPoints2.push({label:rowData[1],y:parseFloat(rowData[3]*<?php echo $conv;?>)});
-				}
+				if (rowData[17])
+                                        dataPoints2.push({label: rowData[1],y:convert_pressure(rowData[17], '<?php echo $pressureunit;?>', parseFloat(rowData[3]))});
+					//dataPoints2.push({label:rowData[1],y:parseFloat(rowData[3]*<?php echo $conv;?>)});
 			}
 			drawChart(dataPoints1 );
 		}
@@ -105,6 +94,8 @@ $(document).ready(function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
 			backgroundColor: '<?php echo $backgroundcolor;?>',
 			animationEnabled: true,
+			zoomEnabled: true,
+			zoomType: "xy",
 			animationDuration: <?php echo $animationduration;?>,
 			title: {
 				text: "",
@@ -144,6 +135,8 @@ $(document).ready(function () {
 					labelFontColor: "#F8F8F8",
 					labelFontSize:11,
 					labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+					labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 				}
 			},
 			axisY:{

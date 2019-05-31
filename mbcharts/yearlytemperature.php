@@ -17,13 +17,6 @@
 
 	include('chartslivedata.php');include('./chart_theme.php');header('Content-type: text/html; charset=utf-8');
 	$weatherfile = date('Y');
-
-	if ($tempunit == 'F') {
-	$conv = '(9 / 5) + 32';
-	} else {
-	$conv = '1';
-	}
-
     echo '
 <!doctype html public "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -31,6 +24,7 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>OUTDOOR TEMP YEAR CHART</title>
 		<script src=../js/jquery.js></script>
+		<script src=../js/convert_units.js></script>
 
 	';
 	?>
@@ -53,9 +47,9 @@
 		if(allLinesArray.length>1){
 			//hi
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >7)
-					dataPoints1.push({label: rowData[0],y:parseFloat(rowData[1]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[11])
+                                        dataPoints1.push({label: rowData[0],y:convert_temp(rowData[11], '<?php echo $tempunit;?>', parseFloat(rowData[1]))});
 			}
 		}
 		requestTempCsv();}function requestTempCsv(){}
@@ -65,141 +59,129 @@
 		if(allLinesArray.length>1){
 			//lo
 			for (var i = 0; i <= allLinesArray.length-1; i++) {
-				var rowData = allLinesArray[i].replace(/\�|\"|\u0000/g,'').split(',');
-				if ( rowData.length >7)
-					dataPoints2.push({label: rowData[0],y:parseFloat(rowData[2]*<?php echo $conv ;?>)});
+				var rowData = allLinesArray[i].replace(/�|\"/g,'').split(',');
+				if ( rowData[11])
+                                        dataPoints2.push({label: rowData[0],y:convert_temp(rowData[11], '<?php echo $tempunit;?>', parseFloat(rowData[2]))});
 
 			}
 			drawChart(dataPoints1 , dataPoints2 );
 		}
 	}
 
-		function drawChart( dataPoints1 , dataPoints2 ) {
-		var chart = new CanvasJS.Chart("chartContainer", {
-		 backgroundColor: '<?php echo $backgroundcolor;?>',
-		 animationEnabled: true,
-		 animationDuration: <?php echo $animationduration;?>,
+       function drawChart( dataPoints1 , dataPoints2 ) {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                        backgroundColor: '<?php echo $backgroundcolor;?>',
+                        animationEnabled: true,
+                        zoomEnabled: true,
+                        zoomType: "xy",
+                        animationDuration: <?php echo $animationduration;?>,
+                        title: {
+                                text: " ",
+                                fontSize: 11,
+                                fontColor: '<?php echo $fontcolor;?>',
+                                fontFamily: "arial",
+                        },
+                        toolTip:{
+                                fontStyle: "normal",
+                                cornerRadius: 4,
+                                backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
+                                contentFormatter: function(e) {
+                                        var str = '<span style="color: <?php echo $fontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
+                                        for (var i = 0; i < e.entries.length; i++) {
+                                                var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $fontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(1) + "<?php echo ' °'.$tempunit ;?>" + '</span> <br/>';
+                                                str = str.concat(temp);
+                                        }
+                                        return (str);
+                                },
+                                shared: true,
+                        },
+                        axisX: {
+                                gridColor: '<?php echo $gridcolor;?>',
+                                labelFontSize: 10,
+                                labelFontColor: '<?php echo $fontcolor;?>',
+                                lineThickness: 1,
+                                gridThickness: 1,
+                                gridDashType: "dot",
+                                titleFontFamily: "arial",
+                                labelFontFamily: "arial",
+                                minimum: 0,
+                                interval:'auto',
+                                intervalType:"month",
+                                xValueType: "dateTime",
+                                includezero: false,
+                                crosshair: {
+                                        enabled: true,
+                                        snapToDataPoint: true,
+                                        color: '<?php echo $xcrosshaircolor;?>',
+                                        labelFontColor: "#F8F8F8",
+                                        labelFontSize:10,
+                                        labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+                                        labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
 
-
-		title: {
-            text: " ",
-			fontSize: 11,
-			fontColor: '<?php echo $fontcolor;?>',
-			fontFamily: "arial",
-        },
-		toolTip:{
-			   fontStyle: "normal",
-			   cornerRadius: 4,
-			   backgroundColor: '<?php echo $tooltipbackgroundcolor;?>',
-			   contentFormatter: function(e) {
-      var str = '<span style="color: <?php echo $fontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
-      for (var i = 0; i < e.entries.length; i++) {
-        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $fontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(1) + "<?php echo ' °'.$tempunit ;?>" + '</span> <br/>';
-        str = str.concat(temp);
-      }
-      return (str);
-    },
-			   shared: true,
-
-
- },
-		axisX: {
-			gridColor: '<?php echo $gridcolor;?>',
-		    labelFontSize: 10,
-			labelFontColor: '<?php echo $fontcolor;?>',
-			lineThickness: 1,
-			gridDashType: "dot",
-			gridThickness: 1,
-			titleFontFamily: "arial",
-			labelFontFamily: "arial",
-			minimum:-0.5,
-			interval:'auto',
-			intervalType:"month",
-			xValueType: "dateTime",
-			crosshair: {
-        enabled: true,
-        snapToDataPoint: true,
-        color: '<?php echo $xcrosshaircolor;?>',
-        labelFontColor: "#F8F8F8",
-        labelFontSize:11,
-        labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
-      }
-
-			},
-
-		axisY:{
-		title: "Temperature (°<?php echo $tempunit ;?>) Recorded",
-		titleFontColor: '<?php echo $fontcolor;?>',
-		titleFontSize: 10,
-        titleWrap: false,
-		margin: 10,
-		interval: 'auto',
-		lineThickness: 1,
-		gridThickness: 1,
-        includeZero: false,
-		gridColor: '<?php echo $gridcolor;?>',
-		gridDashType: "dot",
-		labelFontSize: 11,
-		labelFontColor: '<?php echo $fontcolor;?>',
-		titleFontFamily: "arial",
-		labelFontFamily: "arial",
-		labelFormatter: function ( e ) {
-        return e.value .toFixed(0) + " °<?php echo $tempunit ;?> " ;
-         },
-      crosshair: {
-       enabled: true,
-       snapToDataPoint: true,
-       color: '<?php echo $ycrosshaircolor;?>',
-       labelFontColor: "#F8F8F8",
-       labelFontSize:11,
-       labelBackgroundColor: '<?php echo $ycrosshaircolor;?>',
-       valueFormatString: "#0.# °<?php echo $tempunit ;?>",
-      }
-
-      },
-
-	  legend:{
-      fontFamily: "arial",
-      fontColor: '<?php echo $fontcolor;?>',
-
- },
-
-
-		data: [
-		{
-			type: "splineArea",
-			color: '<?php echo $line1color;?>',
-			lineColor: '<?php echo $line1linecolor;?>',
-			markerSize:0,
-			showInLegend:true,
-			legendMarkerType: "circle",
-			lineThickness: 2,
-			markerType: "circle",
-			name:" Hi Temp",
-			dataPoints: dataPoints1,
-			yValueFormatString: "#0.# °<?php echo $tempunit ;?>",
-
-		},
-		{
-
-			type: "splineArea",
-			color: '<?php echo $line2color;?>',
-			markerSize:0,
-      		markerColor: '<?php echo $line2markercolor;?>',
-			showInLegend:true,
-			legendMarkerType: "circle",
-			lineThickness: 2,
-      		lineColor:  '<?php echo $line2markercolor;?>',
-			markerType: "circle",
-			name:" Lo Temp",
-			dataPoints: dataPoints2,
-			yValueFormatString: "#0.0 °<?php echo $tempunit ;?>",
-
-		}
-
-		]
-		});
-
+                                }
+                        },
+                        axisY:{
+                                title: "Temperature (°<?php echo $tempunit ;?>) Recorded",
+                                titleFontColor: '<?php echo $fontcolor;?>',
+                                titleFontSize: 10,
+                                titleWrap: false,
+                                margin: 10,
+                                interval: 'auto',
+                                lineThickness: 1,
+                                gridThickness: 1,
+                                gridDashType: "dot",
+                                includeZero: false,
+                                gridColor: '<?php echo $gridcolor;?>',
+                                labelFontSize: 11,
+                                labelFontColor: '<?php echo $fontcolor;?>',
+                                titleFontFamily: "arial",
+                                labelFontFamily: "arial",
+                                labelFormatter: function ( e ) {
+                                        return e.value .toFixed(0) + " °<?php echo $tempunit ;?>";
+                                },
+                                crosshair: {
+                                        enabled: true,
+                                        snapToDataPoint: true,
+                                        color: '<?php echo $ycrosshaircolor;?>',
+                                        labelFontColor: "#F8F8F8",
+                                        labelFontSize:12,
+                                        labelBackgroundColor: '<?php echo $ycrosshaircolor;?>',
+                                        valueFormatString: "#0.# °<?php echo $tempunit ;?>",
+                                }
+                        },
+                        legend:{
+                                fontFamily: "arial",
+                                fontColor: '<?php echo $fontcolor;?>',
+                        },
+                        data: [{
+                                type: "splineArea",
+                                color: '<?php echo $line1color;?>',
+                                lineColor: '<?php echo $line1linecolor;?>',
+                                markerSize:0,
+                                showInLegend:true,
+                                legendMarkerType: "circle",
+                                lineThickness: 2,
+                                markerType: "circle",
+                                name:" Hi Temp",
+                                dataPoints: dataPoints1,
+                                yValueFormatString: "#0.# °<?php echo $tempunit ;?>",
+                        },
+                        {
+                                type: "splineArea",
+                                color: '<?php echo $line2color;?>',
+                                markerSize:0,
+                                markerColor: '<?php echo $line2markercolor;?>',
+                                showInLegend:true,
+                                legendMarkerType: "circle",
+                                lineThickness: 2,
+                                lineColor: '<?php echo $line2markercolor;?>',
+                                markerType: "circle",
+                                name:" Lo Temp",
+                                dataPoints: dataPoints2,
+                                yValueFormatString: "#0.# °<?php echo $tempunit ;?>",
+                        }]
+                });
 		chart.render();
 	}
 });

@@ -76,6 +76,8 @@
 		var chart = new CanvasJS.Chart("chartContainer", {
 		 backgroundColor: '<?php echo $backgroundcolor;?>',
 		 animationEnabled: true,
+                 zoomEnabled: true,
+                 zoomType : "xy",
 		 animationDuration: <?php echo $animationduration;?>,
 
 		title: {
@@ -116,6 +118,8 @@
         labelFontColor: "#F8F8F8",
         labelFontSize:11,
         labelBackgroundColor: '<?php echo $xcrosshaircolor;?>',
+	labelFormatter: function(e) {if(e.chart.data[0].dataPoints[e.value].label)
+                                                        return e.chart.data[0].dataPoints[e.value].label;return e.value;},
       }
 			},
 
@@ -163,7 +167,7 @@
 			//wind direction
 			type: "scatter",
 			color: '<?php echo $line2color;?>',
-			markerSize:3,
+			markerSize:2,
 			showInLegend:true,
 			legendMarkerType: "circle",
 			lineThickness: 1,

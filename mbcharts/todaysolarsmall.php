@@ -26,7 +26,8 @@
 		
 	';
 	
-	$date= date('D jS Y');$weatherfile = date('dmY');?>
+	$date= date('D jS Y');
+	$weatherfile = date('dmY');?>
     <br>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -42,11 +43,11 @@
 	
 	function processData1(allText) {
 		var allLinesArray = allText.split('\n');
-		if(allLinesArray.length>=0){
+		if(allLinesArray.length>0){
 			
 			for (var i = 1; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >=0)
+				if ( rowData.length >1)
 					dataPoints1.push({label: rowData[1],y:parseFloat(rowData[8])});
 					
 					
@@ -56,11 +57,11 @@
 
 	function processData2(allText) {
 		var allLinesArray = allText.split('\n');
-		if(allLinesArray.length>=0){
+		if(allLinesArray.length>0){
 			
 			for (var i = 1; i <= allLinesArray.length-1; i++) {
 				var rowData = allLinesArray[i].split(',');
-				if ( rowData.length >=0)
+				if ( rowData.length >1)
 					dataPoints2.push({label: rowData[1],y:parseFloat(rowData[8])});
 					//parseFloat(rowData[13])});
 				
@@ -92,7 +93,7 @@
 			   contentFormatter: function(e) {
       var str = '<span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[0].dataPoint.label + '</span><br/>';
       for (var i = 0; i < e.entries.length; i++) {
-        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(0) + ' Wm/2</span> <br/>';
+        var temp = '<span style="color: ' + e.entries[i].dataSeries.color + ';">' + e.entries[i].dataSeries.name + '</span> <span style="color: <?php echo $darkfontcolor;?>;">' + e.entries[i].dataPoint.y.toFixed(0) + ' UVi</span> <br/>';
         str = str.concat(temp);
       }
       return (str);
@@ -111,8 +112,8 @@
    			intervalType: "hour",
 			minimum:0,
 			crosshair: {
-        		enabled: true,
-        		snapToDataPoint: true,
+				enabled: true,
+				snapToDataPoint: true,
 				color: '<?php echo $darkxcrosshaircolor;?>',
 				labelFontColor: "#F8F8F8",
 				labelFontSize:11,
@@ -125,9 +126,9 @@
 		axisY:{
 		title: "",
 		titleFontColor: '<?php echo $darkfontcolor;?>',
-		titleFontSize: 0,
+		titleFontSize: 10,
         titleWrap: false,
-		margin: 0,
+		margin: 3,
 		lineThickness: 1,		
 		gridThickness: 1,	
 		interval: 'auto',	
@@ -140,7 +141,7 @@
 		labelFontFamily: "arial",
 		labelFormatter: function ( e ) {
         return e.value .toFixed(0);
-         },
+        },
 		crosshair: {
 			enabled: true,
 			snapToDataPoint: true,
@@ -162,20 +163,22 @@
  },
 		
 		
-		data: [{
+		data: [
+		{
 			type: "splineArea",
 			color: '<?php echo $darkline1color;?>',
 			lineColor: '<?php echo $darkline1linecolor;?>',
 			markerSize:0,
-			showInLegend:false,
+			showInLegend: false,
 			legendMarkerType: "circle",
 			lineThickness: 1,
 			markerType: "circle",
-			name:" Solar Radiation",
+			name:"SOLAR",
 			dataPoints: dataPoints1,
-			yValueFormatString: "#0 Wm/2",
+			yValueFormatString:"#0.# <?php echo 'Wm/2' ;?>",
+		}
 
-		}]
+		]
 		});
 		
 
@@ -186,7 +189,7 @@
  </script>
 
 <body>
-<div id="chartContainer2" class="chartContainer2" style="width:100%;height:125px;padding:0;margin-top:-25px;border-radius:3px;border: 1px solid rgba(245, 247, 252,.02);
+<div id="chartContainer2" class="chartContainer2" style="width:100%;height:140px;padding:0;margin-top:-25px;border-radius:3px;border: 1px solid rgba(245, 247, 252,.02);
   box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.6);"></div></div>
 
 </body>

@@ -12,7 +12,7 @@ else echo' <div class="menucolor"><a href="./?units=metric">Units</a></div>';?><
 <ul class="weather34sidebarMenuInner">
 <br /><br /><br />
 <li class="header">ADMIN</li>
-<li><a href="easyweathersetup.php" target="_blank" title="WEATHERSTATION SETTINGS PAGE"><?php echo " <weather34menumarkeryellow></weather34menumarkeryellow> ",$lang['Settings']; ?> </a></li> 
+<li><a href="easywxsetup.php" target="_blank" title="WEATHERSTATION SETTINGS PAGE"><?php echo " <weather34menumarkeryellow></weather34menumarkeryellow> ",$lang['Settings']; ?> </a></li> 
 <p>
 <li><a href="index.php" title="WEATHERSTATION HOME PAGE"> <weather34menumarkergreen></weather34menumarkergreen> Home </a></li>  
 <li class="header">UI THEME</li>

@@ -67,9 +67,9 @@ else echo "";?>
      '?>
      <!---credits | download info---> 
 <?php // please do not remove this and if so no support is given and your domain will be blacklisted from support it is not much to ask //?>
-<li><a href="https://github.com/weather34/Meteobridge-Weather34-Template/" title="Weather34 Meteobridge version via Github " target="_blank">
-<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Download Meteobridge Template</a></li>
-<li><a href="https://github.com/weather34/Meteobridge-Weather34-Template/" title="Weather34 Meteobridge version via Github " target="_blank">
-<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Maintained by William(lightmaster)</a></li>
-<li><a href="https://github.com/weather34/Meteobridge-Weather34-Template" title="https://github.com/weather34/Meteobridge-Weather34-Template/" target="_blank"><weather34menumarkerbluegrey></weather34menumarkerbluegrey> Designed by weather34.com</a></li>    
-</div></div></header>  
+<li><a href="https://github.com/steepleian/WX-HWS" title="Weather34 WeeWX version via Github " target="_blank">
+<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Download WeeWX Template</a></li>
+<li><a href="mailto:steepleian@gmail.com" title="Maintained by " target="_blank">
+<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Maintained by Steepleian</a></li>
+<li><a href="https://weather34.com/homeweatherstation" title="Designed by " target="_blank">
+<weather34menumarkerbluegrey></weather34menumarkerbluegrey> Designed by weather34.com</a></li></div></div></header>  

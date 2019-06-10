@@ -24,7 +24,7 @@ if (strpos($alertlevel,'Yellow') !== false)
   {echo '<spanelightning><alertvalue><a alt="Meteoalarm" title="Meteoalarm" href="meteoalarm.php" data-featherlight="iframe"><?php echo $chartinfo?><yellow>Yellow '.$alert.' Alert <br>'.$alerttype.' </yellow></a><br>Expires '.$alertexp.'</alertvalue>
    </spanelightning></div></div></div>';}
 else if (strpos($alertlevel,'Orange') !== false)
-  {echo '<spanelightning><alertvalue><a alt="Meteoalarm" title="Meteoalarm" href="mereoalarm.php" data-featherlight="iframe"><?php echo $chartinfo?><orange>Amber '.$alert.' Alert <br>'.$alerttype.' </orange></a><br>Expires '.$alertexp.'</alertvalue>
+  {echo '<spanelightning><alertvalue><a alt="Meteoalarm" title="Meteoalarm" href="meteoalarm.php" data-featherlight="iframe"><?php echo $chartinfo?><orange>Amber '.$alert.' Alert <br>'.$alerttype.' </orange></a><br>Expires '.$alertexp.'</alertvalue>
   </spanelightning></div></div></div>';}
 else if (strpos($alertlevel,'Red') !== false)
   {echo '<spanelightning><alertvalue><a alt="Meteoalarm" title="Meteoalarm" href="meteoalarm.php" data-featherlight="iframe"><?php echo $chartinfo?><red>Red '.$alert.' Alert <br>'.$alerttype.' </red></a><br>Expires '.$alertexp.'</alertvalue>

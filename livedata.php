@@ -83,8 +83,8 @@
 	$weather["wind_direction_avg"] = 0;
         if (is_numeric($meteobridgeapi[46])){
 	$weather["wind_direction_avg"] = number_format($meteobridgeapi[46],0);}
-	$weather["wind_speed"]         = number_format($meteobridgeapi[5]);
-	$weather["wind_gust_speed"]    = $meteobridgeapi[6];
+	$weather["wind_speed"]         = number_format($meteobridgeapi[6]);
+	$weather["wind_gust_speed"]    = $meteobridgeapi[40];
 	$weather["wind_speed_bft"]     = $meteobridgeapi[12];
 	$weather["wind_speed_max"]     = $meteobridgeapi[30];	
 	$weather["wind_gust_speed_max"]= $meteobridgeapi[32];	

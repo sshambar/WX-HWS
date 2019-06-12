@@ -34,13 +34,13 @@ $meteobridgeapi[27]=	(int)$daymaxtemptime;//date($timeFormatShort, $meteobridgea
 $meteobridgeapi[28]=	$daymintemp; //temp min today  $weather["temp_today_low"]     = $daymintemp; //temp min today $meteobridgeapi[28];
 $meteobridgeapi[29]=	(int)$daymintemptime; //date($timeFormatShort, $meteobridgeapi[29]);
 $meteobridgeapi[30]=	$daymaxwind; //$weather["wind_speed_max"]     = $meteobridgeapi[30];		
-$meteobridgeapi[31]=	(int)$daymaxwindtime; //$weather["maxwindtime"]        = $windavgdmaxtime; //date($timeFormatShort, $meteobridgeapi[31]);
+$meteobridgeapi[31]=	$daymaxwindtime; //$weather["maxwindtime"]        = $windavgdmaxtime; //date($timeFormatShort, $meteobridgeapi[31]);
 $meteobridgeapi[32]=	$daymaxgust; //wind max today 
-$meteobridgeapi[33]=	(int)$daymaxgusttime; //$weather["maxgusttime"]        = date($timeFormatShort, $meteobridgeapi[33]);
+$meteobridgeapi[33]=	$daymaxgusttime; //$weather["maxgusttime"]        = date($timeFormatShort, $meteobridgeapi[33]);
 $meteobridgeapi[34]=	$daymaxbarom; //max today baro 
-$meteobridgeapi[35]=	(int)$daymaxbaromtime;//$baromaxoriginalDate = $meteobridgeapi[35];
+$meteobridgeapi[35]=	$daymaxbaromtime;//$baromaxoriginalDate = $meteobridgeapi[35];
 $meteobridgeapi[36]=	$dayminbarom; //min today baro
-$meteobridgeapi[37]=	(int)$dayminbaromtime; //$barominoriginalDate = $meteobridgeapi[37];
+$meteobridgeapi[37]=	$dayminbaromtime; //$barominoriginalDate = $meteobridgeapi[37];
 $meteobridgeapi[38]=	$cumulus[38];//$weewxversion;//$weather["swversion"]		   = $meteobridgeapi[38];
 $meteobridgeapi[39]=	$cumulus[39];//$weewxbuild;//$weather["build"]			   = $meteobridgeapi[39];
 $meteobridgeapi[40]=	$cumulus[40];//$last10minmaxwind; //last 10 min max wind //N/A

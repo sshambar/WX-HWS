@@ -257,8 +257,8 @@ $yesterdaymaxhum = "$yesterday.outHumidity.max.format(add_label=False, $localize
 $yesterdaymaxhumtime = "$yesterday.outHumidity.maxtime.format(format_string="%Y%m%d%H%M%S")";
 $yesterdayminhum = "$yesterday.outHumidity.min.format(add_label=False, $localize=False)";	
 $yesterdayminhumtime = "$yesterday.outHumidity.mintime.format(format_string="%Y%m%d%H%M%S")";  
-$startcivil = "$almanac.sun.rise.raw";
-$endcivil = "$almanac.sun.set.raw";
+$startcivil = "$almanac(horizon=-6).sun(use_center=1).rise.raw";
+$endcivil = "$almanac(horizon=-6).sun(use_center=1).set.raw";
 $rain_year_start = "$rainyear.start.format(format_string="%b %Y")";
 $rain_year_end = "$time.strftime("%b %Y", $almost_end_tt)";
 

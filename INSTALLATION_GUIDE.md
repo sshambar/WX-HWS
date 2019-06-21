@@ -30,6 +30,30 @@ IMPORTANT. After installing PHP please make sure you install all the PHP modules
     			# templates for the WX-HWS charts.
     			skin = w34skin
     			enable = true
+			[[Units]]
+            
+            			# The following section sets the units for w34skin.
+            			# IMPORTANT do not change in any circumstance.
+            			[[[Groups]]]
+                
+                			group_altitude = meter    
+                			group_degree_day = degree_C_day   
+                			group_pressure = hPa    
+                			group_rain = mm    # Options are 'inch', 'cm', or 'mm'
+                			group_rainrate = mm_per_hour    
+                			group_speed = km_per_hour     
+                			group_speed2 = km_per_hour2     
+                			group_temperature = degree_C    
+                			mbar = "mb"
+                			hPa = "hPa"
+                			inHg = "in"
+                			mm_per_hour = "mm"
+                			cm_per_hour = "cm"
+                			inch_per_hour = "in"
+               	 			km_per_hour = "km/h"
+                			knot = "kts"
+                			meter_per_second ="m/s"
+                			mile_per_hour ="mph"
 			
 	Once completed, make sure you save weewx.conf
 

@@ -128,8 +128,8 @@ else if ($alertlevel=='' && $alerttype=='')   {$warnimage="No Other Warnings_Gre
   
 
 
-<div class="" style="background:0; color:transparent; font-family: arial; margin:5px auto; width: 770px"><!-- container for external scripts --><!-- $wrn_lang=en  --><div style="width: 98%; margin: 0 auto; background-color: transparent; color: black;">
-<h3 style="color: silver; font-size: 20px;">&nbsp;Weather Warnings&nbsp;<?php echo $EUAregionName ?>&nbsp;</h3>
+<div class="" style="background:0; color:transparent; font-family: arial; margin:5px; height: auto; width: auto%;"><!-- container for external scripts --><!-- $wrn_lang=en  --><div style="width: 98%; margin: 0 auto; background-color: transparent; color: black;">
+<h3 style="color: silver; font-size: 18px;">&nbsp;Weather Warnings&nbsp;<?php echo $EUAregionName ?>&nbsp;</h3>
 <table style="width: 100%; border-collapse: collapse;">
 <tbody>
 <tr style="background-color: <?php echo $bgcolor ?>">
@@ -137,17 +137,17 @@ else if ($alertlevel=='' && $alerttype=='')   {$warnimage="No Other Warnings_Gre
         <img src="./wrnImages/<?php echo $warnimage ?>" alt=" " 
                 style="width: 250px; height: 167px; margin: 5px; vertical-align: top;">
     </td>
-    <td colspan= "2" style="text-align: left;">
+    <td colspan= "2" style="text-align: left; font-size: 12px;">
         <span style="margin: 5px 5px 0px 5px; display: block;"><b>
         <?php echo $from ?></b><?php echo $alertissued ?>&nbsp;&nbsp;&nbsp;<b><?php echo $until ?></b><?php echo $alertexp ?></span>
     </td>
 </tr>
-<tr style="background-color: <?php echo $bgcolor ?>">
+<tr style="background-color: <?php echo $bgcolor ?>; font-size: 12px;">
     <td style="text-align: left; "><span style="margin-left: 5px;"><b><?php echo $alerttype ?>&nbsp;</b></span></td>
     <td style="text-align: right;"><span style="margin-right: 5px;"> <?php echo $level ?><b><?php echo $alertlevel ?>&nbsp;</b></span></td>
 </tr>
 <tr style="background-color: <?php echo $bgcolor ?>">
-    <td colspan= "2" style="text-align: left; ">
+    <td colspan= "2" style="text-align: left;font-size: 12px; ">
     <p style="margin: 5px 5px 15px 5px; padding: 5px 0px 5px 5px; background-color: <?php echo $bgcolor ?>; color: black;"><?php echo $warnTxt ?></p>
     </td>
 </tr>
@@ -155,7 +155,7 @@ else if ($alertlevel=='' && $alerttype=='')   {$warnimage="No Other Warnings_Gre
 </tbody>
 </table>
 <body link="white" vlink="grey">  
-<p style="width: 90%; margin: 5px auto; padding: 10px; color: silver; font-size: 12px;">METEOalarm data delivery is via the DarkSky API<br>
+<p style="width: 90%; margin: 5px auto; padding: 10px; color: silver; font-size: 10px;">METEOalarm data delivery is via the DarkSky API<br>
 <a href="<?php echo $EUCode ?>" target="_blank"> Warning data</a> courtesy of and Copyright © EUMETNET-METEOalarm (http://www.meteoalarm.eu/). 
 Used with permission.
 <br>Time delays between this website and the www.meteoalarm.eu website are possible, 

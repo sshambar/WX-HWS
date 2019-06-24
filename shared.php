@@ -76,20 +76,20 @@ function fToC(&$weather, $field){
 
 function cToFrel(&$weather, $field){
 	if(!isset($weather[$field])) return;
-	$weather[$field] = round((float)(1.8*$weather[$field]), 1);
+	$weather[$field] = round((float)((9/5)*($weather[$field])), 1);
 }
 
 function fToCrel(&$weather, $field){
 	if(!isset($weather[$field])) return;
-	$weather[$field] = round((float)(0.55555556*($weather[$field])), 1);
+	$weather[$field] = round((float)((5/9)*($weather[$field])), 1);
 }
 
 function fToCDirect($field){
-	return round((float)(0.55555556*($field - 32)), 1);
+	return round((float)((5/9)*($field-32)), 1);
 }
 
 function cToFDirect($field){
-	return  number_format((float)$field*1.8 +32,1);
+	return  number_format((float)$field*(9/5)+32,1);
 }
 
 // Pressure
@@ -123,7 +123,7 @@ function heatIndexLow($t, $rh) {
 // Calculates "real feel" heat index valid only at higher temperatures (beginning around 79-80 F), the traditional heat index formula
 function heatIndexHigh($t, $rh) {
 	// Assumes Fahrenheit
-	$heatIndex = -42.379 + 2.04901523 * $t + 10.1433127*$rh - .22475441*$t*$rh - .00683783 *$t * $t - .05481717 * $rh * $rh + .00122874*$t*$t*$rh + .00085282 *$t * $rh *$rh - .00000199 *$t *$t *$rh * $rh;
+	$heatIndex = -42.379 + 2.04901523 * $t + 10.1433127*$rh - .22475541*$t*$rh - .00683783 *$t * $t - .05481717 * $rh * $rh + .00122874*$t*$t*$rh + .00085282 *$t * $rh *$rh - .00000199 *$t *$t *$rh * $rh;
 
 	// Adjustment formula, adding or subtracting as much as a couple degrees at extreme ends of temperature/humidity ranges
 	$a = 0;
@@ -145,18 +145,18 @@ function heatIndex($temp, $rh) {
 	global $weather;
 	$t = anyToF($temp);
 
-	// First try simple formula, valid when calculated heat index <= 79 degrees F
+	// First try simple formula, valid when calculated heat index < 80 degrees F
 	$heatIndex = heatIndexLow($t, $rh);
 
 	// If too warm, do the complicated formula instead
-	if ($heatIndex >= 79)
+	if ($heatIndex > 80)
 	{
 		$heatIndex = heatIndexHigh($t, $rh);
 	}
-//$weather["temp_units"]='C';
+
 if ($weather["temp_units"] == 'C'){
-$heatIndex = fToCDirect($heatIndex);
-	}
+	$heatIndex = fToCDirect($heatIndex);
+}
 	return round($heatIndex, 1);
 }
 
@@ -182,10 +182,9 @@ function anyToC($field){
 
 function anyToF($field){
 	global $weather;
-	if ($weather["temp_units"] == 'F'){
+	if ($weather["temp_units"] == 'F') {
 		return $field;
 	} else {
-	
 		return cToFDirect ($field);
 	}
 }
@@ -357,6 +356,7 @@ $online='<svg id=i-info viewBox="0 0 32 32" width=6 height=6 fill=#9aba2f stroke
 </svg>';
 $notification='<svg id=i-info viewBox="0 0 32 32" width=10 height=10 fill=#ff8841 stroke=#ff8841 stroke-linecap=round stroke-linejoin=round stroke-width=6.25%><path d="M16 14 L16 23 M16 8 L16 10" /><circle cx=16 cy=16 r=14 />
 </svg>';
+$notifyAlert='<svg id=i-info viewBox="0 0 32 32" width=10 height=10 fill=#d35d4e stroke=#d35d4e stroke-linecap=round stroke-linejoin=round stroke-width=6.25%><path d="M16 14 L16 23 M16 8 L16 10" /><circle cx=16 cy=16 r=14 /></svg>';
 $aqiok ='<svg id="aqi-checkmark" viewBox="0 0 32 32" width="26" height="26" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
 <path d="M2 20 L12 28 30 4" /></svg>';
 $aqiexclamationmark='<svg id="aqi-info" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M16 14 L16 23 M16 8 L16 10" /><circle cx="16" cy="16" r="14" /></svg>';

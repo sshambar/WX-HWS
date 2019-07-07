@@ -2445,9 +2445,22 @@ svgrain {
   list-style: none
 }
 
+red,
+ored,
+ored1,
+blue,
+oblue,
+orange,
+oorange,
+green,
+ogreen,
+maxred {
+  font-weight: bold;
+}
+
 ored,
 ored1 {
-  color: #d65b4a
+  color: #d65b4a;
 }
 
 svgearthquake {
@@ -2464,7 +2477,7 @@ oblue {
 oorange,
 orange,
 rise {
-  color: #d86858
+  color: #ff7c39
 }
 
 green,
@@ -3629,7 +3642,7 @@ tsteady {
 }
 
 .daylightvalue1 minutes {
-  left: 40px;
+  left: 37px;
   z-index: auto
 }
 
@@ -3663,11 +3676,11 @@ tsteady {
 }
 
 .daylightvalue1 min {
-  left: 83px
+  left: 79px
 }
 
 .daylightvalue1 hrs {
-  left: 41px
+  left: 44px
 }
 
 .daylightvalue1 hours,
@@ -4286,7 +4299,8 @@ agolightning {
 .bottomfooter a,
 .weather34lightningmain-content,
 notifyblue,
-notifyorange {
+notifyorange,
+notifyred {
   font-family: Arial, Helvetica, system
 }
 
@@ -4704,14 +4718,15 @@ chartinfocolor {
   content: "Estimated";
   display: block;
   line-height: 20px;
-  top: -30px;
-  left: 47px;
+  top: -33px;
+  left: 46px;
   letter-spacing: normal;
   border: 0
 }
 
 notifyblue,
-notifyorange {
+notifyorange,
+notifyred {
   color: #fff;
   padding: 0 2px;
   font-weight: 600
@@ -4724,6 +4739,12 @@ notifyblue {
 
 notifyorange {
   background: #d05f2d;
+  -webkit-border-radius: 3px;
+  border-radius: 3px
+}
+
+notifyred {
+  background: #d35d4e;
   -webkit-border-radius: 3px;
   border-radius: 3px
 }
@@ -4741,13 +4762,14 @@ grey {
 
 .daylightvalue1 hours {
   position: relative;
-  left: -5px
+  left: 0px
 }
 
 .daylightvalue1 period {
   font-family: weathertext, Arial, system;
   position: absolute;
-  top: 18px;
+  line-height: 12px;
+  top: 24px;
   left: 42px;
   color: #2d3a4b;
   font-size: .65rem
@@ -5551,12 +5573,12 @@ img.menuimg {
 
 .daylightword {
   left: 137px;
-  top: 8px
+  top: 5px
 }
 
 .elevationword {
   left: 105px;
-  top: 130px
+  top: 134px
 }
 
 .elevationword span {
@@ -6488,7 +6510,7 @@ valuetextheading {
 value {
   font-family: weathertext2;
   font-size: .95em;
-  font-weight: 400
+  font-weight: bold
 }
 
 valuetext,

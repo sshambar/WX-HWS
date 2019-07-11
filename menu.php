@@ -63,6 +63,7 @@ else echo "";?>
   <a href="index.php?lang=pl"><img src="img/flags/pl.svg"  title="Polish" width="25px" height="25px"></a>&nbsp;
   <a href="index.php?lang=sp"><img src="img/flags/ar.svg"  title="Argentina" width="25px" height="25px"></a>&nbsp;
   <a href="index.php?lang=dl"><img src="img/flags/ch-switzerland.svg"  title="Switzerland" width="25px" height="25px"></a>&nbsp;
+  <a href="index.php?lang=bg"><img src="img/flags/bg.svg"  title="Bulgaria" width="25px" height="25px"></a>&nbsp;
   <br>
      '?>
      <!---credits | download info---> 

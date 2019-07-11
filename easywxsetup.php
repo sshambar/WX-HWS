@@ -320,7 +320,8 @@ Choose the default Language to display and use..</div>
            <option>sp</option>                        
            <option>sw</option> 
            <option>tr</option> 
-           <option>us</option>   
+           <option>us</option>
+           <option>bg</option>   
         </select>
         <br><br>
     
@@ -340,6 +341,7 @@ Choose the default Language to display and use..</div>
            <option><?php echo $flag ;?></option>
            <option>ar</option>
            <option>aus</option>
+           <option>bg</option>
            <option>en</option>
            <option>can</option>  
            <option>cat</option> 

@@ -48,7 +48,7 @@ $lang['Contact'] = 'Контакти';
 $lang['Temperature'] = 'Температура';
 $lang['Feelslike'] = 'Усеща се като';
 $lang['Humidity'] = 'Влага';
-$lang['Dewpoint'] = 'Точката на оросяване';
+$lang['Dewpoint'] = 'Оросяване при';
 $lang['Trend'] = 'клони ';
 $lang['Heatindex'] = 'Топлинен индекс';
 $lang['Windchill'] = 'Охлаждане ';
@@ -295,7 +295,7 @@ $lang['Rainbow'] = 'Дъга';
 $lang['Windy'] = 'Ветровито';
 $lang['Max'] = 'Макс';
 $lang['Min'] = 'Мин';
-$lang ['Wind Run'] = 'Количество вятър';
+$lang ['Wind Run'] = 'Количество';
 
 //earthquake TOP MODULE 10 July 2017
 $lang['ModerateE'] = 'Силни земетресения';

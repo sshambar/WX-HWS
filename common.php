@@ -166,6 +166,14 @@ switch ($lang) {
   $lang_option = 'en';
   setlocale(LC_TIME, "tr_HU.UTF-8");
   break;
+
+  //bulgarian
+  case 'bg':
+  $lang_file = 'lang.bg.php';
+  $lang_flag = 'bg';
+  $lang_option = 'en';
+  setlocale(LC_TIME, "bg_BG.UTF-8");
+  break;
   
 //default
   default:

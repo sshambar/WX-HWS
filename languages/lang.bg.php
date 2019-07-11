@@ -114,21 +114,21 @@ $lang['Avg'] = '<span2> Средни: </span2>';
 
 //wind direction compass
 $lang['Northdir'] = '<span>Север<br></span>';
-$lang['NNEdir'] = 'Север  <br><span>Северо Източен</span>';
-$lang['NEdir'] = 'Северо <span> Източен<br></span>';
-$lang['ENEdir'] = 'Изток <br><span>Северо Източен</span>';
-$lang['Eastdir'] = "<span> Изток<br></span>";
-$lang['ESEdir'] = 'Изток <br><span>Юго Източен</span>';
-$lang['SEdir'] = 'Юго <span> Източен</span>';
-$lang['SSEdir'] = 'Южеб <br><span>Юго Източен</span>';
+$lang['NNEdir'] = 'Север  <br><span>СевероИзточен</span>';
+$lang['NEdir'] = '<span>СевероИзточен<br></span>';
+$lang['ENEdir'] = 'Изток <br><span>СевероИзточен</span>';
+$lang['Eastdir'] = "<span>Изток<br></span>";
+$lang['ESEdir'] = 'Изток <br><span>ЮгоИзточен</span>';
+$lang['SEdir'] = '<span>ЮгоИзточен</span>';
+$lang['SSEdir'] = 'Южен <br><span>ЮгоИзточен</span>';
 $lang['Southdir'] = '<span> Южен</span>';
-$lang['SSWdir'] = 'Южен <br><span>Юго Западен</span>';
-$lang['SWdir'] = 'Юго <span> Западен</span>';
-$lang['WSWdir'] = 'Запад <br><span>Юго Западен</span>';
+$lang['SSWdir'] = 'Южен <br><span>ЮгоЗападен</span>';
+$lang['SWdir'] = '<span>ЮгоЗападен</span>';
+$lang['WSWdir'] = 'Запад <br><span>ЮгоЗападен</span>';
 $lang['Westdir'] = '<span> Запад</span>';
-$lang['WNWdir'] = 'Запад<br><span>Северо Западед</span>';
-$lang['NWdir'] = 'Северо <span> Западен</span>';
-$lang['NWNdir'] = 'Север <br><span>Северо Западен</span>';
+$lang['WNWdir'] = 'Запад<br><span>СевероЗападед</span>';
+$lang['NWdir'] = '<span>СевероЗападен</span>';
+$lang['NWNdir'] = 'Север <br><span>СевероЗападен</span>';
 
 
 

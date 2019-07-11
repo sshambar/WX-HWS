@@ -2,7 +2,8 @@
 /* 
 -----------------
 Language Translation File for HOMEWEATHERSTATION Template
-Language: DEFAULT ENGLISH LANGUAGE TEMPLATE CODE this is the master file
+Language: Bulgarian 
+Translation By : exatobg
 Code By : BRIAN UNDERDOWN
 Developed By: Brian Underdown/Erik M Madsen
 October/November 2016

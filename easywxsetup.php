@@ -8,98 +8,38 @@ include('settings1.php');
  //original weather34 script original css/svg/php by weather34 2015-2019 clearly marked as original by weather34//
 
 IF (ISSET($_POST["Submit"])) {
- 
-$string = '<?php 
-$apikey = "'. $_POST["wuapi"]. '";
-$wuapikey = "'. $_POST["wuapikey"]. '";
-$weatherflowID = "'. $_POST["wfid"]. '";
-$weatherflowoption   = "'. $_POST["weatherflowoption"]. '";
-$weatherflowlightning = "'. $_POST["wfli"]. '";
-$weatherflowmapzoom   = "'. $_POST["weatherflowmapzoom"]. '";
-$id = "'. $_POST["WUID"]. '";
-$purpleairID = "'. $_POST["purpleair"]. '";
-$purpleairhardware   = "'. $_POST["purpleairhardware"]. '";
-$metarapikey ="'. $_POST["metarapikey"]. '";
-$TZ = "'. $_POST["TZ"]. '";
-$UTC = "'. $_POST["UTC"]. '";
-$lon = '. $_POST["lon"]. ';
-$lat = '. $_POST["lat"]. ';
-$darkskyunit   = "'. $_POST["darkskyunit"]. '";
-$wuapiunit   = "'. $_POST["wuapiunit"]. '";
-$stationlocation = "'. $_POST["stationlocation"]. '";
-$stationName = "'. $_POST["stationName"]. '";
-$moonadj = "'. $_POST["moonadj"]. '";
-$minmag = "'. $_POST["minmag"]. '";
-$unit = "'. $_POST["unit"]. '";
-$metric = '. $_POST["metric"]. ';
-$elevation = "'. $_POST["elevation"]. '";
-$uk = '. $_POST["uk"]. ';
-$usa = '. $_POST["usa"]. ';
-$scandinavia = '. $_POST["scandinavia"]. ';
-$restoftheworld = '. $_POST["restoftheworld"]. ';
-$windunit = "'. $_POST["windunit"]. '";
-$distanceunit = "'. $_POST["distanceunit"]. '";
-$tempunit = "'. $_POST["tempunit"]. '";
-$rainunit  = "'. $_POST["rainunit"]. '";
-$rainrate = "'. $_POST["rainrate"]. '";
-$pressureunit  = "'. $_POST["pressureunit"]. '";
-$livedataFormat = "'. $_POST["livedataFormat"]. '";
-$livedata   = "'. $_POST["livedata"]. '";
-$currentconditions   = "'. $_POST["currentconditions"]. '";
-$chartsource   = "'. $_POST["chartsource"]. '";
-$extralinks   = "'. $_POST["extralinks"]. '";
-$languages   = "'. $_POST["languages"]. '";
-$dateFormat   = "'. $_POST["dateFormat"]. '";
-$timeFormat    = "'. $_POST["timeFormat"]. '";
-$timeFormatShort    = "'. $_POST["timeFormatShort"]. '";
-$clockformat    = "'. $_POST["clockformat"]. '";
-$showDate = '. $_POST["showDate"]. ';
-$temperaturemodule   = "'. $_POST["temperaturemodule"]. '";
-$position1   = "'. $_POST["position1"]. '";
-$position2   = "'. $_POST["position2"]. '";
-$position3   = "'. $_POST["position3"]. '";
-$position4   = "'. $_POST["position4"]. '";
-$position1title   = "'. $_POST["position1title"]. '";
-$position2title   = "'. $_POST["position2title"]. '";
-$position3title   = "'. $_POST["position3title"]. '";
-$position4title   = "'. $_POST["position4title"]. '";
-$position6title   = "'. $_POST["position6title"]. '";
-$position6   = "'. $_POST["position6"]. '";
-$position12title   = "'. $_POST["position12title"]. '";
-$position12   = "'. $_POST["position12"]. '";
-$positionlastmoduletitle   = "'. $_POST["positionlastmoduletitle"]. '";
-$positionlastmodule   = "'. $_POST["positionlastmodule"]. '";
-$webcamurl   = "'. $_POST["webcamurl"]. '";
-$email    = "'. $_POST["email"]. '";
-$twitter   = "'. $_POST["twitter"]. '";
-$theme1   = "'. $_POST["theme1"]. '";
-$since    = "'. $_POST["since"]. '";
-$weatherhardware   = "'.$_POST["weatherhardware"]. '";
-$mbplatform   = "'.$_POST["mbplatform"]. '";
-$davis   = "'.$_POST["davis"]. '";
-$db_host   = "'. $_POST["db_host"]. '";
-$db_user    = "'. $_POST["db_user"]. '";
-$db_pass  = "'. $_POST["db_pass"]. '";
-$db_name   = "'. $_POST["db_name"]. '";
-$notifications = "'. $_POST["notifications"]. '";
-$sunoption = "'. $_POST["sunoption"]. '";
-$hemisphere   = "'. $_POST["hemisphere"]. '";
-$metar   = "'. $_POST["metar"]. '";
-$icao1   = "'. $_POST["icao1"]. '";
-$airport1   = "'. $_POST["airport1"]. '";
-$airport1dist   = "'. $_POST["airport1dist"]. '";
-$defaultlanguage   = "'.$_POST["defaultlanguage"]. '";
-$language    = "'.$_POST['language']. '";
-$password    = "'.$_POST['password']. '";
-$flag   = "'.$_POST["flag"]. '";
-$dshourly   = "'.$_POST["dshourly"].'";
-$manifestShortName = "'.$_POST["manifestShortName"].'";
-';
- 
-$fp = FOPEN("settings1.php", "w") or die("Unable to open settings1.php file check file permissions !");
-FWRITE($fp, $string);
-FCLOSE($fp);
- 
+
+function loadFile($file) {
+  if(!file_exists($file)) return [];
+  require $file;
+  unset($file);
+  return get_defined_vars();
+}
+
+$s1d = loadFile('./settings1.default.php');
+// use $_POST values, $s1d for defaults on missing $_POST entries
+$s1 = array_merge($s1d, array_intersect_key($_POST, $s1d));
+// sanitize results
+$args = array_fill_keys(array_keys($s1d), FILTER_DEFAULT);
+$bools = ['metric', 'uk', 'usa', 'scandinavia', 'restoftheworld', 'showDate'];
+$args = array_merge($args, array_fill_keys($bools, FILTER_VALIDATE_BOOLEAN));
+$floats = ['lon', 'lat'];
+$args = array_merge($args, array_fill_keys($floats, FILTER_VALIDATE_FLOAT));
+$s1 = filter_var_array($s1, $args, false);
+// check for change...
+$s1orig = loadFile('./settings1.php');
+if($s1 != $s1orig) {
+  if (!is_writable(".")) {
+    echo ("<p>Unable to write to the website's folder. Make sure the root of the website is writable by your webserver.<br/></p>");
+    die();
+  }
+  $code = "<?php\n";
+  foreach ($s1 as $var => $value) {
+    /// ${var} = "{value}";\n
+    $code .= '$' . $var . ' = ' . var_export($value, true) . ";\n";
+  }
+  file_put_contents('settings1.php', $code);
+}
 }
 ?>
 <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -1448,7 +1388,14 @@ your nearly there :-) keep going<br><br>
     <path d="M30 12 L16 24 2 12" /></svg><br>
 
   <input name="webcamurl" type="text" id="webcamurl" value="<?php echo $webcamurl ;?>" class="chooseapi">
-  
+
+	<br><br>
+         <div class= "stationvalue">Video Webcam Add Your Video Path/Url (replaces Webcam above, will not refresh!)</div>
+     <svg id="i-chevron-bottom" viewBox="0 0 32 32" width="10" height="10" fill="#777" stroke="#777" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+     <path d="M30 12 L16 24 2 12" /></svg><br>
+
+   <input name="videoWeatherCamURL" type="text" id="videoWeatherCamURL" value="<?php echo $videoWeatherCamURL ;?>" class="chooseapi">
+
   <br><br>
         
         <br>
@@ -1741,7 +1688,7 @@ your nearly there :-) keep going<br><br>
     <path d="M12 30 L24 16 12 2" />
 </svg>
 
-    <input name="WUID" type="text" id="WUID" value="<?php echo $id ;?>" class="choose"> 
+    <input name="id" type="text" id="id" value="<?php echo $id ;?>" class="choose"> 
     <br> <span style="color:#777;">enter your <strong>weather underground</strong> station id example in capitals <strong>ISTANBUL161</strong></span>
     <p>
     
@@ -1783,7 +1730,7 @@ your nearly there :-) keep going<br><br>
  <svg id="i-chevron-right" viewBox="0 0 32 32" width="14" height="14" fill="none" stroke="#F05E40" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
     <path d="M12 30 L24 16 12 2" />
 </svg>
-    <input name="wuapi" type="text" id="wuapi" value="<?php echo $apikey ;?>" class="chooseapi">
+    <input name="apikey" type="text" id="apikey" value="<?php echo $apikey ;?>" class="chooseapi">
 <br> <span style="color:#777;">enter your <strong>DarkSky</strong> <strong>API key</strong> this is the most common mistake made be careful when cut and paste often an hidden space is either inserted before or after causing the <strong>API key</strong> to fail. </span>
 <P>
 
@@ -1867,7 +1814,7 @@ your nearly there :-) keep going<br><br>
     <path d="M12 30 L24 16 12 2" />
 </svg>
 
-    <input name="wfid" type="text" id="wfid" value="<?php echo $weatherflowID ;?>" class="choose"> 
+    <input name="weatherflowID" type="text" id="weatherflowID" value="<?php echo $weatherflowID ;?>" class="choose">
     
     
     
@@ -1884,7 +1831,7 @@ your nearly there :-) keep going<br><br>
     <path d="M12 30 L24 16 12 2" />
 </svg>
 
-    <input name="wfli" type="text" id="wfli" value="<?php echo $weatherflowlightning ;?>" class="choose"> 
+    <input name="weatherflowlightning" type="text" id="weatherflowlightning" value="<?php echo $weatherflowlightning ;?>" class="choose">
     
     
     
@@ -1969,7 +1916,7 @@ Weatherflow Map Zoom</div>
     <path d="M12 30 L24 16 12 2" />
 </svg>
 
-    <input name="purpleair" type="text" id="purpleair" value="<?php echo $purpleairID ;?>" class="choose"> 
+    <input name="purpleairID" type="text" id="purpleairID" value="<?php echo $purpleairID ;?>" class="choose">
     
     
     

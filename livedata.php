@@ -100,8 +100,8 @@
 	$weather["lux"] 			   = number_format($meteobridgeapi[45]/0.00809399477,0, '.', '');
 	$weather["maxtemptime"]        = date($timeFormatShort, $meteobridgeapi[27]);
 	$weather["lowtemptime"]        = date($timeFormatShort, $meteobridgeapi[29]);
-	$weather["maxwindtime"]        = date($timeFormatShort, $meteobridgeapi[31]);
-	$weather["maxgusttime"]        = date($timeFormatShort, $meteobridgeapi[33]);
+	$weather["maxwindtime"]        = date($timeFormatShort, strtotime($meteobridgeapi[31]));
+	$weather["maxgusttime"]        = date($timeFormatShort, strtotime($meteobridgeapi[33]));
 	$weather["cloudbase"]          = round(($weather["temp"] - $weather["dewpoint"] ) *1000/4.4,1) ; 
 	$weather["cloudbase_units"]    = 'ft' ;	
 	$weather["wind_run"]           = number_format($weather["wind_speed"]/24,3); //10 minute wind run

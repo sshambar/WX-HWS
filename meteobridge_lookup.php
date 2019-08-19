@@ -2,6 +2,8 @@
 include('w34stats.php');
 $cumulus_live = file_get_contents($livedata);
 $cumulus = explode(" ", $cumulus_live);
+$cumulus = array_map(function($v) { if($v == 'NULL') {
+	return null; } return $v; }, $cumulus);
 if (sizeof($cumulus) >= 47){
 $meteobridgeapi[0]=	$cumulus[0];//$nowdate; //current date dd/mm/yyyy //$recordDate = mktime(substr($meteobridgeapi[1], 0, 2), substr($meteobridgeapi[1], 3, 2), substr($meteobridgeapi[1], 6, 2),substr($meteobridgeapi[0], 3, 2), substr($meteobridgeapi[0], 0, 2), $year);
 $meteobridgeapi[1]=	$cumulus[1];//$nowtime; //current time hh:mm:ss  //$recordDate = mktime(substr($meteobridgeapi[1], 0, 2), substr($meteobridgeapi[1], 3, 2), substr($meteobridgeapi[1], 6, 2),substr($meteobridgeapi[0], 3, 2), substr($meteobridgeapi[0], 0, 2), $year);
@@ -34,9 +36,9 @@ $meteobridgeapi[27]=	(int)$daymaxtemptime;//date($timeFormatShort, $meteobridgea
 $meteobridgeapi[28]=	$daymintemp; //temp min today  $weather["temp_today_low"]     = $daymintemp; //temp min today $meteobridgeapi[28];
 $meteobridgeapi[29]=	(int)$daymintemptime; //date($timeFormatShort, $meteobridgeapi[29]);
 $meteobridgeapi[30]=	$daymaxwind; //$weather["wind_speed_max"]     = $meteobridgeapi[30];		
-$meteobridgeapi[31]=	$daymaxwindtime; //$weather["maxwindtime"]        = $windavgdmaxtime; //date($timeFormatShort, $meteobridgeapi[31]);
+$meteobridgeapi[31]=	$daymaxwindtime; //$weather["maxwindtime"]        = $windavgdmaxtime; //date($timeFormatShort, strtotime($meteobridgeapi[31]));
 $meteobridgeapi[32]=	$daymaxgust; //wind max today 
-$meteobridgeapi[33]=	$daymaxgusttime; //$weather["maxgusttime"]        = date($timeFormatShort, $meteobridgeapi[33]);
+$meteobridgeapi[33]=	$daymaxgusttime; //$weather["maxgusttime"]        = date($timeFormatShort, strtotime($meteobridgeapi[33]));
 $meteobridgeapi[34]=	$daymaxbarom; //max today baro 
 $meteobridgeapi[35]=	$daymaxbaromtime;//$baromaxoriginalDate = $meteobridgeapi[35];
 $meteobridgeapi[36]=	$dayminbarom; //min today baro

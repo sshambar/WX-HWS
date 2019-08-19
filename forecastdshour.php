@@ -1,5 +1,5 @@
 <?php
-include_once('settings.php');include('livedata.php');header('Content-type: text/html; charset=utf-8');
+include_once('settings.php');include('livedata.php');include('common.php');header('Content-type: text/html; charset=utf-8');
 	####################################################################################################
 	#	HOME WEATHER STATION TEMPLATE by BRIAN UNDERDOWN 2016                                          #
 	#	CREATED FOR HOMEWEATHERSTATION TEMPLATE at http://weather34.com/homeweatherstation/index.html  # 
@@ -166,7 +166,9 @@ else if($darkskyhourlyTemp>=7){echo '<darkskytemphihome><greentds>'.number_forma
 				  echo '<darkskytempwindhome><span2 style="color:#d05f2d;"><value>';				 			 
 				  echo "<img src = 'css/windicons/avgw.svg' width='15' style='-webkit-transform:rotate(".$darkskyhourlyWinddir."deg);-moz-transform:rotate(".$darkskyhourlyWinddir."deg);-o-transform:rotate(".$darkskyhourlyWinddir."deg);transform:rotate(".$darkskyhourlyWinddir."deg)'></span>";				 
 				  echo  '</span2><span4><value> '.$darkskyhourlyWindSpeed.' | <gust>'.$darkskyhourlyWindGust.'</gust></span4> <windunit>'.$windunit.'</windunit><br>';				 		 
-				  echo '&nbsp;<darkskyrainhome><span><value>'.$darkskyhourlyPrecipType.' </darkskyrainhome><br><darkskyrainhome1><value>'. $darkskyhourlyPrecipProb.'% <blue1>'.$rainsvg.' '. $darkskyhourlyprecipIntensity.'</blue1><unit> '.$rainunit.'</unit></darkskyrainhome1></span>';
+				  echo '&nbsp;';
+				  if (isset($darkskyhourlyPrecipType)){ echo '<darkskyrainhome><span><value>'.$darkskyhourlyPrecipType.' </darkskyrainhome>';}
+				  echo '<br><darkskyrainhome1><value>'. $darkskyhourlyPrecipProb.'% <blue1>'.$rainsvg.' '. $darkskyhourlyprecipIntensity.'</blue1><unit> '.$rainunit.'</unit></darkskyrainhome1></span>';
 				  echo  '</div>';}?></div></div>
  <div style="position:absolute;bottom:5px;z-index:9999;font-weight:normal;font-size:10px;color:#aaa;text-decoration:none !important;float:right;font-family:arial;">
   

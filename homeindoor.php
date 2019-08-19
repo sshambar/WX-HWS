@@ -50,7 +50,10 @@ function map($value, $fromLow, $fromHigh, $toLow, $toHigh){
 $json_string             = file_get_contents("jsondata/purpleair.txt");
 $parsed_json             = json_decode($json_string);
 //$aqiweather["aqi"]       = $parsed_json->{'results'}[1]->{'PM2_5Value'};
-$aqiweather["aqi"]       = number_format(pm25_to_aqi(($parsed_json->{'results'}[0]->{'PM2_5Value'} + $parsed_json->{'results'}[1]->{'PM2_5Value'}) / 2),1);
+if(count($parsed_json->{'results'})>1)
+  $aqiweather["aqi"]       = number_format(pm25_to_aqi(($parsed_json->{'results'}[0]->{'PM2_5Value'} + $parsed_json->{'results'}[1]->{'PM2_5Value'}) / 2),1);
+else
+  $aqiweather["aqi"]       = number_format(pm25_to_aqi($parsed_json->{'results'}[0]->{'PM2_5Value'}),1);
 $aqiweather["aqiozone"]  = 'N/A';
 $aqiweather["time2"]     = $parsed_json->{'results'}[0]->{'LastSeen'};
 $aqiweather["time"]      = date("H:i",$aqiweather["time2"]);

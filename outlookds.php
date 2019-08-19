@@ -66,8 +66,10 @@ blueu{background:#01a4b5}zerou{color:#777}yellowu{background:#e6a141}orangeu{bac
            if (isset($cond['precipType'])){$darkskydayPrecipType = $cond['precipType'];}
 if ($rainunit=='in'){ $darkskydayprecipIntensity=number_format($cond['precipIntensity'],2);} 
 else $darkskydayprecipIntensity = number_format($cond['precipIntensity']*25.4,1);
+if (isset($cond['precipAccumulation'])) {
 if ($rainunit=='in'){$darkskydayacumm=round($cond['precipAccumulation']*0.393701,1);}
 else {$darkskydayacumm=round($cond['precipAccumulation'],1);}
+} else {$darkskydayacumm=0.0;}
 //convert all the scenarios
 if ($weather["temp_units"]=='C' && $darkskyunit=='us'){ $darkskydayTempHigh = round($cond['temperatureMax']-32)*5/9;}
 else if ($weather["temp_units"]=='F' && $darkskyunit=='si'){ $darkskydayTempHigh = round(32 +(9*$cond['temperatureMax']/5));}

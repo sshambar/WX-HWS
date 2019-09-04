@@ -48,7 +48,7 @@
 		var dataPoints2 = [];
 		$.ajax({
 			type: "GET",
-			url: "result.csv",
+			url: "chartdata.php?csv=result",
 			dataType: "text",
 			cache:false,
 			success: function(data) {processData1(data),processData2(data);}

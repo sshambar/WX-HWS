@@ -1,5 +1,5 @@
 <?php 
-include('w34stats.php');
+include($PWS_STATE.'/w34stats.php');
 $cumulus_live = file_get_contents($livedata);
 $cumulus = explode(" ", $cumulus_live);
 $cumulus = array_map(function($v) { if($v == 'NULL') {

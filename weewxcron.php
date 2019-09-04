@@ -28,7 +28,7 @@ function update_file($ch, $filename) {
 <?php
 $metarapikey=trim($metarapikey);
 $icao1=trim($icao1);
-$filename2 = 'jsondata/metar34.txt';
+$filename2 = $PWS_STATE.'/metar34.txt';
 if($metarapikey && $icao1 && file_stale($filename2)) {
 $w34header= array("X-API-KEY:".$metarapikey."",);
 $complete_save_loc2 = $filename2;
@@ -41,7 +41,7 @@ update_file($ch, $complete_save_loc2);
 if ($position6=="forecast3ds.php" || $position6=='forecast3wu.php' || $position6=='forecast3wularge.php' || $position4 == "advisory.php"){
 // weather34 darksky  curl based
 $apikey=trim($apikey);
-$filename4a = 'jsondata/darksky.txt';
+$filename4a = $PWS_STATE.'/darksky.txt';
 if($apikey && file_stale($filename4a, 3600*0.8)){
 $url4a = 'https://api.forecast.io/forecast/'.$apikey.'/'.$lat.','.$lon.'?lang='.$language.'&units='.$darkskyunit ;
 $ch4a = curl_init($url4a);
@@ -52,7 +52,7 @@ update_file($ch4a, $complete_save_loc4a);
 if ($position6=="forecast3wu.php" || $position6=="forecast3wularge.php"){
 // weather34 weather underground  curl based
 $wuapikey=trim($wuapikey);
-$filename4c = 'jsondata/wuforecast.txt';
+$filename4c = $PWS_STATE.'/wuforecast.txt';
 if($wuapikey && file_stale($filename4c)){
 $url4c = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode='.$lat.','.$lon.'&language=en-US&format=json&units='.$wuapiunit.'&apiKey='.$wuapikey ;
 $ch4c = curl_init($url4c);
@@ -60,7 +60,7 @@ $complete_save_loc4c = $filename4c;
 update_file($ch4c, $complete_save_loc4c);
 }}?>
 <?php // weather34 earthquakes curl based
-$filename1 = 'jsondata/eqnotification.txt';
+$filename1 = $PWS_STATE.'/eqnotification.txt';
 if(file_stale($filename1)){
 $url1 = 'https://earthquake-report.com/feeds/recent-eq?json';
 $ch1 = curl_init($url1);
@@ -69,7 +69,7 @@ update_file($ch1, $complete_save_loc1);
 }
 ?>
 <?php //k-index curl based
-$filename2a = 'jsondata/kindex.txt';
+$filename2a = $PWS_STATE.'/kindex.txt';
 if(file_stale($filename2a)){
 $url2a = 'https://services.swpc.noaa.gov/products/geospace/planetary-k-index-dst.json';
 $ch2a = curl_init($url2a);
@@ -80,7 +80,7 @@ update_file($ch2a, $complete_save_loc2a);
 
 <?php // weather34 purple air quality  curl based
 if($purpleairhardware=='yes'){
-$filename4 = 'jsondata/purpleair.txt';
+$filename4 = $PWS_STATE.'/purpleair.txt';
 if(file_stale($filename4)){
 $url4 = 'https://www.purpleair.com/json?show='.$purpleairID.'';
 $ch4 = curl_init($url4);
@@ -91,7 +91,7 @@ update_file($ch4, $complete_save_loc4);
 <?php
 // Meteoalarm rss feed based
 
-$filename3='jsondata/meteoalarm.txt';
+$filename3=$PWS_STATE.'/meteoalarm.txt';
 if(file_stale($filename3)){
 exec ("wget -r -O '$filename3' '$templateroot'//meteoalarm/warnings1.php?country='$alarmcountry'\&region='$alarmregion'");}
 

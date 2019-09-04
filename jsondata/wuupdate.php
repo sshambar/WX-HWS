@@ -1,7 +1,6 @@
 <?php
 chdir(dirname(__FILE__));
-include_once('../settings.php');
-include_once('../settings1.php');
+include_once(dirname(__DIR__).'/settings.php');
 date_default_timezone_set($TZ);
 // NEW checkwx.com API 
 if(file_exists('metar34.txt')&&time()- filemtime('metar34.txt')>1800){

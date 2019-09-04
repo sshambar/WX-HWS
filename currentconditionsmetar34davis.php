@@ -13,7 +13,7 @@ $suns2 =date('G.i', $result['sunset']);$sunr2 =date('G.i', $result['sunrise']);$
 $sunsethour =date('G', $result['sunset']);$twighlight_begin =date('G:i', $result['civil_twilight_begin']);$twighlight_end =date('G:i', $result['civil_twilight_end']);$now =date('G.i');
 ?>
 <div class="updatedtimecurrent">
-<?php $forecastime=filemtime('jsondata/metar34.txt');$weather34wuurl = file_get_contents("jsondata/metar34.txt");if(filesize('jsondata/metar34.txt')<10){echo  $online;}
+<?php $forecastime=filemtime($PWS_STATE.'/metar34.txt');$weather34wuurl = file_get_contents($PWS_STATE.'/metar34.txt');if(filesize($PWS_STATE.'/metar34.txt')<10){echo  $online;}
 else echo $online,"";echo " ",	date($timeFormat,$forecastime);	?></div>
 <div class="cloudconverter">
 <?php //cloudbase-weather34
@@ -44,7 +44,7 @@ else if($weather["wind_speed_avg"]>=15 && $now >$suns2){echo "<img rel='prefetch
 else if($weather["wind_speed_avg"]>=15 && $now <$sunr2){echo "<img rel='prefetch' src='css/icons/nt_windy.svg' width='70px' height='60px' alt='weather34 windy icon'>";}
 else if($weather["wind_speed_avg"]>=15){echo "<img rel='prefetch' src='css/icons/windy.svg' width='70px' height='60px' alt='weather34 windy icon'>";}
 //metar with darksky fallback-weather34
-else if(filesize('jsondata/metar34.txt')<160){
+else if(filesize($PWS_STATE.'/metar34.txt')<160){
 echo "<img rel='prefetch' src='css/icons/offline.svg'width='70px' height='60px' alt='weather34 offline icon'>";} 	
 else echo "<img rel='prefetch' src='css/icons/".$sky_icon."' width='70px' height='60px'>";
 ?></div>
@@ -71,7 +71,7 @@ else if($weather["wind_speed_avg"]>=40){echo "Strong Wind ".$alert."<br>Conditio
 else if($weather["wind_speed_avg"]>=30){echo "Very Windy ".$alert."<br>Conditions";}
 else if($weather["wind_speed_avg"]>=22){echo "Moderate Wind <br>Conditions";}
 else if($weather["wind_speed_avg"]>=15){echo "Breezy <br>Conditions";}
-else if(filesize('jsondata/metar34.txt')<160){echo "<uppercase>Conditions<br>Not Available</uppercase>";} 
+else if(filesize($PWS_STATE.'/metar34.txt')<160){echo "<uppercase>Conditions<br>Not Available</uppercase>";} 
 //metar conditions-weather34
 else echo '<uppercase>',$sky_desc.'</uppercase><br>'; 
 ?>

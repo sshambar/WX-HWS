@@ -1,6 +1,6 @@
-<?php include('shared.php');
+<?php require_once(__DIR__.'/load_settings.php');include('shared.php');
 // K-INDEX & SOLAR DATA FOR HOMEWEATHERSTATION TEMPLATE RADIO HAMS REJOICE :-) //
-$str = file_get_contents('jsondata/kindex.txt');
+$str = file_get_contents($PWS_STATE.'/kindex.txt');
 $json = array_reverse(json_decode($str,false));
 $kp =  $json[1][1];
 
@@ -133,7 +133,7 @@ Aurora scatter communications using specialised operating techniques allows comm
   
         <br>  <br> <br>     
  <?php echo '<svg viewBox="0 0 32 32" width=7 height=7 fill=#9aba2f stroke=#9aba2f stroke-linecap=round stroke-linejoin=round stroke-width=6.25%><path d="M16 14 L16 23 M16 8 L16 10" /><circle cx=16 cy=16 r=14 /></svg>';
-; echo " Last Updated: ".date("H:i:s",filemtime('jsondata/kindex.txt'));?>
+; echo " Last Updated: ".date("H:i:s",filemtime($PWS_STATE.'/kindex.txt'));?>
 
 </article> 
 

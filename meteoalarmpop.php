@@ -1,4 +1,4 @@
-<?php include('settings.php');include('livedata.php');include('jsondata/meteoalarmsettings.php');include('common.php');
+<?php include('settings.php');include('livedata.php');include($PWS_STATE.'/meteoalarmsettings.php');include('common.php');
 
 
 
@@ -15,7 +15,7 @@
 ?>
 <?php 
 date_default_timezone_set($TZ);
-$json_string             = file_get_contents("jsondata/meteoalarm.txt");
+$json_string             = file_get_contents($PWS_STATE.'/meteoalarm.txt');
 $parsed_json             = json_decode($json_string);
 
 $published =  $parsed_json->{'warnings'}->{"regions"}[0]->{"published"};

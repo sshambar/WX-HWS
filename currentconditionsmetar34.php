@@ -23,9 +23,9 @@ $twighlight_begin =date('G:i', $result['civil_twilight_begin']);
 $twighlight_end =date('G:i', $result['civil_twilight_end']);
 $now =date('G.i');?>
 <div class="updatedtimecurrent">
-<?php $forecastime=filemtime('jsondata/metar34.txt');
-	$weather34wuurl = file_get_contents("jsondata/metar34.txt");
-	if(filesize('jsondata/metar34.txt')<160){echo $online;}else echo $online,"";echo " ",	date($timeFormat,$forecastime);	?></div>
+<?php $forecastime=filemtime($PWS_STATE.'/metar34.txt');
+	$weather34wuurl = file_get_contents($PWS_STATE.'/metar34.txt');
+	if(filesize($PWS_STATE.'/metar34.txt')<160){echo $online;}else echo $online,"";echo " ",	date($timeFormat,$forecastime);	?></div>
 <div class="darkskyiconcurrent"><span1>
 <?php 
 
@@ -51,7 +51,7 @@ else if($weather["wind_speed_avg"]>20 && $now <$sunr2){echo "<img rel='prefetch'
 else if($weather["wind_speed_avg"]>20){echo "<img rel='prefetch' src='css/icons/windy.svg' width='70px' height='60px' alt='weather34 windy icon'>";}
 
 //metar with darksky fallback
-else if(filesize('jsondata/metar34.txt')<160){
+else if(filesize($PWS_STATE.'/metar34.txt')<160){
 echo "<img rel='prefetch' src='css/icons/offline.svg'width='70px' height='60px' alt='weather34 offline icon'>";} 	
 else echo "<img rel='prefetch' src='css/icons/".$sky_icon."' width='70px' height='60px'>";
 ?></div>
@@ -83,7 +83,7 @@ else if($weather["temp"] -$weather["dewpoint"] <0.5  && $weather["temp"]>5){echo
 else if($weather["wind_speed_avg"]>40){echo "Strong Wind ".$alert."<br>Conditions" ;}
 else if($weather["wind_speed_avg"]>30){echo "Very Windy ".$alert."<br>Conditions";}
 else if($weather["wind_speed_avg"]>20){echo "Moderate Wind <br>Conditions";}
-else if(filesize('jsondata/metar34.txt')<160){echo "<uppercase>Conditions<br>Not Available</uppercase>";}
+else if(filesize($PWS_STATE.'/metar34.txt')<160){echo "<uppercase>Conditions<br>Not Available</uppercase>";}
 //metar conditions
 else echo '<uppercase>',$sky_desc.'</uppercase>'; 
 

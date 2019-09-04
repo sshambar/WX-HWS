@@ -66,7 +66,7 @@ As always to Brian Underdown who designed the weather34 template.
  ----------------------------------------------------------------------------------------- */
 include('livedata.php');include('common.php');
 date_default_timezone_set($TZ);
-$json_string = file_get_contents('jsondata/darksky.txt');
+$json_string = file_get_contents($PWS_STATE.'/darksky.txt');
 $parsed_json = json_decode($json_string);
 $alerttype = $parsed_json->{'alerts'}[0]->{"title"};
 $type = explode(" ", $alerttype);

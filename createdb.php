@@ -1,6 +1,6 @@
 <?php
 //weather34 weatherstation create the database then create the tables 
-include('settings1.php');
+require_once(__DIR__.'/load_settings.php');
 $servername = $db_host;
 $username = $db_user;
 $password = $db_pass;

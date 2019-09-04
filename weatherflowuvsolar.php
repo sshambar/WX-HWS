@@ -2,7 +2,7 @@
 //weather34 weatherflow uv module 27th September 2018 //
 
 include_once('livedata.php');header('Content-type: text/html; charset=utf-8');
-$file1 = 'jsondata/weatherflow.txt';
+$file1 = $PWS_STATE.'/weatherflow.txt';
 $url = $file1;
 $content = file_get_contents($url);
 $json = json_decode($content, true);    
@@ -15,7 +15,7 @@ foreach($json['obs'] as $item)
    $weatherflow['lux']  = $item['brightness'];  
 }
 
-$section1 = file_get_contents('https://swd.weatherflow.com/swd/rest/observations/station/'.$weatherflowID.'?api_key='.$somethinggoeshere.'');file_put_contents('jsondata/weatherflow.txt',$section1);
+$section1 = file_get_contents('https://swd.weatherflow.com/swd/rest/observations/station/'.$weatherflowID.'?api_key='.$somethinggoeshere.'');file_put_contents($PWS_STATE.'/weatherflow.txt',$section1);
 ?>
 
 <div class="updatedtime"><span><?php if(file_exists($file1)&&time()- filemtime($file1)>900)echo '

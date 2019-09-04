@@ -1,6 +1,5 @@
 <!-- begin updater.php  30-Mar-2019 -->
 <?php
-include_once('settings1.php');
 include_once('common.php');
 date_default_timezone_set($TZ);
 ?>

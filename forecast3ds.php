@@ -11,7 +11,7 @@
 ?>
 
 <style>hilo{font-size:.8em}</style>
-<div class="updatedtime1"><?php $forecastime=filemtime('jsondata/darksky.txt');$weather34wuurl = file_get_contents("jsondata/darksky.txt");if(filesize('jsondata/darksky.txt')<1){echo "".$offline. " Offline<br>";}else echo $online,"";echo " ",	date($timeFormat,$forecastime);	?></div>
+<div class="updatedtime1"><?php $forecastime=filemtime($PWS_STATE.'/darksky.txt');$weather34wuurl = file_get_contents($PWS_STATE.'/darksky.txt');if(filesize($PWS_STATE.'/darksky.txt')<1){echo "".$offline. " Offline<br>";}else echo $online,"";echo " ",	date($timeFormat,$forecastime);	?></div>
 <div class="darkskyforecasthome"><div class="darkskydiv">
 <?php //begin darksky stuff        
 foreach ($darkskydayCond as $cond) {

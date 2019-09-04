@@ -1,5 +1,5 @@
 <?php
-include('settings1.php');
+require_once(__DIR__.'/load_settings.php');
 date_default_timezone_set($TZ);
 try {
   # set $UTC if blank
@@ -7,7 +7,7 @@ try {
     $UTC = strval((new DateTimeZone($TZ))->getOffset(new DateTime("now"))/3600);
   }
 } catch (Exception $e) { }
-if(!isset($livedata2)) { $livedata2='jsondata/livedata2.txt'; }
+if(!isset($livedata2)) { $livedata2=$PWS_STATE.'/livedata2.txt'; }
 //translations for HOMEWEATHERSTATION TEMPLATE UPDATED 2nd November added set locale
 mb_internal_encoding('UTF-8');
 mb_http_output('UTF-8');

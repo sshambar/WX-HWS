@@ -1,5 +1,5 @@
 <?php
-error_reporting(0); 
+require_once(dirname(__DIR__).'/load_settings.php');error_reporting(0); 
 $result = date_sun_info(time(), $lat, $lon);
 $sunr=date_sunrise(time(), SUNFUNCS_RET_STRING, $lat, $lon, $rise_zenith, $UTC);
 $suns=date_sunset(time(), SUNFUNCS_RET_STRING, $lat, $lon, $set_zenith, $UTC);
@@ -7,7 +7,7 @@ $suns2 =date('G.i', $result['sunset']);
 $sunrs2 =date('G.i', $result['sunrise']);
 $now =date('G.i');
  //weather34 wxcheck API aviation metar script May 2018 
-$json_string             = file_get_contents("jsondata/metar34.txt");
+$json_string             = file_get_contents($PWS_STATE.'/metar34.txt');
 $parsed_json             = json_decode($json_string);
 $metar34time       = $parsed_json->{'data'}[0]->{'observed'};
 $metar34raw       = $parsed_json->{'data'}[0]->{'raw_text'};

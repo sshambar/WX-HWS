@@ -7,7 +7,7 @@
 	#   https://www.weather34.com 	                                                                   #
 	####################################################################################################
 //start the wu output
-$json='jsondata/wuforecast.txt';
+$json=$PWS_STATE.'/wuforecast.txt';
 $weather34wuurl=file_get_contents($json);
 $parsed_weather34wujson = json_decode($weather34wuurl,false);
 {    if ($parsed_weather34wujson->{'daypart'}[0]->{'iconCode'}[0]==null){
@@ -103,7 +103,7 @@ $parsed_weather34wujson = json_decode($weather34wuurl,false);
 	 $wuskydayUV8 = $parsed_weather34wujson->{'daypart'}[0]->{'uvIndex'}[8];
 	 
 	 }?>
-<div class="updatedtime1"><?php $forecastime=filemtime('jsondata/wuforecast.txt');$weather34wuurl = file_get_contents("jsondata/wuforecast.txt");if(filesize('jsondata/wuforecast.txt')<1){echo "".$offline. "";}else echo $online,"";echo " ",date($timeFormat,$forecastime);	?></div>
+<div class="updatedtime1"><?php $forecastime=filemtime($PWS_STATE.'/wuforecast.txt');$weather34wuurl = file_get_contents($PWS_STATE.'/wuforecast.txt');if(filesize($PWS_STATE.'/wuforecast.txt')<1){echo "".$offline. "";}else echo $online,"";echo " ",date($timeFormat,$forecastime);	?></div>
 <div class="wulargeforecasthome"><div class="wulargediv">
 <?php //begin wu stuff 
 //convert lightning index

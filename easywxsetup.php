@@ -1,5 +1,5 @@
 <?php
-include('settings1.php');
+require_once(__DIR__.'/load_settings.php');
  // HOMEWEATHERSTATION EASY SETUP AUGUST 2016 //
  // SIMPLE EASY PHP BASED AND CSS //
  // DEVELOPED BY BRIAN UNDERDOWN //
@@ -10,7 +10,7 @@ include('settings1.php');
 IF (ISSET($_POST["Submit"])) {
 
 function loadFile($file) {
-  if(!file_exists($file)) return [];
+  if(!is_readable($file)) return [];
   require $file;
   unset($file);
   return get_defined_vars();
@@ -27,10 +27,10 @@ $floats = ['lon', 'lat'];
 $args = array_merge($args, array_fill_keys($floats, FILTER_VALIDATE_FLOAT));
 $s1 = filter_var_array($s1, $args, false);
 // check for change...
-$s1orig = loadFile('./settings1.php');
+$s1orig = loadFile($PWS_SETTINGS);
 if($s1 != $s1orig) {
-  if (!is_writable(".")) {
-    echo ("<p>Unable to write to the website's folder. Make sure the root of the website is writable by your webserver.<br/></p>");
+  if (!is_writable($PWS_STATE)) {
+    echo ("<p>Unable to write to the website's '".$PWS_STATE."' folder.<br/></p>");
     die();
   }
   $code = "<?php\n";
@@ -38,7 +38,7 @@ if($s1 != $s1orig) {
     /// ${var} = "{value}";\n
     $code .= '$' . $var . ' = ' . var_export($value, true) . ";\n";
   }
-  file_put_contents('settings1.php', $code);
+  file_put_contents($PWS_SETTINGS, $code);
 }
 }
 ?>

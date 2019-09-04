@@ -32,9 +32,9 @@ $now =date('G.i');
 
 ?><head>
 <div class="updatedtimecurrent">
-<?php $forecastime=filemtime('jsondata/darksky.txt');
-	$weather34wuurl = file_get_contents("jsondata/dark.txt");
-	if(filesize('jsondata/darksky.txt')<1){echo "".$offline. " Offline<br>";}else echo $online,"";echo " ",	date($timeFormat,$forecastime);	?></div>
+<?php $forecastime=filemtime($PWS_STATE.'/darksky.txt');
+	$weather34wuurl = file_get_contents($PWS_STATE.'/darksky.txt');
+	if(filesize($PWS_STATE.'/darksky.txt')<1){echo "".$offline. " Offline<br>";}else echo $online,"";echo " ",	date($timeFormat,$forecastime);	?></div>
  <div class="darkskyiconcurrent">
  <span1><?php 
   

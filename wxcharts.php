@@ -8,7 +8,7 @@
 	#   https://www.weather34.com 	                                                                   #
 	####################################################################################################
 
-include('livedata.php');include('common.php');include('settings1.php');
+include('livedata.php');include('common.php');
 date_default_timezone_set($TZ);?>
 <!DOCTYPE html>
 <html>

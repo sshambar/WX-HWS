@@ -4,7 +4,7 @@
 <?php 
 if ($position6=="forecast3wularge.php" || $position6=="forecast3wu.php"){
 
-$json='jsondata/wuforecast.txt';
+$json=$PWS_STATE.'/wuforecast.txt';
 $weather34wuurl=file_get_contents($json);
 $parsed_weather34wujson = json_decode($weather34wuurl,false);
 {    

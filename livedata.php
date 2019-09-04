@@ -923,10 +923,10 @@ if ($weather["wind_units"] == 'mph') {
 
 
 
-// darksky api forecast and current script for HOMEWEATHERSTATION gets data from jsondata/darksky.json Friday 2nd December 2016 //
+// darksky api forecast and current script for HOMEWEATHERSTATION gets data from $PWS_STATE/darksky.json Friday 2nd December 2016 //
 //$units = 'auto';  // Read the API docs for full details // default is auto
 date_default_timezone_set($TZ);
-$json = 'jsondata/darksky.txt'; 
+$json = $PWS_STATE.'/darksky.txt'; 
 $json = file_get_contents($json); 
 $response = json_decode($json, true);       
 if ($response != null) {
@@ -1031,5 +1031,5 @@ $E = (6.11 * pow(10 , (7.5 * $Tdc / (237.7 + $Tdc))));
 $wetbulbcalc = (((0.00066 * $P) * $Tc) + ((4098 * $E) / pow(($Tdc + 237.7) , 2) * $Tdc)) / ((0.00066 * $P) + (4098 * $E) / pow(($Tdc + 237.7) , 2));
 $wetbulbx =number_format($wetbulbcalc,1);
 // K-INDEX & SOLAR DATA FOR WEATHER34 HOMEWEATHERSTATION TEMPLATE RADIO HAMS REJOICE :-) //
-$kp =0;$str = file_get_contents('jsondata/kindex.txt');$str = json_decode($str,false);if ($str){$json = array_reverse($str);$kp = $json[1][1];}?>
+$kp =0;$str = file_get_contents($PWS_STATE.'/kindex.txt');$str = json_decode($str,false);if ($str){$json = array_reverse($str);$kp = $json[1][1];}?>
 <?php $file = $_SERVER["SCRIPT_NAME"];$break = Explode('/', $file);$mod34file = $break[count($break) - 1];?>

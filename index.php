@@ -30,13 +30,14 @@ function loadSettings($file) {
     unset($file);
     return get_defined_vars();
 }
+require_once(__DIR__.'/load_settings.php');
 $s1d   = loadSettings('./settings1.default.php');
-$s1    = loadSettings('./settings1.php');
+$s1    = loadSettings($PWS_SETTINGS);
 $check = array_diff_key($s1d, $s1);
 if (!empty($check)) {
     //check if dir is writable
-    if (!is_writable(".")) {
-        echo ("<p>Unable to write to the website's folder. Make sure the root of the website is writable by your webserver.<br/>If you're using Apache on linux, Apache should be running as user 'www-data' and group 'www-data'. If so, run these commands or adjust them for Apache's user:group <br/><br/><i>find . -type d -exec sudo chown www-data:www-data {} \; -exec sudo chmod 2775 {} \;</i> <br/><br/>and <br/><br/><i>find . -type f -exec sudo chown www-data:www-data {} \; -exec sudo chmod 664 {} \;</i> <br/><br/>from within the root of your website's folder, probably located in '/var/www/example.com/html/pws.'<br/><br/><br/>or, do yourself a huge favor and navigate into your 'html' folder and use these 3 commands to automatically set the permissions on all files and folders created inside it:<br/><br/><i>chmod g+s .</i><br/><br/><i>setfacl -d -m g::rwx .</i><br/><br/><i>setfacl -d -m o::rx .</i></p>");
+    if (!is_writable($PWS_STATE)) {
+        echo ("<p>Unable to write to the website's '".$PWS_STATE."' folder. Make sure the directory is writable by your webserver.<br/>If you're using Apache on linux, Apache should be running as user 'www-data' and group 'www-data'. If so, run these commands or adjust them for Apache's user:group <br/><br/><i>find . -type d -exec sudo chown www-data:www-data {} \; -exec sudo chmod 2775 {} \;</i> <br/><br/>and <br/><br/><i>find . -type f -exec sudo chown www-data:www-data {} \; -exec sudo chmod 664 {} \;</i> <br/><br/>from within the directory '".$PWS_STATE."'<br/><br/><br/>or, do yourself a huge favor and navigate into your 'html' folder and use these 3 commands to automatically set the permissions on all files and folders created inside it:<br/><br/><i>chmod g+s .</i><br/><br/><i>setfacl -d -m g::rwx .</i><br/><br/><i>setfacl -d -m o::rx .</i></p>");
         die();
     }
     $s1   = array_merge($s1d, $s1);
@@ -45,7 +46,7 @@ if (!empty($check)) {
         /// ${var} = "{value}";\n
         $code .= '$' . $var . ' = ' . var_export($value, true) . ";\n";
     }
-    file_put_contents('./settings1.php', $code);
+    file_put_contents($PWS_SETTINGS, $code);
 }
 ####################################################################################################
 # HOME WEATHER STATION TEMPLATE by BRIAN UNDERDOWN 2017-2018-2019                    			   #
@@ -56,7 +57,7 @@ if (!empty($check)) {
 #   https://github.com/weather34/Weather34-Weatherflow                                             #
 ####################################################################################################
 //original weather34 script original css/svg/php by weather34 2015-2019 clearly marked as original by weather34//
-include_once('livedata.php');include_once('common.php');include_once('settings1.php'); date_default_timezone_set($TZ);?>
+include_once('livedata.php');include_once('common.php');date_default_timezone_set($TZ);?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +134,7 @@ if ('serviceWorker' in navigator) {
   <!--currentsky for homeweatherstation template-->
   <div class="weather-item"><div class="chartforecast">
          <!-- HOURLY & Outlook for homeweather station-->
-  <span class="yearpopup"> <a alt="nearby metar station" title="nearby metar station" href="metarnearby.php" data-lity><?php echo $chartinfo?> <?php echo 'Nearby Metar';?> <?php if(filesize('jsondata/metar34.txt')<160){echo "(<ored>Offline</ored>)";}else echo "" ?></a></span>
+  <span class="yearpopup"> <a alt="nearby metar station" title="nearby metar station" href="metarnearby.php" data-lity><?php echo $chartinfo?> <?php echo 'Nearby Metar';?> <?php if(filesize($PWS_STATE.'/metar34.txt')<160){echo "(<ored>Offline</ored>)";}else echo "" ?></a></span>
   <span class="monthpopup"><a href="windyradar.php" title="Windy.com Radar" alt="Windy.com Radar" data-lity><?php echo $chartinfo?> Radar</a></span>
   <span class="monthpopup"><a href="windywind.php" title="Windy.com Wind Map" alt="Windy.com Wind Map" data-lity><?php echo $chartinfo?> Wind Map</a></span>
   </div>

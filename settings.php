@@ -1,5 +1,5 @@
 <?php 
-include('settings1.php');error_reporting(0); 
+require_once(__DIR__.'/load_settings.php');error_reporting(0);
 	####################################################################################################
 	#	HOME WEATHER STATION TEMPLATE SETUP please set up and check thoroughly                         #
 	#	CREATED FOR HOMEWEATHERSTATION TEMPLATE at https://weather34.com/homeweatherstation/index.html # 
